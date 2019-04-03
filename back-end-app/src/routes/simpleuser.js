@@ -6,7 +6,8 @@ const express = require('express');
 const router = express.Router(); 
 const controller = require('../controllers/simpleuser-controller'); 
 
-// get functions (by id and data)
+// get functions  
+// create get (by cpf and others)
 router.get('/', controller.get);  
 
 // post, put and delete (create, update and delete)
