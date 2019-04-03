@@ -32,7 +32,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 // index route
 app.use('/', indexRoute);    
 
-// product route 
+// simple user route 
 app.use('/simpleusers', simpleuserRoute); 
  
 module.exports = app; 
