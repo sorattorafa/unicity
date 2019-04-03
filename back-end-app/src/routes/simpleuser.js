@@ -1,6 +1,6 @@
 'use strict'; 
   
-// control and route of product 
+// control and route of simple user 
 
 const express = require('express'); 
 const router = express.Router(); 
