@@ -1,8 +1,6 @@
 'use strict'  
 const app = require('../src/app');
 const http = require('http');   
-// mongodb
-const debug = require('debug')('balta:server'); 
 const express = require('express'); 
   
 // port of app
