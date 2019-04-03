@@ -21,9 +21,9 @@ exports.get = async (req, res, next) =>{
 //post - create
 exports.post = async(req, res, next) => {  
     let contract = new ValidationContract(); 
-    contract.hasMinLen(req.body.cpf, 4, 'O numero da sala deve conter pelo menos 4 caracteres = f001') 
-    contract.hasMinLen(req.body.name, 4, 'O nome deve conter pelo menos 4 caracteres') 
-    contract.hasMinLen(req.body.password, 3, 'A senha deve conter pelo menos 3 caracteres') 
+    contract.hasMinLen(req.body.cpf, 4, 'O cpf deve conter pelo menos 4 caracteres') 
+    contract.hasMinLen(req.body.name, 3, 'O nome deve conter pelo menos 3 caracteres') 
+    contract.hasMinLen(req.body.password, 6, 'A senha deve conter pelo menos 6 caracteres') 
  
     // if data is valid
     if (!contract.isValid()){ 
