@@ -11,7 +11,23 @@ const schema = new Schema({
         type: String, 
         required: true, 
         trim: true 
-    },     
+    },  
+    cep: { 
+        type: String, 
+        required: true, 
+        trim: true 
+    },   
+    street: { 
+        type: String, 
+        required: true, 
+        trim: true 
+    },  
+    number: { 
+        type: String, 
+        required: true, 
+        trim: true 
+    },  
+        
     description: { 
         type: String, 
         required: true, 
@@ -39,14 +55,16 @@ const schema = new Schema({
         type: Number, 
         required: true, 
     },    
-    
-    comments: [{  
-        // DIR'S
-        comment: { 
-            type: mongoose.Schema.Types.ObjectId, 
-            ref: 'Comment' 
-        }, 
-    }],     
+     
+    comment: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Comment' 
+    },  
+
+    city: {  
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'City' 
+    },     
      
     categories: [{  
         // DIR'S
