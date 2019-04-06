@@ -19,11 +19,13 @@ mongoose.connect(config.connectionString)
 
 // load schemas (models) of database
 const Simpleuser = require('./models/simpleuser'); 
-
+const Category = require('./models/category')
 // load routes 
 const indexRoute = require('./routes/index'); 
 
 const simpleuserRoute = require('./routes/simpleuser');
+
+const categoryRoute = require('./routes/category');
 
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({extended: false}));
@@ -32,7 +34,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 // index route
 app.use('/', indexRoute);    
 
-// simple user route 
-app.use('/simpleusers', simpleuserRoute); 
+// route 
+app.use('/simpleusers', simpleuserRoute);  
+app.use('/categories', categoryRoute); 
  
 module.exports = app; 
