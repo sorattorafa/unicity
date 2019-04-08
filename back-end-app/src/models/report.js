@@ -35,9 +35,9 @@ const schema = new Schema({
     },     
 
     status: { 
-        type: Boolean, 
+        type: Number, 
         required: true, 
-        default: false 
+        default: 0 
     },        
 
     createDate: { 
@@ -69,9 +69,8 @@ const schema = new Schema({
     categories: [{  
         // DIR'S
         category: { 
-            type: String,  
-            required: true, 
-            trim: true 
+            type: mongoose.Schema.Types.ObjectId,  
+            ref: 'Category'
         }, 
     }],    
 
