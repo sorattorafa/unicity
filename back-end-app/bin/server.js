@@ -1,6 +1,7 @@
 'use strict'  
 const app = require('../src/app');
-const http = require('http');   
+const http = require('http'); 
+const debug = require('debug')('unicity:server'); 
 const express = require('express'); 
   
 // port of app

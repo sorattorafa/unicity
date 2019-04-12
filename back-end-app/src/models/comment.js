@@ -4,7 +4,7 @@
 const mongoose = require('mongoose'); 
 const Schema = mongoose.Schema; 
   
-// create a new schema of customer
+// create a new schema of comment
 
 const schema = new Schema({ 
     author: { 

@@ -3,12 +3,13 @@
 // use mongoose database (online)
 const mongoose = require('mongoose'); 
 const Schema = mongoose.Schema;  
-// create a new schema of companyuser  
+// create a new schema of requester  
 const schema = new Schema({ 
-    cnpj: { // 16 caracteres
+    cnpj: { // xxx.yyy.zzz - ab
         type: String, 
         required: true, 
-        trim: true 
+        trim: true, 
+        unique: true 
     },     
     name: { 
         type: String, 
@@ -24,7 +25,17 @@ const schema = new Schema({
         type: String, 
         required: true, 
         trim: true 
-    },    
+    }, 
+    street: { 
+        type: String, 
+        required: true, 
+        trim: true 
+    },  
+    number: { 
+        type: String, 
+        required: true, 
+        trim: true 
+    },   
     email: { 
         type: String, 
         required: true, 
