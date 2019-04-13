@@ -14,10 +14,10 @@ exports.create = async (data) => {
     var companyuser = new Companyuser(data); 
     await companyuser.save(); 
 }  
-/*
-exports.update = async(cnpj) => { 
+
+exports.update = async(id,data) => { 
     await Companyuser 
-    .findByCnpjAndUpdate(cnpj, { 
+    .findOneAndUpdate(id, { 
         $set: {  
             // can update anything 
             city: data.city, 
@@ -27,7 +27,6 @@ exports.update = async(cnpj) => {
         }
     });
 } 
-*/
 
 exports.delete = async(cnpj) => { 
     await Companyuser 

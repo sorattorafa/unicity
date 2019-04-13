@@ -67,20 +67,9 @@ exports.post = async(req, res, next) => {
     }
 }; 
  
-// put - set 
-exports.put = (req, any, next) => { 
-    const cpf = req.params.cpf; 
-    
-    res.status(200).send({ 
-        cnpj: cnpj, 
-        item: req.body 
-    });     
-}; 
- 
 //put- update request
-/*exports.put = (req, res, next) => {   
+exports.put = (req, res, next) => {   
     let contract = new ValidationContract();    // Usado para fazer a validação de dados
-    contract.hasMinLen(req.body.cnpj, 16, 'Cnpj precisa de 16 caracteres') 
     contract.isEmail(req.body.email, 'Digite um e-mail válido') 
     contract.hasMinLen(req.body.password, 3, 'A senha deve conter pelo menos 3 caracteres')
     
@@ -91,7 +80,7 @@ exports.put = (req, any, next) => {
     }
 
     repository  
-        .update(req.params.cnpj, req.body)
+        .update(req.params.id, req.body)
         .then(x=>{ 
             res.status(201).send({ 
                 message: 'Usuario atualizado com sucesso!' 
@@ -102,7 +91,7 @@ exports.put = (req, any, next) => {
                 data: e 
             });
         });  
-};*/ 
+};
  
 // delete product  
 exports.delete = (req, res, next) => {  
