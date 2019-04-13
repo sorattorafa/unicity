@@ -15,9 +15,9 @@ exports.create = async (data) => {
     await companyuser.save(); 
 }  
 
-exports.update = async(id,data) => { 
+exports.update = async(cnpj,data) => { 
     await Companyuser 
-    .findOneAndUpdate(id, { 
+    .findOneAndUpdate(cnpj, { 
         $set: {  
             // can update anything 
             city: data.city, 
