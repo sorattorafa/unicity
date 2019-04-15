@@ -42,32 +42,32 @@ exports.post = async(req, res, next) => {
     }
 }; 
  
-// put - set 
-exports.put = (req, any, next) => { 
-    const cpf = req.params.cpf; 
-    res.status(200).send({ 
-        cpf: cpf, 
-        item: req.body 
-    });     
-}; 
- 
 //put- update request
 exports.put = (req, res, next) => {   
-    // Product -> function to find by id params and update 
-    // update ./port/request/id 
+    let contract = new ValidationContract();    // Usado para fazer a validação de dados
+    contract.isEmail(req.body.email, 'Digite um e-mail válido') 
+    contract.hasMinLen(req.body.password, 3, 'A senha deve conter pelo menos 3 caracteres')
+    
+    // if data is valid
+    if (!contract.isValid()){ 
+        res.status(400).send(contract.errors()).end();  // Manda mensagens de erros para tela
+        return;
+    }
+
     repository  
         .update(req.params.cpf, req.body)
         .then(x=>{ 
             res.status(201).send({ 
-                message: 'Sala atualizado com sucesso!' 
+                message: 'Usuario atualizado com sucesso!' 
             });
         }).catch(e=>{ 
             res.status(400).send({ 
-                message: 'Sala não atualizado!',  
+                message: 'Usuario não atualizado!',  
                 data: e 
             });
         });  
 }; 
+
  
 exports.delete = (req, res, next) => {  
     repository.delete(req.body.id) 

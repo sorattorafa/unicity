@@ -11,7 +11,7 @@ router.get('/', controller.get);
 
 // post, put and delete (create, update and delete)
 router.post('/', controller.post); 
-router.put('/:id', controller.put); 
+router.put('/:nome', controller.put); 
 router.delete('/', controller.delete); 
 
 module.exports = router;

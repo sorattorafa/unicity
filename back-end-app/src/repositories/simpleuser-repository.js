@@ -16,19 +16,16 @@ exports.create = async (data) => {
     await simpleuser.save(); 
 }  
 
-/*
-exports.update = async(cpf) => { 
+exports.update = async(cpf,data) => { 
     await Simpleuser 
-    .findByCpfAndUpdate(cpf, { 
+    .findOneAndUpdate(cpf, { 
         $set: {  
-            // can update anything 
-            numero: data.numero, 
-            horario: data.horario 
+            // can update anything  
+            email: data.email,
+            password: data.password
         }
     });
 } 
-*/  
-
 exports.delete = async(cpf) => { 
     await Simpleuser 
         .findOneAndRemove(cpf);

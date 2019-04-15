@@ -80,7 +80,7 @@ exports.put = (req, res, next) => {
     }
 
     repository  
-        .update(req.params.id, req.body)
+        .update(req.params.cnpj, req.body)
         .then(x=>{ 
             res.status(201).send({ 
                 message: 'Usuario atualizado com sucesso!' 

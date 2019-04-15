@@ -53,19 +53,28 @@ exports.put = (req, any, next) => {
  
 //put- update request
 exports.put = (req, res, next) => {   
+    let contract = new ValidationContract();    // Usado para fazer a validação de dados
+    contract.hasMinLen(req.body.description, 3, 'A descrição deve conter pelo menos 3 caracteres')
+    
+    // if data is valid
+    if (!contract.isValid()){ 
+        res.status(400).send(contract.errors()).end();  // Manda mensagens de erros para tela
+        return;
+    }
+
     repository  
-        .update(req.params.id, req.body)
+        .update(req.params.name, req.body)
         .then(x=>{ 
             res.status(201).send({ 
-                message: 'Categoria atualizada com sucesso!' 
+                message: 'Categoria atualizado com sucesso!' 
             });
         }).catch(e=>{ 
             res.status(400).send({ 
-                message: 'Categoria não atualizada!',  
+                message: 'Usuario não atualizado!',  
                 data: e 
             });
         });  
-}; 
+};
  
 // delete 
 exports.delete = (req, res, next) => {  

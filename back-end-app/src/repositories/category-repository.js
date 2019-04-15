@@ -5,9 +5,7 @@ const Category =  mongoose.model('Category');
 // every functions are async! 
 
 exports.get = async () => {  
-    const res = await Category.find({ 
-            active:true  
-        }, 'id name description'); 
+    const res = await Category.find({}, 'id name description'); 
     return res;    
 }  
 
@@ -16,19 +14,18 @@ exports.create = async (data) => {
     await category.save(); 
 }  
 
-/*
-exports.update = async(cpf) => { 
-    await Simpleuser 
-    .findByCpfAndUpdate(cpf, { 
-        $set: {  
-            // can update anything 
-            numero: data.numero, 
-            horario: data.horario 
-        }
-    });
-} 
-*/  
 exports.delete = async(id) => { 
     await Category 
         .findOneAndRemove(id);
-}
+} 
+
+
+exports.update = async(name,data) => { 
+    await Category 
+    .findOneAndUpdate(name, { 
+        $set: {  
+            // can update anything 
+            description: data.description,
+        }
+    });
+} 
