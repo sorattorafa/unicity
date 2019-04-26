@@ -10,7 +10,7 @@ const controller = require('../controllers/simpleuser-controller');
 router.get('/', controller.get);  
 
 // post, put and delete (create, update and delete)
-router.post('/', controller.post); 
+router.post('/add', controller.post); 
 router.put('/:cpf', controller.put); 
 router.delete('/', controller.delete); 
 

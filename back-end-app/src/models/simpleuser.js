@@ -16,7 +16,7 @@ const schema = new Schema({
     },       
     active:{  
         type:Boolean, 
-        required:true, 
+        required:false, 
         default:true
     },
     name: { 
@@ -39,12 +39,13 @@ const schema = new Schema({
 
     reports: [{ // Um usuário possui n relatos 
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Report' 
+        ref: 'Report', 
+        required: false 
     }],  
 
     notifications: [{  // para avisar quando os relatos foram resolvidos
         type: String, 
-        required: true, 
+        required: false, 
         trim: true  
     }] 
     

@@ -40,7 +40,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use('/', indexRoute);    
 
 // route 
-app.use('/simpleusers', simpleuserRoute);  
+app.use('/simpleusers', simpleuserRoute);   
 app.use('/categories', categoryRoute); 
 app.use('/companyusers', companyRoute); 
 
