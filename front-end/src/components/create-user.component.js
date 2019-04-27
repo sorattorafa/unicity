@@ -10,8 +10,6 @@ export default class CreateUser extends Component {
         this.onChangeName = this.onChangeName.bind(this);  
         this.onChangeEmail = this.onChangeEmail.bind(this); 
         this.onChangePassword = this.onChangePassword.bind(this); 
-        this.onChangeReports = this.onChangeReports.bind(this); 
-        this.onChangeNotifications = this.onChangeNotifications.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = { 
@@ -19,16 +17,13 @@ export default class CreateUser extends Component {
             name: '',
             email: '',  
             password: '', 
-            reports:'', 
-            notifications:'',
             active: true
         }
     }
-    componentWillMount() {  
-        axios.get('/categories')
-            .then(res => console.log(res.data));    
-
-    }
+//    componentWillMount() {  
+//       axios.get('/categories')
+//            .then(res => console.log(res.data));    
+//  }
 
     onChangeCpf(e) {
         this.setState({
@@ -54,21 +49,6 @@ export default class CreateUser extends Component {
             password: e.target.value
         });
     }   
-     
-
-    onChangeReports(e) {
-        this.setState({
-            reports: e.target.value
-        });
-    }   
-
-    onChangeNotifications(e) {
-        this.setState({
-            notifications: e.target.value
-        });
-    }  
-
-
 
 
     onSubmit(e) {
@@ -80,8 +60,6 @@ export default class CreateUser extends Component {
         console.log(`User Name: ${this.state.name}`);
         console.log(`User Email: ${this.state.email}`); 
         console.log(`User Password: ${this.state.password}`); 
-        console.log(`User Reports: ${this.state.reports}`); 
-        console.log(`User Notifications: ${this.state.notifications}`);
 
         const newUser = { 
             cpf: this.state.cpf,
@@ -100,8 +78,6 @@ export default class CreateUser extends Component {
             name: '',
             email: '', 
             password: '', 
-            reports: '', 
-            notifications: '', 
             active: false
         })
     }
@@ -129,7 +105,7 @@ export default class CreateUser extends Component {
                     </div>
                     <div className="form-group">
                         <label>Email: </label>
-                        <input  type="text"
+                        <input  type="email"
                                 className="form-control"
                                 value={this.state.email}
                                 onChange={this.onChangeEmail}
@@ -144,24 +120,6 @@ export default class CreateUser extends Component {
                                 onChange={this.onChangePassword}
                                 />
                     </div>  
-
-                    <div className="form-group">
-                        <label>Reports: </label>
-                        <input  type="text"
-                                className="form-control"
-                                value={this.state.reports}
-                                onChange={this.onChangeReports}
-                                />
-                    </div> 
-
-                    <div className="form-group">
-                        <label>Notifications: </label>
-                        <input  type="text"
-                                className="form-control"
-                                value={this.state.notifications}
-                                onChange={this.onChangeNotifications}
-                                />
-                    </div> 
                     <div className="form-group">
                         <input type="submit" value="Create User" className="btn btn-primary" />
                     </div>

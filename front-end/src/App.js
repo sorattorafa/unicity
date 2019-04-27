@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 
 import CreateUser from "./components/create-user.component";
-
+import SimpleusersList from "./components/list-simple-user.component";
 import CreateMap from "./components/map.component";
 
 import logo from "./logo.png";
@@ -26,13 +26,18 @@ class App extends Component {
                   <Link to="/createuser" className="nav-link">Criar usuario</Link>
                 </li> 
                 <li className="navbar-item">
+                  <Link to="/listusers" className="nav-link">Visualizar usuarios</Link>
+                </li> 
+              
+                <li className="navbar-item">
                   <Link to="/showmap" className="nav-link">Ver Mapa</Link>
                 </li>
               </ul>
             </div>
           </nav>
 
-          <Route path="/createuser" component={CreateUser} /> 
+          <Route path="/createuser" component={CreateUser} />  
+          <Route path="/listusers" component={SimpleusersList} /> 
           <Route path="/showmap" component={CreateMap} />
         </div>
       </Router>
