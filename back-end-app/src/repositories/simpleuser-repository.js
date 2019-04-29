@@ -16,17 +16,25 @@ exports.create = async (data) => {
     await simpleuser.save(); 
 }  
 
-exports.update = async(cpf,data) => { 
-    await Simpleuser 
-    .findOneAndUpdate(cpf, { 
+exports.update = async(id,data) => { 
+    await Simpleuser  
+    .findOneAndUpdate(id, { 
         $set: {  
-            // can update anything  
-            email: data.email,
-            password: data.password
+            // can update anything 
+            cpf:data.cpf,  
+            name: data.name,
+            email: data.email
         }
     });
 } 
 exports.delete = async(cpf) => { 
     await Simpleuser 
         .findOneAndRemove(cpf);
-}
+}  
+
+
+exports.getById = async(id) => { 
+    const res = await Simpleuser 
+        .findById(id)
+    return res;    
+} 

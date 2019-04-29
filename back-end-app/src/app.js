@@ -14,7 +14,7 @@ const app = express();
 const router = express.Router();  
  
 // connect with moongose database
-mongoose.connect(config.connectionString)
+mongoose.connect(config.connectionString,  { useNewUrlParser: true } )
  
 
 // load schemas (models) of database
