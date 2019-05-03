@@ -1,0 +1,16 @@
+{
+    "name": "unicity",
+    "version": "1.0.0",
+    "description": "Workspace Setup",
+    "main": "index.js",
+    "scripts": {
+      "start:server": "cd back-end-app && nodemon server.js",
+      "start:web": "cd front-end && yarn start",
+      "start:dev": "concurrently \"yarn start:server\" \"yarn start:web\""
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+    }
+  }
+  

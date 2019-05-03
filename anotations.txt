@@ -1,0 +1,3 @@
+Todas as informações que você precisa saber do projeto estão abaixo:
+
+Cidades derão adicionadas no banco uma vez só. Não será possível cadastrar novas cidades.

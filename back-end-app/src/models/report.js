@@ -48,12 +48,14 @@ const schema = new Schema({
 
     number_of_denunciations: { 
         type: Number, 
-        required: true, 
+        required: true,
+        default: 0
     },  
 
     number_of_supports: { 
         type: Number, 
-        required: true, 
+        required: true,
+        default: 0 
     },    
      
     comment: { 
@@ -63,7 +65,8 @@ const schema = new Schema({
 
     city: {  
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'City' 
+        ref: 'City'
+        // required: true
     },     
      
     categories: [{  
@@ -71,6 +74,7 @@ const schema = new Schema({
         category: { 
             type: mongoose.Schema.Types.ObjectId,  
             ref: 'Category'
+            // required: true
         }, 
     }],    
 

@@ -4,7 +4,7 @@
 
 const express = require('express'); 
 const router = express.Router(); 
-const controller = require('../controllers/simpleuser-controller'); 
+const controller = require('../controllers/adminuser-controller'); 
 
 // get functions (by id and data)
 router.get('/', controller.get);  
