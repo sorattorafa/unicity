@@ -17,8 +17,8 @@ exports.create = async (data) => {
 }  
 
 exports.update = async(id,data) => { 
-    await Simpleuser  
-    .findOneAndUpdate(id, { 
+    await Simpleuser   
+    .findByIdAndUpdate(id, { 
         $set: {  
             // can update anything 
             cpf:data.cpf,  
