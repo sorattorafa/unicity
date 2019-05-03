@@ -14,7 +14,20 @@ exports.get = async (req, res, next) =>{
             message: 'Falha ao processar sua requisição'
         });
     }    
-};
+}; 
+
+
+// Get simple users by id 
+exports.getById = async (req, res, next) =>{ 
+    try {
+        var data = await repository.getById(req.params.id); 
+        res.status(200).send(data);
+    } catch (e) { 
+        res.status(500).send({ 
+            message: 'Falha ao processar sua requisição'
+        });
+    }    
+}; 
  
 // create / set / update / delete  
 
@@ -46,7 +59,6 @@ exports.post = async(req, res, next) => {
 exports.put = (req, res, next) => {   
     let contract = new ValidationContract();    // Usado para fazer a validação de dados
     contract.isEmail(req.body.email, 'Digite um e-mail válido') 
-    contract.hasMinLen(req.body.password, 3, 'A senha deve conter pelo menos 3 caracteres')
     
     // if data is valid
     if (!contract.isValid()){ 
@@ -55,7 +67,7 @@ exports.put = (req, res, next) => {
     }
 
     repository  
-        .update(req.params.cpf, req.body)
+        .update(req.params.id, req.body)
         .then(x=>{ 
             res.status(201).send({ 
                 message: 'Usuario atualizado com sucesso!' 

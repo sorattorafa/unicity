@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-
-import CreateUser from "./components/create-user.component";
+// components of simple user
+import CreateUser from "./components/simpleuser/create-user.component";
 import CreateReport from "./components/report/create-report";
-import SimpleusersList from "./components/list-simple-user.component";
-import CreateMap from "./components/map.component";
+import EditSimpleuser from "./components/simpleuser/edit-simpleuser.component"; 
+import SimpleusersList from "./components/simpleuser/list-simple-user.component"; 
+ 
+// components of map
+import CreateMap from "./components/map/map.component";
 
 import logo from "./logo.png";
 
@@ -37,7 +40,8 @@ class App extends Component {
             </div>
           </nav>
 
-          <Route path="/createuser" component={CreateUser} />  
+          <Route path="/createuser" component={CreateUser} />   
+          <Route path="/edit/:id" component={EditSimpleuser} />
           <Route path="/listusers" component={SimpleusersList} /> 
           <Route path="/showmap" component={CreateMap} />
           <Route path="/createreport" component={CreateReport} />
