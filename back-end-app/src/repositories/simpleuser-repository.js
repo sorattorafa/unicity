@@ -27,9 +27,8 @@ exports.update = async(id,data) => {
         }
     });
 } 
-exports.delete = async(cpf) => { 
-    await Simpleuser 
-        .findOneAndRemove(cpf);
+exports.delete = async(id) => { 
+    await Simpleuser.findByIdAndDelete(id);
 }  
 
 

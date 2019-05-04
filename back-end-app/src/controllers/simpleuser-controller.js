@@ -82,7 +82,7 @@ exports.put = (req, res, next) => {
 
  
 exports.delete = (req, res, next) => {  
-    repository.delete(req.body.id) 
+    repository.delete(req.params.id) 
         .then(x=>{ 
             res.status(200).send({ 
                 message: 'Requisição removido com sucesso!' 

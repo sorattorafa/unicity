@@ -13,6 +13,6 @@ router.get('/:id', controller.getById);
 // post, put and delete (create, update and delete)
 router.post('/add', controller.post); 
 router.put('/:id', controller.put); 
-router.delete('/', controller.delete); 
+router.delete('/delete/:id', controller.delete); 
 
 module.exports = router;
