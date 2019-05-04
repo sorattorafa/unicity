@@ -6,7 +6,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import CreateUser from "./components/simpleuser/create-user.component"; 
 import EditSimpleuser from "./components/simpleuser/edit-simpleuser.component"; 
 import SimpleusersList from "./components/simpleuser/list-simple-user.component"; 
- 
+import DeleteSimpleuser from "./components/simpleuser/delete-simpleuser"; 
+  
 // components of map
 import CreateMap from "./components/map/map.component";
 
@@ -41,7 +42,8 @@ class App extends Component {
 
           <Route path="/createuser" component={CreateUser} />   
           <Route path="/edit/:id" component={EditSimpleuser} />
-          <Route path="/listusers" component={SimpleusersList} /> 
+          <Route path="/listusers" component={SimpleusersList} />  
+          <Route path="/delete/:id" component={DeleteSimpleuser} /> 
           <Route path="/showmap" component={CreateMap} />
         </div>
       </Router>
