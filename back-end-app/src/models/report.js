@@ -48,12 +48,14 @@ const schema = new Schema({
 
     number_of_denunciations: { 
         type: Number, 
-        required: true, 
+        required: true,  
+        default:0
     },  
 
     number_of_supports: { 
         type: Number, 
         required: true, 
+        default:0 
     },    
      
     comment: { 

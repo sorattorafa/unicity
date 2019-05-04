@@ -22,6 +22,7 @@ const Category = require('./models/category')
 const Companyuser = require('./models/companyuser') 
 const Comment = require('./models/comment')  
 const Adminuser = require('./models/adminuser') 
+const Report = require('./models/report') 
 
 
 
@@ -33,6 +34,7 @@ const categoryRoute = require('./routes/category');
 const companyRoute = require('./routes/companyuser'); 
 const commentRoute = require('./routes/comment'); 
 const adminuserRoute = require('./routes/adminuser'); 
+const reportRoute = require('./routes/report'); 
 
 
 
@@ -49,5 +51,6 @@ app.use('/categories', categoryRoute);
 app.use('/companyusers', companyRoute); 
 app.use('/adminusers', adminuserRoute);  
 app.use('/comments', commentRoute);   
+app.use('/reports', reportRoute);   
 
 module.exports = app; 
