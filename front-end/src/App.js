@@ -7,6 +7,9 @@ import CreateUser from "./components/simpleuser/create-user.component";
 import EditSimpleuser from "./components/simpleuser/edit-simpleuser.component"; 
 import SimpleusersList from "./components/simpleuser/list-simple-user.component"; 
 import DeleteSimpleuser from "./components/simpleuser/delete-simpleuser"; 
+
+//components of admin user
+import CreateAdminUser from "./components/adminuser/create-adminuser";
   
 // components of map
 import CreateMap from "./components/map/map.component";
@@ -36,6 +39,9 @@ class App extends Component {
                 <li className="navbar-item">
                   <Link to="/showmap" className="nav-link">Ver Mapa</Link>
                 </li>
+                <li className="navbar-item">
+                  <Link to="/createadminuser" className="nav-link">Criar usuário administador</Link>
+                </li>
               </ul>
             </div>
           </nav>
@@ -45,6 +51,7 @@ class App extends Component {
           <Route path="/listusers" component={SimpleusersList} />  
           <Route path="/delete/:id" component={DeleteSimpleuser} /> 
           <Route path="/showmap" component={CreateMap} />
+          <Route path="/createadminuser" component={CreateAdminUser} />
         </div>
       </Router>
     );
