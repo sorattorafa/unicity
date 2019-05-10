@@ -82,19 +82,20 @@ export default class CreateReport extends Component {
 
         console.log(`Form submitted:`); 
 
-        console.log(`User title: ${this.state.title}`);
-        console.log(`User cep: ${this.state.cep}`);
-        console.log(`User street: ${this.state.street}`); 
-        console.log(`User number: ${this.state.number}`); 
+        console.log(`Report title: ${this.state.title}`);
+        console.log(`Report cep: ${this.state.cep}`);
+        console.log(`Report street: ${this.state.street}`); 
+        console.log(`Report number: ${this.state.number}`); 
+        console.log(`Report description: ${this.state.description}`); 
 
         const newReport = { 
             title: this.state.title,
             cep: this.state.cep,
             street: this.state.street, 
             number: this.state.number,  
-            description: this.state.description, 
-            city: this.state.city,
-            categories: this.state.categories 
+            description: this.state.description
+            //city: this.state.city,
+            //categories: this.state.categories 
         }
 
         axios.post('/simpleusers/add', newReport)
@@ -105,10 +106,10 @@ export default class CreateReport extends Component {
             cep: '',
             street: '', 
             number: '', 
-            description: '',
+            description: ''
             // status: '',
-            city: '',
-            categories: ''
+            //city: '',
+            //categories: ''
         })
     }
 
@@ -116,79 +117,28 @@ export default class CreateReport extends Component {
         return (
             <div style={{marginTop: 20}}>
                 <h3>Adicionar relato</h3>
-                <Form>
+                <Form className="formRelato" onSubmit={this.onSubmit}>
                     <FormGroup>
                         <Label for="exampleEmail">Título</Label>
                         <Input type="text" name="title" id="tile" placeholder="Título do relato" />
                     </FormGroup>
                     <FormGroup>
-                        <Label for="exampleEmail">Título</Label>
-                        <Input type="text" name="title" id="tile" placeholder="Título do relato" />
-                $$$$    </FormGroup>
-
-                    <FormGroup>
-                        <Label for="examplePassword">Password</Label>
-                        <Input type="password" name="password" id="examplePassword" placeholder="password placeholder" />
+                        <Label for="exampleEmail">CEP</Label>
+                        <Input type="text" name="cep" id="cep" placeholder="CEP" />
                     </FormGroup>
                     <FormGroup>
-                        <Label for="exampleSelect">Select</Label>
-                        <Input type="select" name="select" id="exampleSelect">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </Input>
+                        <Label for="examplePassword">Rua</Label>
+                        <Input type="text" name="street" id="street" placeholder="Rua" />
                     </FormGroup>
                     <FormGroup>
-                        <Label for="exampleSelectMulti">Select Multiple</Label>
-                        <Input type="select" name="selectMulti" id="exampleSelectMulti" multiple>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </Input>
+                        <Label for="examplePassword">Número</Label>
+                        <Input type="text" name="number" id="number" placeholder="Número" />
                     </FormGroup>
                     <FormGroup>
-                        <Label for="exampleText">Text Area</Label>
-                        <Input type="textarea" name="text" id="exampleText" />
+                        <Label for="exampleText">Descrição</Label>
+                        <Input type="textarea" name="descricao" id="descricao" />
                     </FormGroup>
-                    <FormGroup>
-                        <Label for="exampleFile">File</Label>
-                        <Input type="file" name="file" id="exampleFile" />
-                        <FormText color="muted">
-                            This is some placeholder block-level help text for the above input.
-                            It's a bit lighter and easily wraps to a new line.
-                        </FormText>
-                    </FormGroup>
-                    <FormGroup tag="fieldset">
-                        <legend>Radio Buttons</legend>
-                        <FormGroup check>
-                            <Label check>
-                            <Input type="radio" name="radio1" />{' '}
-                            Option one is this and that—be sure to include why it's great
-                            </Label>
-                        </FormGroup>
-                        <FormGroup check>
-                            <Label check>
-                            <Input type="radio" name="radio1" />{' '}
-                            Option two can be something else and selecting it will deselect option one
-                            </Label>
-                        </FormGroup>
-                        <FormGroup check disabled>
-                            <Label check>
-                            <Input type="radio" name="radio1" disabled />{' '}
-                            Option three is disabled
-                            </Label>
-                        </FormGroup>
-                    </FormGroup>
-                    <FormGroup check>
-                        <Label check>
-                            <Input type="checkbox" />{' '}
-                            Check me out
-                        </Label>
-                    </FormGroup>
+                    
                     <Button>Submit</Button>
                 </Form>
             </div>
