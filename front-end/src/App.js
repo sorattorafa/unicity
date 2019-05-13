@@ -9,15 +9,8 @@ import SimpleusersList from "./components/simpleuser/list-simple-user.component"
 import DeleteSimpleuser from "./components/simpleuser/delete-simpleuser"; 
 
 //components of admin user
-<<<<<<< HEAD
-import CreateAdminUser from "./components/adminuser/create-adminuser"; 
-=======
 import CreateAdminUser from "./components/adminuser/create-adminuser";
   
-// components of map
-import CreateMap from "./components/map/map.component";
->>>>>>> e9b1585b1ed8242a7e657670c47a3320eadc72b2
-
 import logo from "./logo.png";
 import './App.css';
 
@@ -59,9 +52,6 @@ class App extends Component {
                 <li className="navbar-item">
                   <Link to="/createadminuser" className="nav-link">Criar usuário administador</Link>
                 </li>
-                <li className="navbar-item">
-                  <Link to="/createadminuser" className="nav-link">Criar usuário administador</Link>
-                </li>
               </ul>
             </div>
           </nav> 
@@ -69,7 +59,6 @@ class App extends Component {
           <Route path="/edit/:id" component={EditSimpleuser} />
           <Route path="/listusers" component={SimpleusersList} />  
           <Route path="/delete/:id" component={DeleteSimpleuser} /> 
-<<<<<<< HEAD
           <Route path="/createadminuser" component={CreateAdminUser} /> 
         </div>  
         
@@ -88,11 +77,6 @@ class App extends Component {
               <CardText> Made with <span role="img" aria-label="love">💚</span> by <a href="https://git.io/w3cj" target="_blank" rel="noopener noreferrer">w3cj</a></CardText>
             </Card>
           </div>    
-=======
-          <Route path="/showmap" component={CreateMap} />
-          <Route path="/createadminuser" component={CreateAdminUser} />
-        </div>
->>>>>>> e9b1585b1ed8242a7e657670c47a3320eadc72b2
       </Router>
     );
   }
