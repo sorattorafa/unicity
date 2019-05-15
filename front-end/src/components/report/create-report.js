@@ -1,147 +1,244 @@
 import React, {Component} from 'react';
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import {
+    Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete,
+  } from 'antd';
+  
+const { Option } = Select;
+const AutoCompleteOption = AutoComplete.Option;
 
-import axios from 'axios';
+const residences = [{
+  value: 'zhejiang',
+  label: 'Zhejiang',
+  children: [{
+    value: 'hangzhou',
+    label: 'Hangzhou',
+    children: [{
+      value: 'xihu',
+      label: 'West Lake',
+    }],
+  }],
+}, {
+  value: 'jiangsu',
+  label: 'Jiangsu',
+  children: [{
+    value: 'nanjing',
+    label: 'Nanjing',
+    children: [{
+      value: 'zhonghuamen',
+      label: 'Zhong Hua Men',
+    }],
+  }],
+}];
 
 export default class CreateReport extends Component {
+  state = {
+    confirmDirty: false,
+    autoCompleteResult: [],
+  };
 
-    constructor(props) {
-        super(props); 
- 
-        this.onChangeTitle = this.onChangeTitle.bind(this);
-        this.onChangeCep = this.onChangeCep.bind(this);  
-        this.onChangeStreet = this.onChangeStreet.bind(this); 
-        this.onChangeNumber = this.onChangeNumber.bind(this);
-        this.onChangeDescription = this.onChangeDescription.bind(this);
-        this.onChangeCity = this.onChangeCity.bind(this);
-        this.onChangeCategories = this.onChangeCategories.bind(this); 
-        this.onSubmit = this.onSubmit.bind(this);
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.form.validateFieldsAndScroll((err, values) => {
+      if (!err) {
+        console.log('Received values of form: ', values);
+      }
+    });
+  }
 
-        this.state = { 
-            title: '',
-            cep: '',
-            street: '',  
-            number: '',
-            description: '',
-            // status: '',
-            city: '',
-            categories: ''
-        }
+  handleConfirmBlur = (e) => {
+    const value = e.target.value;
+    this.setState({ confirmDirty: this.state.confirmDirty || !!value });
+  }
+
+  compareToFirstPassword = (rule, value, callback) => {
+    const form = this.props.form;
+    if (value && value !== form.getFieldValue('password')) {
+      callback('Two passwords that you enter is inconsistent!');
+    } else {
+      callback();
     }
-//    componentWillMount() {  
-//       axios.get('/categories')
-//            .then(res => console.log(res.data));    
-//  }
+  }
 
-    onChangeTitle(e) {
-        this.setState({
-            title: e.target.value
-        });
-    } 
-
-    onChangeCep(e) {
-        this.setState({
-            cep: e.target.value
-        });
+  validateToNextPassword = (rule, value, callback) => {
+    const form = this.props.form;
+    if (value && this.state.confirmDirty) {
+      form.validateFields(['confirm'], { force: true });
     }
+    callback();
+  }
 
-    onChangeStreet(e) {
-        this.setState({
-            street: e.target.value
-        });
-    } 
- 
-
-    onChangeNumber(e) {
-        this.setState({
-            number: e.target.value
-        });
+  handleWebsiteChange = (value) => {
+    let autoCompleteResult;
+    if (!value) {
+      autoCompleteResult = [];
+    } else {
+      autoCompleteResult = ['.com', '.org', '.net'].map(domain => `${value}${domain}`);
     }
+    this.setState({ autoCompleteResult });
+  }
 
-    onChangeDescription(e) {
-        this.setState({
-            description: e.target.value
-        });
-    }
+  render() {
+    const { getFieldDecorator } = this.props.form;
+    const { autoCompleteResult } = this.state;
 
-    onChangeCity(e) {
-        this.setState({
-            city: e.target.value
-        });
-    }
+    const formItemLayout = {
+      labelCol: {
+        xs: { span: 24 },
+        sm: { span: 8 },
+      },
+      wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 16 },
+      },
+    };
+    const tailFormItemLayout = {
+      wrapperCol: {
+        xs: {
+          span: 24,
+          offset: 0,
+        },
+        sm: {
+          span: 16,
+          offset: 8,
+        },
+      },
+    };
+    const prefixSelector = getFieldDecorator('prefix', {
+      initialValue: '86',
+    })(
+      <Select style={{ width: 70 }}>
+        <Option value="86">+86</Option>
+        <Option value="87">+87</Option>
+      </Select>
+    );
 
-    onChangeCategories(e) {
-        this.setState({
-            categories: e.target.value
-        });
-    }
+    const websiteOptions = autoCompleteResult.map(website => (
+      <AutoCompleteOption key={website}>{website}</AutoCompleteOption>
+    ));
 
-
-    onSubmit(e) {
-        e.preventDefault();
-
-        console.log(`Form submitted:`); 
-
-        console.log(`Report title: ${this.state.title}`);
-        console.log(`Report cep: ${this.state.cep}`);
-        console.log(`Report street: ${this.state.street}`); 
-        console.log(`Report number: ${this.state.number}`); 
-        console.log(`Report description: ${this.state.description}`); 
-
-        const newReport = { 
-            title: this.state.title,
-            cep: this.state.cep,
-            street: this.state.street, 
-            number: this.state.number,  
-            description: this.state.description
-            //city: this.state.city,
-            //categories: this.state.categories 
-        }
-
-        axios.post('/simpleusers/add', newReport)
-            .then(res => console.log(res.data));
-
-        this.setState({ 
-            title:'',
-            cep: '',
-            street: '', 
-            number: '', 
-            description: ''
-            // status: '',
-            //city: '',
-            //categories: ''
-        })
-    }
-
-    render() {
-        return (
-            <div style={{marginTop: 20}}>
-                <h3>Adicionar relato</h3>
-                <Form className="formRelato" onSubmit={this.onSubmit}>
-                    <FormGroup>
-                        <Label for="exampleEmail">Título</Label>
-                        <Input type="text" name="title" id="tile" placeholder="Título do relato" />
-                    </FormGroup>
-                    <FormGroup>
-                        <Label for="exampleEmail">CEP</Label>
-                        <Input type="text" name="cep" id="cep" placeholder="CEP" />
-                    </FormGroup>
-                    <FormGroup>
-                        <Label for="examplePassword">Rua</Label>
-                        <Input type="text" name="street" id="street" placeholder="Rua" />
-                    </FormGroup>
-                    <FormGroup>
-                        <Label for="examplePassword">Número</Label>
-                        <Input type="text" name="number" id="number" placeholder="Número" />
-                    </FormGroup>
-                    <FormGroup>
-                        <Label for="exampleText">Descrição</Label>
-                        <Input type="textarea" name="descricao" id="descricao" />
-                    </FormGroup>
-                    
-                    <Button>Submit</Button>
-                </Form>
-            </div>
-        )
-    }
+    return (
+      <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+        <Form.Item
+          label="E-mail"
+        >
+          {getFieldDecorator('email', {
+            rules: [{
+              type: 'email', message: 'The input is not valid E-mail!',
+            }, {
+              required: true, message: 'Please input your E-mail!',
+            }],
+          })(
+            <Input />
+          )}
+        </Form.Item>
+        <Form.Item
+          label="Password"
+        >
+          {getFieldDecorator('password', {
+            rules: [{
+              required: true, message: 'Please input your password!',
+            }, {
+              validator: this.validateToNextPassword,
+            }],
+          })(
+            <Input type="password" />
+          )}
+        </Form.Item>
+        <Form.Item
+          label="Confirm Password"
+        >
+          {getFieldDecorator('confirm', {
+            rules: [{
+              required: true, message: 'Please confirm your password!',
+            }, {
+              validator: this.compareToFirstPassword,
+            }],
+          })(
+            <Input type="password" onBlur={this.handleConfirmBlur} />
+          )}
+        </Form.Item>
+        <Form.Item
+          label={(
+            <span>
+              Nickname&nbsp;
+              <Tooltip title="What do you want others to call you?">
+                <Icon type="question-circle-o" />
+              </Tooltip>
+            </span>
+          )}
+        >
+          {getFieldDecorator('nickname', {
+            rules: [{ required: true, message: 'Please input your nickname!', whitespace: true }],
+          })(
+            <Input />
+          )}
+        </Form.Item>
+        <Form.Item
+          label="Habitual Residence"
+        >
+          {getFieldDecorator('residence', {
+            initialValue: ['zhejiang', 'hangzhou', 'xihu'],
+            rules: [{ type: 'array', required: true, message: 'Please select your habitual residence!' }],
+          })(
+            <Cascader options={residences} />
+          )}
+        </Form.Item>
+        <Form.Item
+          label="Phone Number"
+        >
+          {getFieldDecorator('phone', {
+            rules: [{ required: true, message: 'Please input your phone number!' }],
+          })(
+            <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
+          )}
+        </Form.Item>
+        <Form.Item
+          label="Website"
+        >
+          {getFieldDecorator('website', {
+            rules: [{ required: true, message: 'Please input website!' }],
+          })(
+            <AutoComplete
+              dataSource={websiteOptions}
+              onChange={this.handleWebsiteChange}
+              placeholder="website"
+            >
+              <Input />
+            </AutoComplete>
+          )}
+        </Form.Item>
+        <Form.Item
+          label="Captcha"
+          extra="We must make sure that your are a human."
+        >
+          <Row gutter={8}>
+            <Col span={12}>
+              {getFieldDecorator('captcha', {
+                rules: [{ required: true, message: 'Please input the captcha you got!' }],
+              })(
+                <Input />
+              )}
+            </Col>
+            <Col span={12}>
+              <Button>Get captcha</Button>
+            </Col>
+          </Row>
+        </Form.Item>
+        <Form.Item {...tailFormItemLayout}>
+          {getFieldDecorator('agreement', {
+            valuePropName: 'checked',
+          })(
+            <Checkbox>I have read the <a href="">agreement</a></Checkbox>
+          )}
+        </Form.Item>
+        <Form.Item {...tailFormItemLayout}>
+          <Button type="primary" htmlType="submit">Register</Button>
+        </Form.Item>
+      </Form>
+    );
+  }
 }
+
+const WrappedRegistrationForm = Form.create({ name: 'register' })(RegistrationForm);
+
+ReactDOM.render(<WrappedRegistrationForm />, mountNode);
