@@ -7,12 +7,12 @@ const Schema = mongoose.Schema;
 
 // create a new schema of requester  
 
-const schema = new Schema({ ,       
+const schema = new Schema({      
     cpf: { // xxx.yyy.zzz - ab
         type: String, 
         required: true, 
         unique: true, 
-        trim: true, 
+        trim: true 
     }, 
     name: { 
         type: String, 
@@ -30,7 +30,7 @@ const schema = new Schema({ ,
         type: String, 
         required: true, 
         trim: true   
-    }] 
+    } 
     
 }); 
   

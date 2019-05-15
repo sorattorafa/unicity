@@ -3,7 +3,7 @@
 // validation 
 const ValidationContract = require('../validators/fluent-validator');
 // repository of product 
-const repository = require('../repositories/simpleuser-repository');  
+const repository = require('../repositories/report-repository');  
 
 exports.get = async (req, res, next) =>{ 
     try {
@@ -17,7 +17,7 @@ exports.get = async (req, res, next) =>{
 }; 
 
 
-// Get simple users by id 
+// Get report by id 
 exports.getById = async (req, res, next) =>{ 
     try {
         var data = await repository.getById(req.params.id); 
@@ -30,13 +30,12 @@ exports.getById = async (req, res, next) =>{
 }; 
  
 // create / set / update / delete  
-
 //post - create
 exports.post = async(req, res, next) => {  
     let contract = new ValidationContract(); 
-    contract.hasMinLen(req.body.cpf, 4, 'O numero da sala deve conter pelo menos 4 caracteres = f001') 
-    contract.hasMinLen(req.body.name, 4, 'O nome deve conter pelo menos 4 caracteres') 
-    contract.hasMinLen(req.body.password, 3, 'A senha deve conter pelo menos 3 caracteres') 
+    contract.hasMinLen(req.body.title, 4, 'O titulo deve conter 4 caracteres') 
+    contract.hasMinLen(req.body.cep, 4, 'O cep deve conter pelo menos 4 caracteres') 
+    contract.hasMinLen(req.body.street, 3, 'A rua deve conter pelo menos 3 caracteres') 
  
     // if data is valid
     if (!contract.isValid()){ 
@@ -57,24 +56,15 @@ exports.post = async(req, res, next) => {
  
 //put- update request
 exports.put = (req, res, next) => {   
-    let contract = new ValidationContract();    // Usado para fazer a validação de dados
-    contract.isEmail(req.body.email, 'Digite um e-mail válido') 
-    
-    // if data is valid
-    if (!contract.isValid()){ 
-        res.status(400).send(contract.errors()).end();  // Manda mensagens de erros para tela
-        return;
-    }
-
     repository  
         .update(req.params.id, req.body)
         .then(x=>{ 
             res.status(201).send({ 
-                message: 'Usuario atualizado com sucesso!' 
+                message: 'Relato atualizado com sucesso!' 
             });
         }).catch(e=>{ 
             res.status(400).send({ 
-                message: 'Usuario não atualizado!',  
+                message: 'Relato não atualizado!',  
                 data: e 
             });
         });  
@@ -82,7 +72,7 @@ exports.put = (req, res, next) => {
 
  
 exports.delete = (req, res, next) => {  
-    repository.delete(req.params.id) 
+    repository.delete(req.body.id) 
         .then(x=>{ 
             res.status(200).send({ 
                 message: 'Requisição removido com sucesso!' 

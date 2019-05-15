@@ -1,39 +1,39 @@
 'use strict'; 
 const mongoose = require('mongoose'); 
-const Simpleuser =  mongoose.model('Simpleuser');  
+const Report =  mongoose.model('Report');  
  
 // every functions are async! 
 
 exports.get = async () => {  
-    const res = await Simpleuser.find({ 
-            active:true  
-        }, 'cpf name email password reports notifications'); 
+    const res = await Report.find({ 
+            status:0  
+        }, 'title description cep street number '); 
     return res;    
 }  
 
 exports.create = async (data) => { 
-    var simpleuser = new Simpleuser(data); 
-    await simpleuser.save(); 
+    var report = new Report(data); 
+    await report.save(); 
 }  
 
 exports.update = async(id,data) => { 
-    await Simpleuser   
+    await Report   
     .findByIdAndUpdate(id, { 
         $set: {  
             // can update anything 
-            cpf:data.cpf,  
-            name: data.name,
-            email: data.email
+            cep:data.cep,  
+            street: data.street,
+            number: data.number
         }
     });
 } 
 exports.delete = async(id) => { 
-    await Simpleuser.findByIdAndDelete(id);
+    await Report.findByIdAndDelete(id);
 }  
 
 
 exports.getById = async(id) => { 
-    const res = await Simpleuser 
+    const res = await Report 
         .findById(id)
     return res;    
 } 

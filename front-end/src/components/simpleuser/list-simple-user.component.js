@@ -8,7 +8,10 @@ const Simpleuser = props => (
         <td className={props.simpleuser.simpleuser_completed ? 'completed' : ''}>{props.simpleuser.name}</td> 
         <td className={props.simpleuser.simpleuser_completed ? 'completed' : ''}>{props.simpleuser.email}</td> 
         <td>
-            <Link to={"/edit/"+props.simpleuser._id}>Edit</Link>
+            <Link to={"/edit/"+props.simpleuser._id}>Edit</Link> 
+        </td> 
+        <td>
+            <Link to={"/delete/"+props.simpleuser._id}>Delete</Link> 
         </td>
     </tr>
 )

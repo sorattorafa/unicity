@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import axios from 'axios';
+import axios from 'axios'; 
 
 export default class EditSimpleuser extends Component {
 
@@ -58,7 +58,7 @@ export default class EditSimpleuser extends Component {
             name: this.state.name,
             email: this.state.email
         };
-        axios.put('http://localhost:3001/simpleusers/'+this.props.match.params.id, obj)
+        axios.put('/simpleusers/'+this.props.match.params.id, obj)
             .then(res => console.log(res.data));
 
         this.props.history.push('/');
