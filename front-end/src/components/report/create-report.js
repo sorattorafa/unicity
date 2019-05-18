@@ -1,10 +1,11 @@
-import { Form, Row, Col, Icon, Input, Button, Tooltip } from 'antd';
+import { Form, Row, Col, Icon, Input, Button, Tooltip, Select } from 'antd';
 import React, {Component} from 'react';
 import ReactDOM from "react-dom";
 import "antd/dist/antd.css";
 // import "./index.css";
 import axios from 'axios';
 
+const { Option } = Select;
 const TextArea = Input.TextArea;
 
 // Return the errors in hte fields
@@ -75,6 +76,15 @@ class CreateReport extends React.Component {
 
         axios.post('/reports/add', values)
             .then(res => console.log(res.data));
+
+        this.setState({ 
+          title: '',
+          cep: '',
+          street: '',  
+          number: '',
+          description: '',
+          active: true
+        })
       }
     });
   };
@@ -101,6 +111,9 @@ class CreateReport extends React.Component {
     const streetError = isFieldTouched('street') && getFieldError('street');
     const numberError = isFieldTouched('number') && getFieldError('number');
     const descriptionError = isFieldTouched('description') && getFieldError('description');
+    // const cityError = isFieldTouched('city') && getFieldError('city');
+    // const categoryError = isFieldTouched('category') && getFieldError('category');
+
     return (
       <Row>
         <Form {...formItemLayout} onSubmit={this.handleSubmit}>
@@ -181,6 +194,55 @@ class CreateReport extends React.Component {
               </Form.Item>
             </Col>
           </Row>
+
+          {/* Report's City */}
+          {/* <Row gutter={24}>
+            <Col span={12}>
+              <Form.Item label={
+                <span>
+                  Cidade&nbsp;
+                  <Tooltip title="Qual a cidade de ocorrência do relato?">
+                    <Icon type="question-circle-o" />
+                  </Tooltip>
+                </span>
+              } hasFeedback>
+                {getFieldDecorator('city', {
+                  rules: [{ required: true, message: 'Insira a cidade de ocorrência do relato!' }],
+                })(
+                  <Select>
+                    <Option value="1">Campo Mourão</Option>
+                    <Option value="2">Maringá</Option>
+                    <Option value="3">Cianorte</Option>
+                    <Option value="4">Ivaiporã</Option>
+                    <Option value="5">Araruna</Option>
+                  </Select>,
+                )}
+              </Form.Item>
+            </Col> */}
+
+          {/* Report's Category */}
+            {/* <Col span={12}>
+              <Form.Item label={
+                <span>
+                  Categoria&nbsp;
+                  <Tooltip title="Qual a categoria do relato?">
+                    <Icon type="question-circle-o" />
+                  </Tooltip>
+                </span>
+              } hasFeedback>
+                {getFieldDecorator('category', {
+                  rules: [{ required: true, message: 'Insira a categoria do relato!' }],
+                })(
+                  <Select>
+                    <Option value="1">Segurança pública</Option>
+                    <Option value="2">Mobilidade</Option>
+                    <Option value="3">Vias</Option>
+                    <Option value="4">Iluminação</Option>
+                  </Select>,
+                )}
+              </Form.Item>
+            </Col>
+          </Row> */}
 
           {/* Report's Description */}
           <Row>
