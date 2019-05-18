@@ -104,8 +104,6 @@ class CreateReport extends React.Component {
     };
 
     // Only show error after a field is touched.
-    const usernameError = isFieldTouched('username') && getFieldError('username');
-    const passwordError = isFieldTouched('password') && getFieldError('password');
     const titleError = isFieldTouched('title') && getFieldError('title');
     const cepError = isFieldTouched('cep') && getFieldError('cep');
     const streetError = isFieldTouched('street') && getFieldError('street');
@@ -262,29 +260,6 @@ class CreateReport extends React.Component {
               })(<TextArea rows={4} />)}
             </Form.Item>
           </Row>
-
-
-          {/* <Form.Item validateStatus={usernameError ? 'error' : ''} help={usernameError || ''}>
-            {getFieldDecorator('username', {
-              rules: [{ required: true, message: 'Please input your username!' }],
-            })(
-              <Input
-                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                placeholder="Username"
-              />,
-            )}
-          </Form.Item>
-          <Form.Item validateStatus={passwordError ? 'error' : ''} help={passwordError || ''}>
-            {getFieldDecorator('password', {
-              rules: [{ required: true, message: 'Please input your Password!' }],
-            })(
-              <Input
-                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                type="password"
-                placeholder="Password"
-              />,
-            )}
-          </Form.Item> */}
           
           {/* Submit Button */}
           <Row>
