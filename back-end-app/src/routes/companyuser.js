@@ -13,7 +13,7 @@ router.get('/categories/:category', controller.getByCategory);
 
 
 // post, put and delete (create, update and delete)
-router.post('/', controller.post); 
+router.post('/add', controller.post); 
 router.put('/:cnpj', controller.put); 
 router.delete('/:cnpj', controller.delete); 
 

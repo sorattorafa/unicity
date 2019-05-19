@@ -11,6 +11,9 @@ import CreateReport from "./components/report/create-report";
 
 //components of admin user
 import CreateAdminUser from "./components/adminuser/create-adminuser";
+
+//components of company user
+import CreateCompanyUser from "./components/companyuser/create-companyuser";
   
 import logo from "./logo.png";
 import './App.css';    
@@ -149,6 +152,9 @@ class App extends Component {
                 <li className="navbar-item">
                   <Link to="/createreport" className="nav-link">Criar Relato</Link>
                 </li>
+                <li className="navbar-item">
+                  <Link to="/createcompanyuser" className="nav-link">Criar usuário empresarial</Link>
+                </li>
               </ul>
             </div>
           </nav> 
@@ -158,6 +164,7 @@ class App extends Component {
           <Route path="/listusers" component={SimpleusersList} />  
           <Route path="/delete/:id" component={DeleteSimpleuser} /> 
           <Route path="/createadminuser" component={CreateAdminUser} /> 
+          <Route path="/createcompanyuser" component={CreateCompanyUser} /> 
         </div>  
         
         {/* <div className="map">
