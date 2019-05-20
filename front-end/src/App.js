@@ -14,7 +14,16 @@ import CreateAdminUser from "./components/adminuser/create-adminuser";
 
 //components of company user
 import CreateCompanyUser from "./components/companyuser/create-companyuser";
+<<<<<<< HEAD
+   
+
+
+//components of categories
+import CreateCategory from "./components/categories/create-category";
+=======
+>>>>>>> 54cd85d40991c8ca4ffd6fa41aeab25ae5989ac1
   
+
 import logo from "./logo.png";
 import './App.css';    
 import { getMessages, getLocation, sendMessage } from './map-components/Api';
@@ -154,6 +163,12 @@ class App extends Component {
                 </li>
                 <li className="navbar-item">
                   <Link to="/createcompanyuser" className="nav-link">Criar usuário empresarial</Link>
+<<<<<<< HEAD
+                </li> 
+                <li className="navbar-item">
+                  <Link to="/createcategory" className="nav-link">Criar categoria</Link>
+=======
+>>>>>>> 54cd85d40991c8ca4ffd6fa41aeab25ae5989ac1
                 </li>
               </ul>
             </div>
@@ -164,7 +179,12 @@ class App extends Component {
           <Route path="/listusers" component={SimpleusersList} />  
           <Route path="/delete/:id" component={DeleteSimpleuser} /> 
           <Route path="/createadminuser" component={CreateAdminUser} /> 
+<<<<<<< HEAD
+          <Route path="/createcompanyuser" component={CreateCompanyUser} />  
+          <Route path="/createcategory" component={CreateCategory} /> 
+=======
           <Route path="/createcompanyuser" component={CreateCompanyUser} /> 
+>>>>>>> 54cd85d40991c8ca4ffd6fa41aeab25ae5989ac1
         </div>  
         
         {/* <div className="map">
