@@ -54,7 +54,7 @@ const schema = new Schema({
 
     categories: [{ 
         type: String, 
-        required: true, 
+  //      required: true, 
         trim: true  
     }] 
 

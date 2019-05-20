@@ -12,12 +12,6 @@ const schema = new Schema({
         default:true
     },
     
-    id: { 
-        type: String, 
-        required: true, 
-        trim: true 
-    }, 
-
     name: { 
         type: String, 
         required: true, 
