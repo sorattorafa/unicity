@@ -14,9 +14,6 @@ import CreateAdminUser from "./components/adminuser/create-adminuser";
 
 //components of company user
 import CreateCompanyUser from "./components/companyuser/create-companyuser";
-<<<<<<< HEAD
-   
-
 
 //components of categories
 import CreateCategory from "./components/categories/create-category";
