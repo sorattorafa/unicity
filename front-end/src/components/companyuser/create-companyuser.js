@@ -5,6 +5,8 @@ import "antd/dist/antd.css";
 // import "./index.css";
 import axios from 'axios';
 
+const TextArea = Input.TextArea;
+
 // Return errors in fields
 function hasErrors(fieldsError) {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
@@ -194,7 +196,7 @@ class CreateCompanyUser extends React.Component {
                         >
                             {getFieldDecorator('apresentation', {
                                 rules: [{ required: true, message: 'Insira uma mensagem de apresentação da empresa', whitespace: true }],
-                            })(<Input />)}
+                            })(<TextArea rows={4} />)}
                         </Form.Item>
                     </Row>
 
