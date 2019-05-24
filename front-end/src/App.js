@@ -4,10 +4,12 @@ import { Map, TileLayer, Marker} from 'react-leaflet';
 import { Card, CardText, Button} from 'reactstrap';
 import "bootstrap/dist/css/bootstrap.min.css"; 
 import CreateUser from "./components/simpleuser/create-user.component"; 
-import EditSimpleuser from "./components/simpleuser/edit-simpleuser.component"; 
+import EditSimpleuser from "./components/simpleuser/edit-simpleuser.component";  
 import SimpleusersList from "./components/simpleuser/list-simple-user.component"; 
 import DeleteSimpleuser from "./components/simpleuser/delete-simpleuser"; 
-import CreateReport from "./components/report/create-report"; 
+import CreateReport from "./components/report/create-report";  
+
+import UsersList from "./components/simpleuser/list-simpleuser";  
 
 //components of admin user
 import CreateAdminUser from "./components/adminuser/create-adminuser";
@@ -146,7 +148,7 @@ class App extends Component {
               <ul className="navbar-nav mr-auto">
                 <li className="navbar-item">
                   <Link to="/createuser" className="nav-link">Criar usuario</Link>
-                </li> 
+                </li>  
                 <li className="navbar-item">
                   <Link to="/listusers" className="nav-link">Visualizar usuarios</Link>
                 </li> 
@@ -161,21 +163,25 @@ class App extends Component {
                 </li> 
                 <li className="navbar-item">
                   <Link to="/createcategory" className="nav-link">Criar categoria</Link>
+                </li> 
+                <li className="navbar-item">
+                  <Link to="/userss" className="nav-link">Visualizar usuários (antd)</Link>
                 </li>
               </ul>
             </div>
           </nav> 
-          <Route path="/createuser" component={CreateUser} />
+          <Route path="/createuser" component={CreateUser} /> 
           <Route path="/createreport" component={CreateReport} />   
           <Route path="/edit/:id" component={EditSimpleuser} />
           <Route path="/listusers" component={SimpleusersList} />  
           <Route path="/delete/:id" component={DeleteSimpleuser} /> 
           <Route path="/createadminuser" component={CreateAdminUser} /> 
           <Route path="/createcompanyuser" component={CreateCompanyUser} />  
-          <Route path="/createcategory" component={CreateCategory} />
+          <Route path="/createcategory" component={CreateCategory} /> 
+          <Route path="/userss" component={UsersList} />
         </div>  
-        
-        {/* <div className="map">
+       {/*
+         <div className="map">
             <Map
               className="map"
               worldCopyJump={true}
@@ -218,11 +224,13 @@ class App extends Component {
           <Card body className="thanks-form">
             <CardText>Thanks for submitting a message!</CardText>
           </Card>
-        }
+        } 
+
             <Card className="footer">
               <CardText> Made with <span role="img" aria-label="love">💚</span> by <a href="https://github.com" target="_blank" rel="noopener noreferrer">Unicity Team</a></CardText>
             </Card>
-          </div>     */}
+          </div>      
+        */}
       </Router>
     );
   }
