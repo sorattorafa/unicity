@@ -1,5 +1,4 @@
 'use strict'; 
- 
 // use mongoose database (online)
 const mongoose = require('mongoose'); 
 const Schema = mongoose.Schema; 
@@ -12,11 +11,6 @@ const schema = new Schema({
         required: true, 
         trim: true 
     },  
-    state: {  
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'State',
-        required: true
-    }, 
     active: { 
         type: Boolean, 
         default:true
@@ -25,4 +19,4 @@ const schema = new Schema({
   
 
 // export the model of customer 
-module.exports = mongoose.model('City', schema);
+module.exports = mongoose.model('State', schema);

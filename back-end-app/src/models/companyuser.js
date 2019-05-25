@@ -46,6 +46,12 @@ const schema = new Schema({
         required: true, 
         trim: true 
     },     
+ 
+
+    active: { 
+        type: Boolean,  
+        default: true 
+    },      
 
     solvedreports: [{ // one company have n solved reports  
         type: mongoose.Schema.Types.ObjectId, 
