@@ -277,5 +277,5 @@ class CreateReport extends React.Component {
   }
 }
 
-const WrappedHorizontalLoginForm = Form.create({ name: 'horizontal_login' })(CreateReport);
- export default WrappedHorizontalLoginForm;
+const WrappedCreateReport = Form.create({ name: 'horizontal_createreport' })(CreateReport);
+ export default WrappedCreateReport;

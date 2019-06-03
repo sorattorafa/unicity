@@ -1,0 +1,89 @@
+#components-layout-demo-responsive .logo {
+    height: 32px;
+    background: rgba(255,255,255,.2);
+    margin: 16px;
+  }
+  
+  #components-layout-demo-custom-trigger .trigger {
+    font-size: 18px;
+    line-height: 64px;
+    padding: 0 24px;
+    cursor: pointer;
+    transition: color .3s;
+  }
+  
+  #components-layout-demo-custom-trigger .logo {
+    height: 32px;
+    background: rgba(255,255,255,.2);
+    margin: 16px;
+  }
+  
+  .ant-layout-header {
+    background: white !important;
+  }
+  
+  .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected, .ant-menu-item:active {
+    background-color: #e51c205c !important;
+  }
+  
+  .ant-menu-item:after {
+    border-right: 3px solid #e51c20 !important;
+  }
+  
+  .ant-menu-horizontal > .ant-menu-item-selected, .ant-menu-horizontal > .ant-menu-item:hover {
+    border-bottom: 2px solid #e51c20 !important;
+  }
+  
+  .ant-menu-item-selected a, .ant-menu-item:hover a {
+    color: #e51c20 !important;
+  }
+  
+  .ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+    background: #e51c20 !important;
+    border-color: #e51c20 !important;
+  }
+  
+  .ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover {
+    border-color: #e51c20 !important;
+    background: #e51c20 !important;
+    color: #fff !important;
+  }
+  
+  .ant-radio-button-wrapper:hover, .ant-radio-button-wrapper-focused {
+    color: #e51c20 !important;
+  }
+  
+  .ant-radio-button-wrapper-checked {
+    -webkit-box-shadow: -1px 0 0 0 #e51c20 !important;
+    box-shadow: -1px 0 0 0 #e51c20 !important;
+  }
+  
+  ::selection {
+    background: #e51c20 !important;
+    color: #fff;
+  }
+  
+  blockquote {
+    font-size: 90%;
+    color: #697b8c;
+    border-left: 4px solid #ebedf0;
+    padding-left: 0.8em;
+    margin: 1em 0;
+  }
+  
+  .ant-menu-inline {
+    height: 100% !important;
+  }
+  
+  .ant-layout-sider-zero-width-trigger:hover {
+    background: white !important;
+  }
+  
+  .ant-layout-sider-zero-width-trigger {
+    background: white !important;
+    color: #333 !important;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    -webkit-box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+  }
