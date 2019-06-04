@@ -64,7 +64,7 @@ class App extends Component {
     sendingMessage: false,
     sentMessage: false,
     messages: []
-  } 
+  }  
   componentDidMount() {
     getMessages()
       .then(messages => {
@@ -154,11 +154,10 @@ class App extends Component {
   }
 
 
-
-
   render() { 
     const position = [this.state.location.lat, this.state.location.lng];  
-    const position2 = this.state.location2;
+    const position2 = this.state.location2; 
+    const {lat, lng} = this.state.location2;
     return (  
       <Router>    
           <div className="container">        
@@ -215,11 +214,23 @@ class App extends Component {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />   
           {
-            this.state.haveUserClick ? 
+            this.state.haveUserClick ?   
             <Marker
               position={position2}
-              icon={myIcon}>
-            </Marker> : ''
+              icon={myIcon}>    
+              <Popup>  
+              <p>latitude: {lat}  </p>
+              <p>  longitude: {lng} </p>
+                <li className="navbar-item">
+                  <Link to= {{ 
+                    pathname:'/createreport',  
+                    state: { 
+                      position2
+                    }
+                  }} className="nav-link">Criar Relato</Link>
+                </li>  
+                </Popup>  
+            </Marker> : ''     
           }
           {
             this.state.haveUsersLocation ? 

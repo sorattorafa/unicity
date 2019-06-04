@@ -22,8 +22,11 @@ class CreateReport extends React.Component {
     this.onChangeStreet = this.onChangeStreet.bind(this); 
     this.onChangeNumber = this.onChangeNumber.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
-
-    this.state = { 
+    this.onChangeLat = this.onChangeLat.bind(this); 
+    this.onChangeLng = this.onChangeLng.bind(this);
+    this.state = {  
+      lat:'',  
+      lng:'',
       title: '',
       cep: '',
       street: '',  
@@ -32,7 +35,18 @@ class CreateReport extends React.Component {
       active: true
     }
   }
+ 
 
+  onChangeLng(e) {
+    this.setState({
+        lng: e.target.value
+    });
+  } 
+  onChangeLat(e) {
+    this.setState({
+        lat: e.target.value
+    });
+  } 
   onChangeTitle(e) {
     this.setState({
         title: e.target.value
@@ -61,11 +75,27 @@ class CreateReport extends React.Component {
     this.setState({
         description: e.target.value
     });
-  } 
+  }  
 
+//  componentWillReceiveProps(nextProps){ 
+  
+    //console.log('ola', nextProps); 
+    // nextProps.location.state.position2
+    //setFieldsValue({
+    //  latlnt: nextProps.location.state.position2,
+   // });
+  //}
   componentDidMount() {
     // To disabled submit button at the beginning.
-    this.props.form.validateFields();
+   // this.setState({
+   //   lat:
+   //   lng
+   // })
+    this.props.form.validateFields(); 
+    this.props.form.setFieldsValue ({ 
+      lat: this.props.location.state.position2.lat, 
+      lng: this.props.location.state.position2.lng
+    }); 
   }
 
   handleSubmit = e => {
@@ -77,7 +107,9 @@ class CreateReport extends React.Component {
         axios.post('/reports/add', values)
             .then(res => console.log(res.data));
 
-        this.setState({ 
+        this.setState({  
+          lat: '', 
+          lng: '',
           title: '',
           cep: '',
           street: '',  
@@ -190,7 +222,48 @@ class CreateReport extends React.Component {
                   rules: [{ required: true, message: 'Insira o número do estabelecimento mais próximo do local do relato!' }],
                 })(<Input />)}
               </Form.Item>
-            </Col>
+            </Col> 
+             
+
+
+            <Col span={8}>
+              <Form.Item
+                label={
+                  <span>
+                    Lat&nbsp;
+                    <Tooltip title="Qual a latitude ?">
+                      <Icon type="question-circle-o" />
+                    </Tooltip>
+                  </span>
+                }
+              >
+                {getFieldDecorator('lat', {
+                  rules: [{ required: true, message: 'Insira o número da latitude relato!' }],
+                })(<Input
+                    disabled={true}
+                  />)}
+              </Form.Item>
+            </Col>  
+
+            <Col span={8}>
+              <Form.Item
+                label={
+                  <span>
+                    Lng&nbsp;
+                    <Tooltip title="Qual a latitude ?">
+                      <Icon type="question-circle-o" />
+                    </Tooltip>
+                  </span>
+                }
+              >
+                {getFieldDecorator('lng', {
+                  rules: [{ required: true, message: 'Insira o número da latitude relato!' }], 
+                })(<Input
+                    disabled={true}
+                  />)}
+              </Form.Item>
+            </Col> 
+
           </Row>
 
           {/* Report's City */}
