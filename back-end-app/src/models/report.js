@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
   
 // create a new schema of customer
 const schema = new Schema({  
- 
+  
     title: { 
         type: String, 
         required: true, 
