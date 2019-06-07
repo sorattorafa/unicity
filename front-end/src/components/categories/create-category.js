@@ -1,9 +1,12 @@
-import { Form, Row, Col, Icon, Input, Button, Tooltip, Select } from 'antd';
+import { Layout, Form, Row, Col, Icon, Input, Button, Tooltip, Select } from 'antd';
 import React from 'react';
 //import ReactDOM from "react-dom";
 import "antd/dist/antd.css";
 // import "./index.css";
 import axios from 'axios';
+
+import NavBar from '../../components/navbar/navbar';
+import LateralMenu from '../../components/lateralmenu/lateralmenu';
 
 const { Option } = Select;
 const TextArea = Input.TextArea;
@@ -83,58 +86,63 @@ class CreateCategory extends React.Component {
     // const categoryError = isFieldTouched('category') && getFieldError('category');
 
     return (
-      <Row>
-        <Form {...formItemLayout} onSubmit={this.handleSubmit}>
-          {/* Category name */}
-          <Row>
-            <Form.Item
-              validateStatus={nameError ? 'error' : ''} help={nameError || ''}
-              label={
-                <span>
-                  Nome&nbsp;
-                  <Tooltip name="Como a categoria pode ser resumida em uma frase?">
-                    <Icon type="question-circle-o" />
-                  </Tooltip>
-                </span>
-              }
-            >
-              {getFieldDecorator('name', {
-                rules: [{ required: true, message: 'Insira um nome para a categoria!', whitespace: true }],
-              })(<Input />)}
-            </Form.Item>
-          </Row> 
-
-          {/* Categories Description */}
-          <Row>
-            <Form.Item
-              validateStatus={descriptionError ? 'error' : ''} help={descriptionError || ''}
-              label={
-                <span>
-                  Descrição&nbsp;
-                  <Tooltip title="Qual a descrição da categoria?">
-                    <Icon type="question-circle-o" />
-                  </Tooltip>
-                </span>
-              }
-            >
-              {getFieldDecorator('description', {
-                rules: [{ required: true, message: 'Insira uma descrição sobre a categoria!', whitespace: true }],
-              })(<TextArea rows={4} />)}
-            </Form.Item>
-          </Row>
-          
-          {/* Submit Button */}
-          <Row>
-            <Col span={24} style={{ textAlign: 'right' }}>
-              <Form.Item>
-                <Button type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())}>
-                  Cadastrar categoria
-                </Button>
+      <Layout style = {{ minHeight: '100vh' }}>
+        <NavBar />
+        
+        <Layout style = {{ background: '#fff', padding: "40px 20px 0 20px" }}>
+          <LateralMenu pagina = "confirmacaoPromocao" />
+          <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+            {/* Category name */}
+            <Row>
+              <Form.Item
+                validateStatus={nameError ? 'error' : ''} help={nameError || ''}
+                label={
+                  <span>
+                    Nome&nbsp;
+                    <Tooltip name="Como a categoria pode ser resumida em uma frase?">
+                      <Icon type="question-circle-o" />
+                    </Tooltip>
+                  </span>
+                }
+              >
+                {getFieldDecorator('name', {
+                  rules: [{ required: true, message: 'Insira um nome para a categoria!', whitespace: true }],
+                })(<Input />)}
               </Form.Item>
-            </Col>
-          </Row>
-        </Form>
-        </Row>
+            </Row> 
+
+            {/* Categories Description */}
+            <Row>
+              <Form.Item
+                validateStatus={descriptionError ? 'error' : ''} help={descriptionError || ''}
+                label={
+                  <span>
+                    Descrição&nbsp;
+                    <Tooltip title="Qual a descrição da categoria?">
+                      <Icon type="question-circle-o" />
+                    </Tooltip>
+                  </span>
+                }
+              >
+                {getFieldDecorator('description', {
+                  rules: [{ required: true, message: 'Insira uma descrição sobre a categoria!', whitespace: true }],
+                })(<TextArea rows={4} />)}
+              </Form.Item>
+            </Row>
+            
+            {/* Submit Button */}
+            <Row>
+              <Col span={24} style={{ textAlign: 'right' }}>
+                <Form.Item>
+                  <Button type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())}>
+                    Cadastrar categoria
+                  </Button>
+                </Form.Item>
+              </Col>
+            </Row>
+          </Form>
+        </Layout>
+      </Layout>
     );
   }
 }

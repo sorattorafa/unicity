@@ -1,9 +1,12 @@
-import { Form, Row, Col, Icon, Input, Button, Tooltip, Select } from 'antd';
+import { Layout, Form, Row, Col, Icon, Input, Button, Tooltip, Select } from 'antd';
 import React, {Component} from 'react';
 import ReactDOM from "react-dom";
 import "antd/dist/antd.css";
 // import "./index.css";
 import axios from 'axios';
+
+import NavBar from '../../components/navbar/navbar';
+import LateralMenu from '../../components/lateralmenu/lateralmenu';
 
 const { Option } = Select;
 const TextArea = Input.TextArea;
@@ -113,166 +116,171 @@ class CreateReport extends React.Component {
     // const categoryError = isFieldTouched('category') && getFieldError('category');
 
     return (
-      <Row>
-        <Form {...formItemLayout} onSubmit={this.handleSubmit}>
-          {/* Report's Title */}
-          <Row>
-            <Form.Item
-              validateStatus={titleError ? 'error' : ''} help={titleError || ''}
-              label={
-                <span>
-                  Título&nbsp;
-                  <Tooltip title="Como o problema pode ser resumido em uma frase?">
-                    <Icon type="question-circle-o" />
-                  </Tooltip>
-                </span>
-              }
-            >
-              {getFieldDecorator('title', {
-                rules: [{ required: true, message: 'Insira um título para o problema!', whitespace: true }],
-              })(<Input />)}
-            </Form.Item>
-          </Row>
-
-          {/* Report's CEP */}
-          <Row>
-            <Form.Item
-              validateStatus={cepError ? 'error' : ''} help={cepError || ''}
-              label={
-                <span>
-                  CEP&nbsp;
-                  <Tooltip title="Qual o CEP do ocorrido?">
-                    <Icon type="question-circle-o" />
-                  </Tooltip>
-                </span>
-              }
-            >
-              {getFieldDecorator('cep', {
-                rules: [{ required: true, message: 'Insira o CEP do local do relato!', whitespace: true }],
-              })(<Input />)}
-            </Form.Item>
-          </Row>
-
-          {/* Report's Street */}
-          <Row gutter={24}>
-            <Col span={16}>
+      <Layout style = {{ minHeight: '100vh' }}>
+        <NavBar />
+        
+        <Layout style = {{ background: '#fff', padding: "40px 20px 0 20px" }}>
+          <LateralMenu pagina = "confirmacaoPromocao" />
+          <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+            {/* Report's Title */}
+            <Row>
               <Form.Item
-                validateStatus={streetError ? 'error' : ''} help={streetError || ''}
+                validateStatus={titleError ? 'error' : ''} help={titleError || ''}
                 label={
                   <span>
-                    Rua&nbsp;
-                    <Tooltip title="Qual a rua do ocorrido?">
+                    Título&nbsp;
+                    <Tooltip title="Como o problema pode ser resumido em uma frase?">
                       <Icon type="question-circle-o" />
                     </Tooltip>
                   </span>
                 }
               >
-                {getFieldDecorator('street', {
-                  rules: [{ required: true, message: 'Insira a rua do local do relato!', whitespace: true }],
+                {getFieldDecorator('title', {
+                  rules: [{ required: true, message: 'Insira um título para o problema!', whitespace: true }],
                 })(<Input />)}
               </Form.Item>
-            </Col>
+            </Row>
 
-          {/* Report's number */}
-            <Col span={8}>
+            {/* Report's CEP */}
+            <Row>
               <Form.Item
-                validateStatus={numberError ? 'error' : ''} help={numberError || ''}
+                validateStatus={cepError ? 'error' : ''} help={cepError || ''}
                 label={
                   <span>
-                    Número&nbsp;
-                    <Tooltip title="Qual o número do estabelecimento mais próximo do ocorrido?">
+                    CEP&nbsp;
+                    <Tooltip title="Qual o CEP do ocorrido?">
                       <Icon type="question-circle-o" />
                     </Tooltip>
                   </span>
                 }
               >
-                {getFieldDecorator('number', {
-                  rules: [{ required: true, message: 'Insira o número do estabelecimento mais próximo do local do relato!' }],
+                {getFieldDecorator('cep', {
+                  rules: [{ required: true, message: 'Insira o CEP do local do relato!', whitespace: true }],
                 })(<Input />)}
               </Form.Item>
-            </Col>
-          </Row>
+            </Row>
 
-          {/* Report's City */}
-          {/* <Row gutter={24}>
-            <Col span={12}>
-              <Form.Item label={
-                <span>
-                  Cidade&nbsp;
-                  <Tooltip title="Qual a cidade de ocorrência do relato?">
-                    <Icon type="question-circle-o" />
-                  </Tooltip>
-                </span>
-              } hasFeedback>
-                {getFieldDecorator('city', {
-                  rules: [{ required: true, message: 'Insira a cidade de ocorrência do relato!' }],
-                })(
-                  <Select>
-                    <Option value="1">Campo Mourão</Option>
-                    <Option value="2">Maringá</Option>
-                    <Option value="3">Cianorte</Option>
-                    <Option value="4">Ivaiporã</Option>
-                    <Option value="5">Araruna</Option>
-                  </Select>,
-                )}
-              </Form.Item>
-            </Col> */}
+            {/* Report's Street */}
+            <Row gutter={24}>
+              <Col span={14}>
+                <Form.Item
+                  validateStatus={streetError ? 'error' : ''} help={streetError || ''}
+                  label={
+                    <span>
+                      Rua&nbsp;
+                      <Tooltip title="Qual a rua do ocorrido?">
+                        <Icon type="question-circle-o" />
+                      </Tooltip>
+                    </span>
+                  }
+                >
+                  {getFieldDecorator('street', {
+                    rules: [{ required: true, message: 'Insira a rua do local do relato!', whitespace: true }],
+                  })(<Input />)}
+                </Form.Item>
+              </Col>
 
-          {/* Report's Category */}
-            {/* <Col span={12}>
-              <Form.Item label={
-                <span>
-                  Categoria&nbsp;
-                  <Tooltip title="Qual a categoria do relato?">
-                    <Icon type="question-circle-o" />
-                  </Tooltip>
-                </span>
-              } hasFeedback>
-                {getFieldDecorator('category', {
-                  rules: [{ required: true, message: 'Insira a categoria do relato!' }],
-                })(
-                  <Select>
-                    <Option value="1">Segurança pública</Option>
-                    <Option value="2">Mobilidade</Option>
-                    <Option value="3">Vias</Option>
-                    <Option value="4">Iluminação</Option>
-                  </Select>,
-                )}
-              </Form.Item>
-            </Col>
-          </Row> */}
+            {/* Report's number */}
+              <Col span={10}>
+                <Form.Item
+                  validateStatus={numberError ? 'error' : ''} help={numberError || ''}
+                  label={
+                    <span>
+                      Número&nbsp;
+                      <Tooltip title="Qual o número do estabelecimento mais próximo do ocorrido?">
+                        <Icon type="question-circle-o" />
+                      </Tooltip>
+                    </span>
+                  }
+                >
+                  {getFieldDecorator('number', {
+                    rules: [{ required: true, message: 'Insira o número do estabelecimento mais próximo do local do relato!' }],
+                  })(<Input />)}
+                </Form.Item>
+              </Col>
+            </Row>
 
-          {/* Report's Description */}
-          <Row>
-            <Form.Item
-              validateStatus={descriptionError ? 'error' : ''} help={descriptionError || ''}
-              label={
-                <span>
-                  Descrição&nbsp;
-                  <Tooltip title="Qual a descrição do ocorrido?">
-                    <Icon type="question-circle-o" />
-                  </Tooltip>
-                </span>
-              }
-            >
-              {getFieldDecorator('description', {
-                rules: [{ required: true, message: 'Insira uma descrição sobre o relato!', whitespace: true }],
-              })(<TextArea rows={4} />)}
-            </Form.Item>
-          </Row>
-          
-          {/* Submit Button */}
-          <Row>
-            <Col span={24} style={{ textAlign: 'right' }}>
-              <Form.Item>
-                <Button type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())}>
-                  Relatar
-                </Button>
+            {/* Report's City */}
+            {/* <Row gutter={24}>
+              <Col span={12}>
+                <Form.Item label={
+                  <span>
+                    Cidade&nbsp;
+                    <Tooltip title="Qual a cidade de ocorrência do relato?">
+                      <Icon type="question-circle-o" />
+                    </Tooltip>
+                  </span>
+                } hasFeedback>
+                  {getFieldDecorator('city', {
+                    rules: [{ required: true, message: 'Insira a cidade de ocorrência do relato!' }],
+                  })(
+                    <Select>
+                      <Option value="1">Campo Mourão</Option>
+                      <Option value="2">Maringá</Option>
+                      <Option value="3">Cianorte</Option>
+                      <Option value="4">Ivaiporã</Option>
+                      <Option value="5">Araruna</Option>
+                    </Select>,
+                  )}
+                </Form.Item>
+              </Col> */}
+
+            {/* Report's Category */}
+              {/* <Col span={12}>
+                <Form.Item label={
+                  <span>
+                    Categoria&nbsp;
+                    <Tooltip title="Qual a categoria do relato?">
+                      <Icon type="question-circle-o" />
+                    </Tooltip>
+                  </span>
+                } hasFeedback>
+                  {getFieldDecorator('category', {
+                    rules: [{ required: true, message: 'Insira a categoria do relato!' }],
+                  })(
+                    <Select>
+                      <Option value="1">Segurança pública</Option>
+                      <Option value="2">Mobilidade</Option>
+                      <Option value="3">Vias</Option>
+                      <Option value="4">Iluminação</Option>
+                    </Select>,
+                  )}
+                </Form.Item>
+              </Col>
+            </Row> */}
+
+            {/* Report's Description */}
+            <Row>
+              <Form.Item
+                validateStatus={descriptionError ? 'error' : ''} help={descriptionError || ''}
+                label={
+                  <span>
+                    Descrição&nbsp;
+                    <Tooltip title="Qual a descrição do ocorrido?">
+                      <Icon type="question-circle-o" />
+                    </Tooltip>
+                  </span>
+                }
+              >
+                {getFieldDecorator('description', {
+                  rules: [{ required: true, message: 'Insira uma descrição sobre o relato!', whitespace: true }],
+                })(<TextArea rows={4} />)}
               </Form.Item>
-            </Col>
-          </Row>
-        </Form>
-        </Row>
+            </Row>
+            
+            {/* Submit Button */}
+            <Row>
+              <Col span={24} style={{ textAlign: 'right' }}>
+                <Form.Item>
+                  <Button type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())}>
+                    Relatar
+                  </Button>
+                </Form.Item>
+              </Col>
+            </Row>
+          </Form>
+        </Layout>
+      </Layout>
     );
   }
 }

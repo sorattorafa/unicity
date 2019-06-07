@@ -18,11 +18,14 @@ mongoose.connect(config.connectionString,  { useNewUrlParser: true } )
 
 // load schemas (models) of database
 const Simpleuser = require('./models/simpleuser'); 
-const Category = require('./models/category') 
-const Companyuser = require('./models/companyuser') 
-const Comment = require('./models/comment')  
-const Adminuser = require('./models/adminuser') 
-const Report = require('./models/report') 
+const Category = require('./models/category'); 
+const Companyuser = require('./models/companyuser'); 
+const Comment = require('./models/comment'); 
+const Adminuser = require('./models/adminuser'); 
+const Report = require('./models/report'); 
+const City = require('./models/city'); 
+const State = require('./models/state'); 
+
 
 
 
@@ -35,6 +38,8 @@ const companyRoute = require('./routes/companyuser');
 const commentRoute = require('./routes/comment'); 
 const adminuserRoute = require('./routes/adminuser'); 
 const reportRoute = require('./routes/report'); 
+const cityRoute = require('./routes/city'); 
+const stateRoute = require('./routes/state'); 
 
 
 
@@ -52,5 +57,7 @@ app.use('/companyusers', companyRoute);
 app.use('/adminusers', adminuserRoute);  
 app.use('/comments', commentRoute);   
 app.use('/reports', reportRoute);   
-
+app.use('/cities', cityRoute);   
+app.use('/states', stateRoute); 
+   
 module.exports = app; 

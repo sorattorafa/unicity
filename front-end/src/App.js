@@ -6,7 +6,7 @@ import { Card, CardText, Button} from 'reactstrap';
 import "bootstrap/dist/css/bootstrap.min.css";
 import CreateUser from "./components/simpleuser/create-user.component";
 import EditSimpleuser from "./components/simpleuser/edit-simpleuser.component";
-import SimpleusersList from "./components/simpleuser/list-simple-user.component";
+import SimpleusersList from "./components/simpleuser/list-simpleuser";
 import DeleteSimpleuser from "./components/simpleuser/delete-simpleuser";
 import CreateReport from "./components/report/create-report";
 

@@ -1,9 +1,12 @@
-import { Form, Row, Col, Icon, Input, Button, Tooltip } from 'antd';
+import { Layout, Form, Row, Col, Icon, Input, Button, Tooltip } from 'antd';
 import React, {Component} from 'react';
 import ReactDOM from "react-dom";
 import "antd/dist/antd.css";
 // import "./index.css";
 import axios from 'axios';
+
+import NavBar from '../../components/navbar/navbar';
+import LateralMenu from '../../components/lateralmenu/lateralmenu';
 
 const TextArea = Input.TextArea;
 
@@ -140,206 +143,211 @@ class CreateCompanyUser extends React.Component {
         const confirmpasswordError = isFieldTouched('confirmpassword') && getFieldError('confirmpassword');
 
         return (
-            <Row>
-                <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+            <Layout style = {{ minHeight: '100vh' }}>
+                <NavBar />
+        
+                <Layout style = {{ background: '#fff', padding: "40px 20px 0 20px" }}>
+                     <LateralMenu pagina = "confirmacaoPromocao" />
+                    <Form {...formItemLayout} onSubmit={this.handleSubmit}>
 
-                    {/* Company User's Cnpj */}
-                    <Row>
-                        <Form.Item
-                            validateStatus={cnpjError ? 'error' : ''} help={cnpjError || ''}
-                            label={
-                                <span>
-                                    CNPJ&nbsp;
-                                    <Tooltip title="Qual é o CNPJ da nova empresa?">
-                                        <Icon type="question-circle-o" />
-                                    </Tooltip>
-                                </span>
-                            }
-                        >
-                            {getFieldDecorator('cnpj', {
-                                rules: [{ required: true, message: 'Insira o CNPJ da nova empresa!', whitespace: true }],
-                            })(<Input />)}
-                        </Form.Item>
-                    </Row>
-
-                    {/* Company User's Name */}
-                    <Row>
-                        <Form.Item
-                            validateStatus={nameError ? 'error' : ''} help={nameError || ''}
-                            label={
-                                <span>
-                                    Nome&nbsp;
-                                    <Tooltip title="Qual é o nome da nova empresa?">
-                                        <Icon type="question-circle-o" />
-                                    </Tooltip>
-                                </span>
-                            }
-                        >
-                            {getFieldDecorator('name', {
-                                rules: [{ required: true, message: 'Insira o nome da nova empresa!', whitespace: true }],
-                            })(<Input />)}
-                        </Form.Item>
-                    </Row>
-
-                    {/* Company User's Apresentation */}
-                    <Row>
-                        <Form.Item
-                            validateStatus={nameError ? 'error' : ''} help={nameError || ''}
-                            label={
-                                <span>
-                                    Apresentação&nbsp;
-                                    <Tooltip title="Insira uma mensagem de apresentação da empresa">
-                                        <Icon type="question-circle-o" />
-                                    </Tooltip>
-                                </span>
-                            }
-                        >
-                            {getFieldDecorator('apresentation', {
-                                rules: [{ required: true, message: 'Insira uma mensagem de apresentação da empresa', whitespace: true }],
-                            })(<TextArea rows={4} />)}
-                        </Form.Item>
-                    </Row>
-
-                    {/* Company User's City */}
-                    <Row>
-                        <Form.Item
-                            validateStatus={cityError ? 'error' : ''} help={cityError || ''}
-                            label={
-                                <span>
-                                    Cidade&nbsp;
-                                    <Tooltip title="Qual a cidade da nova empresa?">
-                                        <Icon type="question-circle-o" />
-                                    </Tooltip>
-                                </span>
-                            }
-                        >
-                            {getFieldDecorator('city', {
-                                rules: [{ required: true, message: 'Insira a cidade da nova empresa!', whitespace: true }],
-                            })(<Input />)}
-                        </Form.Item>
-                    </Row>
-
-                    {/* Company User's Street */}
-                    <Row gutter={24}>
-                        <Col span={12}>
+                        {/* Company User's Cnpj */}
+                        <Row>
                             <Form.Item
-                                validateStatus={streetError ? 'error' : ''} help={streetError || ''}
+                                validateStatus={cnpjError ? 'error' : ''} help={cnpjError || ''}
                                 label={
                                     <span>
-                                        Rua&nbsp;
-                                        <Tooltip title="Qual a rua do endereço da nova empresa?">
+                                        CNPJ&nbsp;
+                                        <Tooltip title="Qual é o CNPJ da nova empresa?">
                                             <Icon type="question-circle-o" />
                                         </Tooltip>
                                     </span>
                                 }
                             >
-                                {getFieldDecorator('street', {
-                                    rules: [{ required: true, message: 'Insira a rua do endereço nova empresa!', whitespace: true }],
+                                {getFieldDecorator('cnpj', {
+                                    rules: [{ required: true, message: 'Insira o CNPJ da nova empresa!', whitespace: true }],
                                 })(<Input />)}
                             </Form.Item>
-                        </Col>
+                        </Row>
 
-                    {/* Company User's Number */}
-                        <Col span={12}>
+                        {/* Company User's Name */}
+                        <Row>
                             <Form.Item
-                                validateStatus={numberError ? 'error' : ''} help={numberError || ''}
+                                validateStatus={nameError ? 'error' : ''} help={nameError || ''}
                                 label={
                                     <span>
-                                        Número&nbsp;
-                                        <Tooltip title="Qual o número do endereço da nova empresa?">
+                                        Nome&nbsp;
+                                        <Tooltip title="Qual é o nome da nova empresa?">
                                             <Icon type="question-circle-o" />
                                         </Tooltip>
                                     </span>
                                 }
                             >
-                                {getFieldDecorator('number', {
-                                    rules: [{ required: true, message: 'Insira o número do endereço nova empresa!', whitespace: true }],
+                                {getFieldDecorator('name', {
+                                    rules: [{ required: true, message: 'Insira o nome da nova empresa!', whitespace: true }],
                                 })(<Input />)}
                             </Form.Item>
-                        </Col>
-                    </Row>
+                        </Row>
 
-                    {/* Company User's Email */}
-                    <Row>
-                        <Form.Item
-                            validateStatus={emailError ? 'error' : ''} help={emailError || ''}
-                            label={
-                                <span>
-                                    E-mail&nbsp;
-                                    <Tooltip title="Qual o email da nova empresa?">
-                                        <Icon type="question-circle-o" />
-                                    </Tooltip>
-                                </span>
-                            }
-                        >
-                            {getFieldDecorator('email', {
-                                rules: [{ type: 'email', message: 'Esse não é um e-mail válido!' },
-                                { required: true, message: 'Insira o email da nova empresa!', whitespace: true }],
-                            })(<Input />)}
-                        </Form.Item>
-                    </Row>
-
-                    {/* Company User's Password */}
-                    <Row gutter={24}>
-                        <Col span={12}>
+                        {/* Company User's Apresentation */}
+                        <Row>
                             <Form.Item
-                                validateStatus={passwordError ? 'error' : ''} help={passwordError || ''}
+                                validateStatus={nameError ? 'error' : ''} help={nameError || ''}
                                 label={
                                     <span>
-                                        Senha&nbsp;
-                                        <Tooltip title="Insira uma senha para a nova empresa!">
+                                        Apresentação&nbsp;
+                                        <Tooltip title="Insira uma mensagem de apresentação da empresa">
                                             <Icon type="question-circle-o" />
                                         </Tooltip>
                                     </span>
                                 }
                             >
-                                {getFieldDecorator('password', {
-                                    rules: [{ required: true, message: 'Insira uma senha para a nova empresa!' }],
-                                })(<Input
-                                    prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                    type="password"
-                                    placeholder="Password"
-                                />)}
+                                {getFieldDecorator('apresentation', {
+                                    rules: [{ required: true, message: 'Insira uma mensagem de apresentação da empresa', whitespace: true }],
+                                })(<TextArea rows={4} />)}
                             </Form.Item>
-                        </Col>
-                        
-                    {/* Company User's Confirm Password */}
-                        <Col span={12}>
+                        </Row>
+
+                        {/* Company User's City */}
+                        <Row>
                             <Form.Item
-                                validateStatus={confirmpasswordError ? 'error' : ''} help={confirmpasswordError || ''}
+                                validateStatus={cityError ? 'error' : ''} help={cityError || ''}
                                 label={
                                     <span>
-                                        Confirme a senha&nbsp;
-                                        <Tooltip title="Confirme a senha para a nova empresa!">
+                                        Cidade&nbsp;
+                                        <Tooltip title="Qual a cidade da nova empresa?">
                                             <Icon type="question-circle-o" />
                                         </Tooltip>
                                     </span>
                                 }
                             >
-                                {getFieldDecorator('confirmpassword', {
-                                    rules: [{ required: true, message: 'Confirme a senha para a nova empresa!' }],
-                                })(<Input
-                                    prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                    type="password"
-                                    placeholder="Confirm Password"
-                                />)}
+                                {getFieldDecorator('city', {
+                                    rules: [{ required: true, message: 'Insira a cidade da nova empresa!', whitespace: true }],
+                                })(<Input />)}
                             </Form.Item>
-                        </Col>
-                    </Row>
+                        </Row>
 
-                    {/* Submit Button */}
-                    <Row>
-                        <Col span={20} style={{ textAlign: 'right' }}>
-                            <Form.Item>
-                                <Button type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())}>
-                                    Cadastrar
-                                </Button>
+                        {/* Company User's Street */}
+                        <Row gutter={24}>
+                            <Col span={12}>
+                                <Form.Item
+                                    validateStatus={streetError ? 'error' : ''} help={streetError || ''}
+                                    label={
+                                        <span>
+                                            Rua&nbsp;
+                                            <Tooltip title="Qual a rua do endereço da nova empresa?">
+                                                <Icon type="question-circle-o" />
+                                            </Tooltip>
+                                        </span>
+                                    }
+                                >
+                                    {getFieldDecorator('street', {
+                                        rules: [{ required: true, message: 'Insira a rua do endereço nova empresa!', whitespace: true }],
+                                    })(<Input />)}
+                                </Form.Item>
+                            </Col>
+
+                        {/* Company User's Number */}
+                            <Col span={12}>
+                                <Form.Item
+                                    validateStatus={numberError ? 'error' : ''} help={numberError || ''}
+                                    label={
+                                        <span>
+                                            Número&nbsp;
+                                            <Tooltip title="Qual o número do endereço da nova empresa?">
+                                                <Icon type="question-circle-o" />
+                                            </Tooltip>
+                                        </span>
+                                    }
+                                >
+                                    {getFieldDecorator('number', {
+                                        rules: [{ required: true, message: 'Insira o número do endereço nova empresa!', whitespace: true }],
+                                    })(<Input />)}
+                                </Form.Item>
+                            </Col>
+                        </Row>
+
+                        {/* Company User's Email */}
+                        <Row>
+                            <Form.Item
+                                validateStatus={emailError ? 'error' : ''} help={emailError || ''}
+                                label={
+                                    <span>
+                                        E-mail&nbsp;
+                                        <Tooltip title="Qual o email da nova empresa?">
+                                            <Icon type="question-circle-o" />
+                                        </Tooltip>
+                                    </span>
+                                }
+                            >
+                                {getFieldDecorator('email', {
+                                    rules: [{ type: 'email', message: 'Esse não é um e-mail válido!' },
+                                    { required: true, message: 'Insira o email da nova empresa!', whitespace: true }],
+                                })(<Input />)}
                             </Form.Item>
-                        </Col>
-                    </Row>
+                        </Row>
 
-                </Form>
-            </Row>
+                        {/* Company User's Password */}
+                        <Row gutter={24}>
+                            <Col span={12}>
+                                <Form.Item
+                                    validateStatus={passwordError ? 'error' : ''} help={passwordError || ''}
+                                    label={
+                                        <span>
+                                            Senha&nbsp;
+                                            <Tooltip title="Insira uma senha para a nova empresa!">
+                                                <Icon type="question-circle-o" />
+                                            </Tooltip>
+                                        </span>
+                                    }
+                                >
+                                    {getFieldDecorator('password', {
+                                        rules: [{ required: true, message: 'Insira uma senha para a nova empresa!' }],
+                                    })(<Input
+                                        prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                        type="password"
+                                        placeholder="Password"
+                                    />)}
+                                </Form.Item>
+                            </Col>
+                            
+                        {/* Company User's Confirm Password */}
+                            <Col span={12}>
+                                <Form.Item
+                                    validateStatus={confirmpasswordError ? 'error' : ''} help={confirmpasswordError || ''}
+                                    label={
+                                        <span>
+                                            Confirme a senha&nbsp;
+                                            <Tooltip title="Confirme a senha para a nova empresa!">
+                                                <Icon type="question-circle-o" />
+                                            </Tooltip>
+                                        </span>
+                                    }
+                                >
+                                    {getFieldDecorator('confirmpassword', {
+                                        rules: [{ required: true, message: 'Confirme a senha para a nova empresa!' }],
+                                    })(<Input
+                                        prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                        type="password"
+                                        placeholder="Confirm Password"
+                                    />)}
+                                </Form.Item>
+                            </Col>
+                        </Row>
+
+                        {/* Submit Button */}
+                        <Row>
+                            <Col span={20} style={{ textAlign: 'right' }}>
+                                <Form.Item>
+                                    <Button type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())}>
+                                        Cadastrar
+                                    </Button>
+                                </Form.Item>
+                            </Col>
+                        </Row>
+
+                    </Form>
+                </Layout>
+            </Layout>
         );
     }
 }
