@@ -8,7 +8,7 @@ import EditSimpleuser from "./components/simpleuser/edit-simpleuser.component";
 import SimpleusersList from "./components/simpleuser/list-simple-user.component"; 
 import DeleteSimpleuser from "./components/simpleuser/delete-simpleuser"; 
 import CreateReport from "./components/report/create-report";  
-
+import axios from 'axios'; 
 import UsersList from "./components/simpleuser/list-simpleuser";  
 
 //components of admin user
@@ -23,7 +23,7 @@ import CreateCategory from "./components/categories/create-category";
 
 import logo from "./logo.png";
 import './App.css';    
-import { getMessages, getLocation, sendMessage } from './map-components/Api';
+import { getLocation, sendMessage} from './map-components/Api';
 
 import L from 'leaflet'; 
 import userLocationURL from './map-components/userlocation.svg'; 
@@ -63,15 +63,18 @@ class App extends Component {
     showMessageForm: false,
     sendingMessage: false,
     sentMessage: false,
-    messages: []
+    messages: [], 
+    reports: []
   }  
-  componentDidMount() {
-    getMessages()
-      .then(messages => {
-        this.setState({
-          messages
-        });
-      });
+  componentDidMount() { 
+    axios.get('/reports')
+    .then(response => {
+        this.setState({reports: response.data}); 
+      //  console.log(this.state.reports)
+    })
+    .catch(function (error) {
+        console.log(error);
+    }) 
   }
 
   showMessageForm = () => {
@@ -238,18 +241,18 @@ class App extends Component {
               position={position}
               icon={myIcon}>
             </Marker> : ''
+          } 
+          { 
+            this.state.reports.map(report => ( 
+              <Marker 
+               key={report._id} 
+               position={[report.lat, report.lng]}
+              icon={messageIcon} 
+              >  
+              </Marker>
+              ) 
+            )
           }
-          {this.state.messages.map(message => (
-            <Marker
-              key={message._id}
-              position={[message.latitude, message.longitude]}
-              icon={messageIcon}>
-              <Popup>
-                <p><em>{message.name}:</em> {message.message}</p>
-                { message.otherMessages ? message.otherMessages.map(message => <p key={message._id}><em>{message.name}:</em> {message.message}</p>) : '' }
-              </Popup>
-            </Marker>
-          ))}
         </Map>
         {
           !this.state.showMessageForm ?
