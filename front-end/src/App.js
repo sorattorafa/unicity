@@ -239,7 +239,7 @@ class App extends Component {
             this.state.haveUsersLocation ? 
             <Marker
               position={position}
-              icon={myIcon}>
+              icon={myIcon}> 
             </Marker> : ''
           } 
           { 
@@ -247,8 +247,11 @@ class App extends Component {
               <Marker 
                key={report._id} 
                position={[report.lat, report.lng]}
-              icon={messageIcon} 
-              >  
+              icon={messageIcon}> 
+                  <Popup>   
+                    <p>Título: {report.title}  </p>
+                    <p>Descrição: {report.description}  </p>   
+                  </Popup>
               </Marker>
               ) 
             )
