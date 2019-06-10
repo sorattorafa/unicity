@@ -6,7 +6,17 @@ const Schema = mongoose.Schema;
   
 // create a new schema of customer
 const schema = new Schema({  
- 
+   
+    lat: { 
+        type: String, 
+        required: true, 
+        trim:true,
+    }, 
+    lng: { 
+        type: String, 
+        required: true, 
+        trim:true,
+    },
     title: { 
         type: String, 
         required: true, 

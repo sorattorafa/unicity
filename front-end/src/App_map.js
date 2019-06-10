@@ -4,12 +4,12 @@ import { Map, TileLayer, Marker} from 'react-leaflet';
 import { Card, CardText, Button} from 'reactstrap';
 import "bootstrap/dist/css/bootstrap.min.css"; 
 import CreateUser from "./components/simpleuser/create-user.component"; 
-import EditSimpleuser from "./components/simpleuser/edit-simpleuser.component"; 
+import EditSimpleuser from "./components/simpleuser/edit-simpleuser.component";  
 import SimpleusersList from "./components/simpleuser/list-simple-user.component"; 
 import DeleteSimpleuser from "./components/simpleuser/delete-simpleuser"; 
-import CreateReport from "./components/report/create-report";
-
-import UsersList from "./components/simpleuser/list-simpleuser";  
+import CreateReport from "./components/report/create-report";  
+import axios from 'axios'; 
+import UsersList from "./components/simpleuser/list-simpleuser";   
 
 //components of admin user
 import CreateAdminUser from "./components/adminuser/create-adminuser";
@@ -20,28 +20,15 @@ import CreateCompanyUser from "./components/companyuser/create-companyuser";
 //components of categories
 import CreateCategory from "./components/categories/create-category";
   
-
 import logo from "./logo.png";
 import './App.css';    
-import { getMessages, getLocation, sendMessage } from './map-components/Api';
+import { getLocation, sendMessage} from './map-components/Api';
 
 import L from 'leaflet'; 
 import userLocationURL from './map-components/userlocation.svg'; 
 import messageLocationURL from './map-components/message_location.svg';
 import MessageCardForm from './map-components/MessageCardForm'; 
 
-var myIcon = L.icon({
-  iconUrl: userLocationURL,
-  iconSize: [21, 41], 
-  iconAnchor: [12.5, 41], 
-  popupAnchor: [0,-41]
-
-}); 
-
-const messageIcon = L.icon({
-  iconUrl: messageLocationURL,
-  iconSize: [50, 82]
-});
  
 class App extends Component {
   state = {
@@ -63,15 +50,18 @@ class App extends Component {
     showMessageForm: false,
     sendingMessage: false,
     sentMessage: false,
-    messages: []
-  } 
-  componentDidMount() {
-    getMessages()
-      .then(messages => {
-        this.setState({
-          messages
-        });
-      });
+    messages: [], 
+    reports: []
+  }  
+  componentDidMount() { 
+    axios.get('/reports')
+    .then(response => {
+        this.setState({reports: response.data}); 
+      //  console.log(this.state.reports)
+    })
+    .catch(function (error) {
+        console.log(error);
+    }) 
   }
 
   showMessageForm = () => {
@@ -154,11 +144,10 @@ class App extends Component {
   }
 
 
-
-
   render() { 
     const position = [this.state.location.lat, this.state.location.lng];  
-    const position2 = this.state.location2;
+    const position2 = this.state.location2; 
+    const {lat, lng} = this.state.location2;
     return (  
       <Router>    
           <div className="container">        
@@ -215,30 +204,45 @@ class App extends Component {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />   
           {
-            this.state.haveUserClick ? 
+            this.state.haveUserClick ?   
             <Marker
               position={position2}
-              icon={myIcon}>
-            </Marker> : ''
+              icon={myIcon}>    
+              <Popup>  
+              <p>latitude: {lat}  </p>
+              <p>  longitude: {lng} </p>
+                <li className="navbar-item">
+                  <Link to= {{ 
+                    pathname:'/createreport',  
+                    state: { 
+                      position2
+                    }
+                  }} className="nav-link">Criar Relato</Link>
+                </li>  
+                </Popup>  
+            </Marker> : ''     
           }
           {
             this.state.haveUsersLocation ? 
             <Marker
               position={position}
-              icon={myIcon}>
+              icon={myIcon}> 
             </Marker> : ''
+          } 
+          { 
+            this.state.reports.map(report => ( 
+              <Marker 
+               key={report._id} 
+               position={[report.lat, report.lng]}
+              icon={messageIcon}> 
+                  <Popup>   
+                    <p>Título: {report.title}  </p>
+                    <p>Descrição: {report.description}  </p>   
+                  </Popup>
+              </Marker>
+              ) 
+            )
           }
-          {this.state.messages.map(message => (
-            <Marker
-              key={message._id}
-              position={[message.latitude, message.longitude]}
-              icon={messageIcon}>
-              <Popup>
-                <p><em>{message.name}:</em> {message.message}</p>
-                { message.otherMessages ? message.otherMessages.map(message => <p key={message._id}><em>{message.name}:</em> {message.message}</p>) : '' }
-              </Popup>
-            </Marker>
-          ))}
         </Map>
         {
           !this.state.showMessageForm ?
