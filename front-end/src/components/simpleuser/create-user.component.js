@@ -1,4 +1,4 @@
-import { Layout, Form, Row, Col, Icon, Input, Button, Tooltip } from 'antd';
+import { Divider, Typography, Layout, Form, Row, Col, Icon, Input, Button, Tooltip } from 'antd';
 import React, {Component} from 'react';
 import ReactDOM from "react-dom";
 import "antd/dist/antd.css";
@@ -7,6 +7,9 @@ import axios from 'axios';
 
 import NavBar from '../../components/navbar/navbar';
 import LateralMenu from '../../components/lateralmenu/lateralmenu';
+
+const { Title } = Typography;
+const { Content } = Layout;
 
 // Return the errors in hte fields
 function hasErrors(fieldsError) {
@@ -113,9 +116,13 @@ function hasErrors(fieldsError) {
         <Layout style = {{ minHeight: '100vh' }}>
           <NavBar />
         
-          <Layout style = {{ background: '#fff', padding: "40px 20px 0 20px" }}>
-            <LateralMenu pagina = "confirmacaoPromocao" />
-              <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+          <Layout>
+          <LateralMenu pagina = "createuser" />
+          
+          <Content className = "contentLayoutForm" style = {{ padding: "30px 20px 0px 20px" }} >
+            <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+              <Title className = "titleForm" level={1}> Cadastrar usuários </Title>
+              <Divider className = "dividerForm" />
                 {/* Simple User's Cpf */}
                 <Row>
                   <Form.Item
@@ -229,7 +236,7 @@ function hasErrors(fieldsError) {
                 </Row>
                 
                 {/* Submit Button */}
-                <Row>
+                <Row className="buttonForm">
                   <Col span={24} style={{ textAlign: 'right' }}>
                     <Form.Item>
                       <Button type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())}>
@@ -239,6 +246,7 @@ function hasErrors(fieldsError) {
                   </Col>
                 </Row>
               </Form>
+              </Content>
             </Layout>
         </Layout>
       );

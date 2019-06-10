@@ -1,12 +1,14 @@
-import { Layout, Form, Row, Col, Icon, Input, Button, Tooltip } from 'antd';
+import { Divider, Typography, Layout, Form, Row, Col, Icon, Input, Button, Tooltip } from 'antd';
 import React, {Component} from 'react';
 import ReactDOM from "react-dom";
-import "antd/dist/antd.css";
-// import "./index.css";
+// import "antd/dist/antd.css";
+import "./create-adminuser.css";
 import axios from 'axios';
-
 import NavBar from '../../components/navbar/navbar';
 import LateralMenu from '../../components/lateralmenu/lateralmenu';
+
+const { Title } = Typography;
+const { Content } = Layout;
 
 // Return the errors in hte fields
 function hasErrors(fieldsError) {
@@ -110,131 +112,134 @@ class CreateAdminUser extends React.Component {
     const confirmpasswordError = isFieldTouched('confirmpassword') && getFieldError('confirmpassword');
 
     return (
-      <Layout style = {{ minHeight: '100vh' }}>
+      <Layout style = {{ minHeight: '100vh', width: '100%' }}>
         <NavBar />
         
-        <Layout style = {{ background: '#fff', padding: "40px 20px 0 20px" }}>
-          <LateralMenu pagina = "confirmacaoPromocao" />
+        <Layout>
+          <LateralMenu pagina = "createadminuser" />
           
-          <Form {...formItemLayout} onSubmit={this.handleSubmit}>
-          <h1>Criar administrador</h1>
-            {/* Admin User's Cpf */}
-            <Row>
-              <Form.Item
-                validateStatus={cpfError ? 'error' : ''} help={cpfError || ''}
-                label={
-                  <span>
-                    CPF&nbsp;
-                    <Tooltip title="Qual é o CPF do novo administrador?">
-                      <Icon type="question-circle-o" />
-                    </Tooltip>
-                  </span>
-                }
-              >
-                {getFieldDecorator('cpf', {
-                  rules: [{ required: true, message: 'Insira o CPF do novo administrador!', whitespace: true }],
-                })(<Input />)}
-              </Form.Item>
-            </Row>
-
-            {/* Admin User's Name */}
-            <Row>
-              <Form.Item
-                validateStatus={nameError ? 'error' : ''} help={nameError || ''}
-                label={
-                  <span>
-                    Nome&nbsp;
-                    <Tooltip title="Qual o nome do novo administrador?">
-                      <Icon type="question-circle-o" />
-                    </Tooltip>
-                  </span>
-                }
-              >
-                {getFieldDecorator('name', {
-                  rules: [{ required: true, message: 'Insira o nome do novo administrador!', whitespace: true }],
-                })(<Input />)}
-              </Form.Item>
-            </Row>
-
-            {/* Admin User's Email */}
-            <Row>
+          <Content className = "contentLayoutForm" style = {{ padding: "30px 20px 0px 20px" }} >
+            <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+              <Title className = "titleForm" level={1}> Cadastrar administradores </Title>
+              <Divider className = "dividerForm" />
+              {/* Admin User's Cpf */}
+              <Row>
                 <Form.Item
-                  validateStatus={emailError ? 'error' : ''} help={emailError || ''}
+                  validateStatus={cpfError ? 'error' : ''} help={cpfError || ''}
                   label={
                     <span>
-                      E-mail&nbsp;
-                      <Tooltip title="Qual o email do novo administrador?">
+                      CPF&nbsp;
+                      <Tooltip title="Qual é o CPF do novo administrador?">
                         <Icon type="question-circle-o" />
                       </Tooltip>
                     </span>
                   }
                 >
-                  {getFieldDecorator('email', {
-                    rules: [{ type: 'email', message: 'Esse não é um e-mail válido!' },
-                    { required: true, message: 'Insira o email do novo administrador!', whitespace: true }],
+                  {getFieldDecorator('cpf', {
+                    rules: [{ required: true, message: 'Insira o CPF do novo administrador!', whitespace: true }],
                   })(<Input />)}
                 </Form.Item>
-            </Row>
+              </Row>
 
-            {/* Admin User's password */}
-            <Row gutter={24}>
-              <Col span={12}>
+              {/* Admin User's Name */}
+              <Row>
                 <Form.Item
-                  validateStatus={passwordError ? 'error' : ''} help={passwordError || ''}
+                  validateStatus={nameError ? 'error' : ''} help={nameError || ''}
                   label={
                     <span>
-                      Senha&nbsp;
-                      <Tooltip title="Insira uma senha para o novo administrador">
+                      Nome&nbsp;
+                      <Tooltip title="Qual o nome do novo administrador?">
                         <Icon type="question-circle-o" />
                       </Tooltip>
                     </span>
                   }
                 >
-                  {getFieldDecorator('password', {
-                    rules: [{ required: true, message: 'Insira uma senha para o novo administrador!' }],
-                  })(<Input
-                      prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                      type="password"
-                      placeholder="Password"
-                  />)}
+                  {getFieldDecorator('name', {
+                    rules: [{ required: true, message: 'Insira o nome do novo administrador!', whitespace: true }],
+                  })(<Input />)}
                 </Form.Item>
-              </Col>
+              </Row>
 
-            {/* Admin User's confirm password */}
-              <Col span={12}>
-                <Form.Item
-                  validateStatus={confirmpasswordError ? 'error' : ''} help={confirmpasswordError || ''}
-                  label={
-                    <span>
-                      Confirme a senha&nbsp;
-                      <Tooltip title="Confirme a senha para o novo administrador">
-                        <Icon type="question-circle-o" />
-                      </Tooltip>
-                    </span>
-                  }
-                >
-                  {getFieldDecorator('confirmpassword', {
-                    rules: [{ required: true, message: 'Confirme a senha para o novo administrador!' }],
-                  })(<Input
-                      prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                      type="password"
-                      placeholder="Confirm Password"
-                  />)}
-                </Form.Item>
-              </Col>
-            </Row>
-            
-            {/* Submit Button */}
-            <Row>
-              <Col span={24} style={{ textAlign: 'right' }}>
-                <Form.Item>
-                  <Button type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())}>
-                    Cadastrar
-                  </Button>
-                </Form.Item>
-              </Col>
-            </Row>
-          </Form>
+              {/* Admin User's Email */}
+              <Row>
+                  <Form.Item
+                    validateStatus={emailError ? 'error' : ''} help={emailError || ''}
+                    label={
+                      <span>
+                        E-mail&nbsp;
+                        <Tooltip title="Qual o email do novo administrador?">
+                          <Icon type="question-circle-o" />
+                        </Tooltip>
+                      </span>
+                    }
+                  >
+                    {getFieldDecorator('email', {
+                      rules: [{ type: 'email', message: 'Esse não é um e-mail válido!' },
+                      { required: true, message: 'Insira o email do novo administrador!', whitespace: true }],
+                    })(<Input />)}
+                  </Form.Item>
+              </Row>
+
+              {/* Admin User's password */}
+              <Row gutter={24}>
+                <Col span={12}>
+                  <Form.Item
+                    validateStatus={passwordError ? 'error' : ''} help={passwordError || ''}
+                    label={
+                      <span>
+                        Senha&nbsp;
+                        <Tooltip title="Insira uma senha para o novo administrador">
+                          <Icon type="question-circle-o" />
+                        </Tooltip>
+                      </span>
+                    }
+                  >
+                    {getFieldDecorator('password', {
+                      rules: [{ required: true, message: 'Insira uma senha para o novo administrador!' }],
+                    })(<Input
+                        prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                        type="password"
+                        placeholder="Password"
+                    />)}
+                  </Form.Item>
+                </Col>
+
+              {/* Admin User's confirm password */}
+                <Col span={12}>
+                  <Form.Item
+                    validateStatus={confirmpasswordError ? 'error' : ''} help={confirmpasswordError || ''}
+                    label={
+                      <span>
+                        Confirme a senha&nbsp;
+                        <Tooltip title="Confirme a senha para o novo administrador">
+                          <Icon type="question-circle-o" />
+                        </Tooltip>
+                      </span>
+                    }
+                  >
+                    {getFieldDecorator('confirmpassword', {
+                      rules: [{ required: true, message: 'Confirme a senha para o novo administrador!' }],
+                    })(<Input
+                        prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                        type="password"
+                        placeholder="Confirm Password"
+                    />)}
+                  </Form.Item>
+                </Col>
+              </Row>
+              
+              {/* Submit Button */}
+              <Row className="buttonForm">
+                <Col span={24} style={{ textAlign: 'right' }}>
+                  <Form.Item>
+                    <Button className="buttonForm" type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())}>
+                      Cadastrar
+                    </Button>
+                  </Form.Item>
+                </Col>
+              </Row>
+            </Form>
+          </Content>
         </Layout>
       </Layout>
     );

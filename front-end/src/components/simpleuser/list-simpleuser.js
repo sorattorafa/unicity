@@ -1,9 +1,12 @@
-import React, { Layout, Component } from 'react';
+import React, { Component } from 'react';
 import axios from 'axios'; 
-import { Table } from 'antd';
+import { Divider, Typography, Layout, Table } from 'antd';
 
 import NavBar from '../../components/navbar/navbar';
 import LateralMenu from '../../components/lateralmenu/lateralmenu';
+
+const { Title } = Typography;
+const { Content } = Layout;
 
 const columns = [ 
   {
@@ -45,9 +48,14 @@ export default class SimpleUsersList extends Component {
           <Layout style = {{ minHeight: '100vh' }}>
             <NavBar />
         
-            <Layout style = {{ background: '#fff', padding: "40px 20px 0 20px" }}>
-              <LateralMenu pagina = "confirmacaoPromocao" />
+            <Layout>
+          <LateralMenu pagina = "listusers" />
+          
+          <Content className = "contentLayoutForm" style = {{ padding: "30px 20px 0px 20px" }} >
+              <Title className = "titleForm" level={1}> Lista de usuários </Title>
+              <Divider className = "dividerForm" />
               <Table columns={columns} dataSource={this.state.simpleusers} />
+              </Content>
             </Layout>
           </Layout>
         );   

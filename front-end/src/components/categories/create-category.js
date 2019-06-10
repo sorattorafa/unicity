@@ -1,4 +1,4 @@
-import { Layout, Form, Row, Col, Icon, Input, Button, Tooltip, Select } from 'antd';
+import { Divider, Typography, Layout, Form, Row, Col, Icon, Input, Button, Tooltip, Select } from 'antd';
 import React from 'react';
 //import ReactDOM from "react-dom";
 import "antd/dist/antd.css";
@@ -10,6 +10,8 @@ import LateralMenu from '../../components/lateralmenu/lateralmenu';
 
 const { Option } = Select;
 const TextArea = Input.TextArea;
+const { Title } = Typography;
+const { Content } = Layout;
 
 // Return the errors in hte fields
 function hasErrors(fieldsError) {
@@ -89,9 +91,12 @@ class CreateCategory extends React.Component {
       <Layout style = {{ minHeight: '100vh' }}>
         <NavBar />
         
-        <Layout style = {{ background: '#fff', padding: "40px 20px 0 20px" }}>
-          <LateralMenu pagina = "confirmacaoPromocao" />
-          <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+        <Layout>
+          <LateralMenu pagina = "createcategory" />
+          <Content className = "contentLayoutForm" style = {{ padding: "30px 20px 0px 20px" }} >
+            <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+              <Title className = "titleForm" level={1}> Cadastrar categorias </Title>
+              <Divider className = "dividerForm" />
             {/* Category name */}
             <Row>
               <Form.Item
@@ -131,16 +136,17 @@ class CreateCategory extends React.Component {
             </Row>
             
             {/* Submit Button */}
-            <Row>
+            <Row className="buttonForm">
               <Col span={24} style={{ textAlign: 'right' }}>
                 <Form.Item>
-                  <Button type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())}>
+                  <Button htmlType="submit" disabled={hasErrors(getFieldsError())}>
                     Cadastrar categoria
                   </Button>
                 </Form.Item>
               </Col>
             </Row>
           </Form>
+          </Content>
         </Layout>
       </Layout>
     );

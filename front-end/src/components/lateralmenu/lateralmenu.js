@@ -16,7 +16,7 @@ export default class LateralMenu extends Component {
 
     this.state = {
       // status: getStatus()
-      status: '0'                 // 0: simpleuser; 1: companyuser; 2: admin
+      status: '2'                 // 0: simpleuser; 1: companyuser; 2: admin
     };
   }
 
@@ -57,14 +57,14 @@ export default class LateralMenu extends Component {
 
           { this.state.status === '2' ?
             <Menu.Item key = "createadminuser">
-              <Link to = "/create-adminuser">
+              <Link to = "/createadminuser">
                 <Icon type = "team" />
                 <span> Criar ADM </span>
               </Link>
             </Menu.Item>
           : null }
           { this.state.status === '2' ?
-            <Menu.Item key = "createCateory">
+            <Menu.Item key = "CreateCategory">
               <Link to = "/createcategory">
                 <Icon type = "star" />
                 <span> Criar categoria </span>
