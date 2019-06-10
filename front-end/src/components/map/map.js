@@ -1,27 +1,10 @@
 import React, { Component } from 'react'; 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Map, TileLayer, Marker} from 'react-leaflet';
+import { Map, TileLayer, Marker, Popup} from 'react-leaflet';
 import { Card, CardText, Button} from 'reactstrap';
-import "bootstrap/dist/css/bootstrap.min.css"; 
-import CreateUser from "./components/simpleuser/create-user.component"; 
-import EditSimpleuser from "./components/simpleuser/edit-simpleuser.component";  
-import SimpleusersList from "./components/simpleuser/list-simple-user.component"; 
-import DeleteSimpleuser from "./components/simpleuser/delete-simpleuser"; 
-import CreateReport from "./components/report/create-report";  
+import "bootstrap/dist/css/bootstrap.min.css";  
 import axios from 'axios'; 
-import UsersList from "./components/simpleuser/list-simpleuser";   
 
-//components of admin user
-import CreateAdminUser from "./components/adminuser/create-adminuser";
-
-//components of company user
-import CreateCompanyUser from "./components/companyuser/create-companyuser";
-
-//components of categories
-import CreateCategory from "./components/categories/create-category";
-  
-import logo from "./logo.png";
-import './App.css';    
 import { getLocation, sendMessage} from './map-components/Api';
 
 import L from 'leaflet'; 
@@ -29,8 +12,20 @@ import userLocationURL from './map-components/userlocation.svg';
 import messageLocationURL from './map-components/message_location.svg';
 import MessageCardForm from './map-components/MessageCardForm'; 
 
+var myIcon = L.icon({
+  iconUrl: userLocationURL,
+  iconSize: [21, 41], 
+  iconAnchor: [12.5, 41], 
+  popupAnchor: [0,-41]
+
+}); 
+
+const messageIcon = L.icon({
+  iconUrl: messageLocationURL,
+  iconSize: [50, 82]
+});
  
-class App extends Component {
+class ReportMap extends Component {
   state = {
     location: {
       lat: -24.0394374,
@@ -149,49 +144,7 @@ class App extends Component {
     const position2 = this.state.location2; 
     const {lat, lng} = this.state.location2;
     return (  
-      <Router>    
-          <div className="container">        
-          <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <a className="navbar-brand" href="https://codingthesmartway.com">
-              <img src={logo} width="60" height="60" alt="CodingTheSmartWay.com" />
-            </a>
-            <Link to="/" className="navbar-brand">Unicity</Link>
-            <div className="collpase nav-collapse">
-              <ul className="navbar-nav mr-auto">
-                <li className="navbar-item">
-                  <Link to="/createuser" className="nav-link">Criar usuario</Link>
-                </li>  
-                <li className="navbar-item">
-                  <Link to="/listusers" className="nav-link">Visualizar usuarios</Link>
-                </li> 
-                <li className="navbar-item">
-                  <Link to="/createadminuser" className="nav-link">Criar usuário administador</Link>
-                </li>
-                <li className="navbar-item">
-                  <Link to="/createreport" className="nav-link">Criar Relato</Link>
-                </li>
-                <li className="navbar-item">
-                  <Link to="/createcompanyuser" className="nav-link">Criar usuário empresarial</Link>
-                </li> 
-                <li className="navbar-item">
-                  <Link to="/createcategory" className="nav-link">Criar categoria</Link>
-                </li> 
-                <li className="navbar-item">
-                  <Link to="/userss" className="nav-link">Visualizar usuários (antd)</Link>
-                </li>
-              </ul>
-            </div>
-          </nav> 
-          <Route path="/createuser" component={CreateUser} /> 
-          <Route path="/createreport" component={CreateReport} />   
-          <Route path="/edit/:id" component={EditSimpleuser} />
-          <Route path="/listusers" component={SimpleusersList} />  
-          <Route path="/delete/:id" component={DeleteSimpleuser} /> 
-          <Route path="/createadminuser" component={CreateAdminUser} /> 
-          <Route path="/createcompanyuser" component={CreateCompanyUser} />  
-          <Route path="/createcategory" component={CreateCategory} /> 
-          <Route path="/userss" component={UsersList} />
-        </div>   
+      <Router>      
         {
         <div className="map">
         <Map
@@ -272,4 +225,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default ReportMap;

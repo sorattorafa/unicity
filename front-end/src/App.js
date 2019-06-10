@@ -19,6 +19,9 @@ import CreateCompanyUser from "./components/companyuser/create-companyuser";
 //components of categories
 import CreateCategory from "./components/categories/create-category";
 
+//Map's component
+import ReportMap from "./components/map/map";
+
  
 class App extends Component {
   render() {
@@ -34,7 +37,7 @@ class App extends Component {
           <Route path="/createadminuser" component={ CreateAdminUser } /> 
           <Route path="/createcompanyuser" component={ CreateCompanyUser } />  
           <Route path="/createcategory" component={ CreateCategory } />
-          <Route path = "/" exact component = { CreateAdminUser } />
+          <Route path = "/" exact component = { ReportMap } />
 
           {/* <Route path = "*" component = { NotFound } /> */}
         </Switch>
