@@ -1,4 +1,4 @@
-import { Layout, Form, Row, Col, Icon, Input, Button, Tooltip } from 'antd';
+import { Divider, Typography, Layout, Form, Row, Col, Icon, Input, Button, Tooltip } from 'antd';
 import React, {Component} from 'react';
 import ReactDOM from "react-dom";
 import "antd/dist/antd.css";
@@ -9,6 +9,8 @@ import NavBar from '../../components/navbar/navbar';
 import LateralMenu from '../../components/lateralmenu/lateralmenu';
 
 const TextArea = Input.TextArea;
+const { Title } = Typography;
+const { Content } = Layout;
 
 // Return errors in fields
 function hasErrors(fieldsError) {
@@ -146,9 +148,13 @@ class CreateCompanyUser extends React.Component {
             <Layout style = {{ minHeight: '100vh' }}>
                 <NavBar />
         
-                <Layout style = {{ background: '#fff', padding: "40px 20px 0 20px" }}>
-                     <LateralMenu pagina = "confirmacaoPromocao" />
-                    <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+                <Layout>
+          <LateralMenu pagina = "createcompanyuser" />
+          
+          <Content className = "contentLayoutForm" style = {{ padding: "30px 20px 0px 20px" }} >
+            <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+              <Title className = "titleForm" level={1}> Cadastrar usuário empresarial </Title>
+              <Divider className = "dividerForm" />
 
                         {/* Company User's Cnpj */}
                         <Row>
@@ -335,7 +341,7 @@ class CreateCompanyUser extends React.Component {
                         </Row>
 
                         {/* Submit Button */}
-                        <Row>
+                        <Row className="buttonForm">
                             <Col span={20} style={{ textAlign: 'right' }}>
                                 <Form.Item>
                                     <Button type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())}>
@@ -346,6 +352,7 @@ class CreateCompanyUser extends React.Component {
                         </Row>
 
                     </Form>
+                    </Content>
                 </Layout>
             </Layout>
         );

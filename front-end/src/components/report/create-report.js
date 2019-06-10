@@ -1,4 +1,4 @@
-import { Layout, Form, Row, Col, Icon, Input, Button, Tooltip, Select } from 'antd';
+import { Divider, Typography, Layout, Form, Row, Col, Icon, Input, Button, Tooltip, Select } from 'antd';
 import React, {Component} from 'react';
 import ReactDOM from "react-dom";
 import "antd/dist/antd.css";
@@ -10,6 +10,8 @@ import LateralMenu from '../../components/lateralmenu/lateralmenu';
 
 const { Option } = Select;
 const TextArea = Input.TextArea;
+const { Title } = Typography;
+const { Content } = Layout;
 
 // Return the errors in hte fields
 function hasErrors(fieldsError) {
@@ -119,9 +121,13 @@ class CreateReport extends React.Component {
       <Layout style = {{ minHeight: '100vh' }}>
         <NavBar />
         
-        <Layout style = {{ background: '#fff', padding: "40px 20px 0 20px" }}>
-          <LateralMenu pagina = "confirmacaoPromocao" />
-          <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+        <Layout>
+          <LateralMenu pagina = "createreport" />
+          
+          <Content className = "contentLayoutForm" style = {{ padding: "30px 20px 0px 20px" }} >
+            <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+              <Title className = "titleForm" level={1}> Adicionar relato </Title>
+              <Divider className = "dividerForm" />
             {/* Report's Title */}
             <Row>
               <Form.Item
@@ -269,7 +275,7 @@ class CreateReport extends React.Component {
             </Row>
             
             {/* Submit Button */}
-            <Row>
+            <Row className="buttonForm">
               <Col span={24} style={{ textAlign: 'right' }}>
                 <Form.Item>
                   <Button type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())}>
@@ -279,6 +285,7 @@ class CreateReport extends React.Component {
               </Col>
             </Row>
           </Form>
+          </Content>
         </Layout>
       </Layout>
     );

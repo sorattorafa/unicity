@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Menu, Icon } from 'antd';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
-import { Map, TileLayer, Marker} from 'react-leaflet';
-import { Card, CardText, Button} from 'reactstrap';
-import "bootstrap/dist/css/bootstrap.min.css";
+// import { Map, TileLayer, Marker} from 'react-leaflet';
+// import { Card, CardText, Button} from 'reactstrap';
+// import "bootstrap/dist/css/bootstrap.min.css";
 import CreateUser from "./components/simpleuser/create-user.component";
 import EditSimpleuser from "./components/simpleuser/edit-simpleuser.component";
 import SimpleusersList from "./components/simpleuser/list-simpleuser";
@@ -18,8 +18,6 @@ import CreateCompanyUser from "./components/companyuser/create-companyuser";
 
 //components of categories
 import CreateCategory from "./components/categories/create-category";
-
-import './App.css';
 
  
 class App extends Component {
