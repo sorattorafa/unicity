@@ -81,9 +81,15 @@
   
   .ant-layout-sider-zero-width-trigger {
     background: white !important;
-    color: #333 !important;
+    color: #5f008e !important;
     -webkit-transition: all 0.3s;
     transition: all 0.3s;
-    -webkit-box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
-    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+    position: absolute;
+    top: -50px !important;
+    right: -56px;
+    width: 36px;
+    height: 42px;
+    border-color: #5f008e !important;
+    border-radius: 5px;
+    z-index: 100;
   }
