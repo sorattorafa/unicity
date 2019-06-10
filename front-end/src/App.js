@@ -26,7 +26,6 @@ import ReportMap from "./components/map/map";
 class App extends Component {
   render() {
     return (
-
       <BrowserRouter>
         <Switch>
           <Route path="/createuser" component={ CreateUser } />
@@ -37,8 +36,7 @@ class App extends Component {
           <Route path="/createadminuser" component={ CreateAdminUser } /> 
           <Route path="/createcompanyuser" component={ CreateCompanyUser } />  
           <Route path="/createcategory" component={ CreateCategory } />
-          <Route path = "/" exact component = { ReportMap } />
-
+          <Route path = "/" exact component = { ReportMap } /> 
           {/* <Route path = "*" component = { NotFound } /> */}
         </Switch>
       </BrowserRouter>

@@ -82,20 +82,12 @@ class CreateReport extends React.Component {
     });
   }  
 
-//  componentWillReceiveProps(nextProps){ 
-  
-    //console.log('ola', nextProps); 
-    // nextProps.location.state.position2
-    //setFieldsValue({
-    //  latlnt: nextProps.location.state.position2,
-   // });
-  //}
   componentDidMount() {
     // To disabled submit button at the beginning.
    // this.setState({
    //   lat:
    //   lng
-   // })
+   // }) 
     this.props.form.validateFields(); 
     this.props.form.setFieldsValue ({ 
       lat: this.props.location.state.position2.lat, 

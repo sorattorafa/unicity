@@ -3,15 +3,16 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Map, TileLayer, Marker, Popup} from 'react-leaflet';
 import { Card, CardText, Button} from 'reactstrap';
 import "bootstrap/dist/css/bootstrap.min.css";  
-import axios from 'axios'; 
-
+import axios from 'axios';
+import App from '../../App.js';
 import { getLocation, sendMessage} from './map-components/Api';
 
 import L from 'leaflet'; 
 import userLocationURL from './map-components/userlocation.svg'; 
 import messageLocationURL from './map-components/message_location.svg';
 import MessageCardForm from './map-components/MessageCardForm'; 
-
+import CreateReport from "../report/create-report";
+ 
 var myIcon = L.icon({
   iconUrl: userLocationURL,
   iconSize: [21, 41], 
@@ -135,9 +136,11 @@ class ReportMap extends Component {
     this.setState({
       location2 : e.latlng, 
       haveUserClick: true,
-    });
+    });  
   }
-
+  redirect = () => {
+    document.location.reload()  
+  }
 
   render() { 
     const position = [this.state.location.lat, this.state.location.lng];  
@@ -165,12 +168,12 @@ class ReportMap extends Component {
               <p>latitude: {lat}  </p>
               <p>  longitude: {lng} </p>
                 <li className="navbar-item">
-                  <Link to= {{ 
+                  <Link to = {{ 
                     pathname:'/createreport',  
                     state: { 
                       position2
-                    }
-                  }} className="nav-link">Criar Relato</Link>
+                    } 
+                  }} className="nav-link">Criar Relato</Link> 
                 </li>  
                 </Popup>  
             </Marker> : ''     
@@ -219,7 +222,8 @@ class ReportMap extends Component {
               <CardText> Made with <span role="img" aria-label="love">💚</span> by <a href="https://github.com" target="_blank" rel="noopener noreferrer">Unicity Team</a></CardText>
             </Card>
           </div>      
-        }
+        } 
+        <Route path="/createreport" component={ CreateReport } />   
       </Router>
     );
   }
