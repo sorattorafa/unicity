@@ -166,17 +166,21 @@ class ReportMap extends Component {
               icon={myIcon}>    
               <Popup>  
               <p>latitude: {lat}  </p>
-              <p>  longitude: {lng} </p>
+              <p>  longitude: {lng} </p>  
+              <div className="collpase nav-collapse"> 
+              <ul className="navbar-nav mr-auto">
                 <li className="navbar-item">
                   <Link to = {{ 
                     pathname:'/createreport',  
                     state: { 
                       position2
-                    } 
-                  }} className="nav-link">Criar Relato</Link> 
+                    }  
+                  }} className="nav-link">Clique e vá para o final da página </Link>  
                 </li>  
+                </ul>
+              </div>    
                 </Popup>  
-            </Marker> : ''     
+            </Marker> : ''   
           }
           {
             this.state.haveUsersLocation ? 
@@ -194,6 +198,7 @@ class ReportMap extends Component {
                   <Popup>   
                     <p>Título: {report.title}  </p>
                     <p>Descrição: {report.description}  </p>   
+                    <p>Categoria: {report.category}  </p>   
                   </Popup>
               </Marker>
               ) 
