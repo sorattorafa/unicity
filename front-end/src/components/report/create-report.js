@@ -26,7 +26,8 @@ class CreateReport extends React.Component {
     this.onChangeCep = this.onChangeCep.bind(this);  
     this.onChangeStreet = this.onChangeStreet.bind(this); 
     this.onChangeNumber = this.onChangeNumber.bind(this);
-    this.onChangeDescription = this.onChangeDescription.bind(this);
+    this.onChangeDescription = this.onChangeDescription.bind(this); 
+    this.onChangeCategory = this.onChangeCategory.bind(this);
     this.onChangeLat = this.onChangeLat.bind(this); 
     this.onChangeLng = this.onChangeLng.bind(this);
     this.state = {  
@@ -35,8 +36,9 @@ class CreateReport extends React.Component {
       title: '',
       cep: '',
       street: '',  
-      number: '',
-      description: '',
+      number: '', 
+      category: '',
+      description: '', 
       active: true
     }
   }
@@ -75,27 +77,24 @@ class CreateReport extends React.Component {
         number: e.target.value
     });
   }
-
+ 
+  onChangeCategory(e) {
+    this.setState({
+        category: e.target.value
+    });
+  }  
   onChangeDescription(e) {
     this.setState({
         description: e.target.value
     });
   }  
 
-//  componentWillReceiveProps(nextProps){ 
-  
-    //console.log('ola', nextProps); 
-    // nextProps.location.state.position2
-    //setFieldsValue({
-    //  latlnt: nextProps.location.state.position2,
-   // });
-  //}
   componentDidMount() {
     // To disabled submit button at the beginning.
    // this.setState({
    //   lat:
    //   lng
-   // })
+   // }) 
     this.props.form.validateFields(); 
     this.props.form.setFieldsValue ({ 
       lat: this.props.location.state.position2.lat, 
@@ -118,7 +117,8 @@ class CreateReport extends React.Component {
           title: '',
           cep: '',
           street: '',  
-          number: '',
+          number: '', 
+          category:'',
           description: '',
           active: true
         })
@@ -144,7 +144,8 @@ class CreateReport extends React.Component {
     const titleError = isFieldTouched('title') && getFieldError('title');
     const cepError = isFieldTouched('cep') && getFieldError('cep');
     const streetError = isFieldTouched('street') && getFieldError('street');
-    const numberError = isFieldTouched('number') && getFieldError('number');
+    const numberError = isFieldTouched('number') && getFieldError('number'); 
+    const categoryError = isFieldTouched('category') && getFieldError('category');
     const descriptionError = isFieldTouched('description') && getFieldError('description');
     // const cityError = isFieldTouched('city') && getFieldError('city');
     // const categoryError = isFieldTouched('category') && getFieldError('category');
@@ -305,9 +306,12 @@ class CreateReport extends React.Component {
                 </Form.Item>
               </Col> */}
 
-            {/* Report's Category */}
-              {/* <Col span={12}>
-                <Form.Item label={
+            {/* Report's Category */}  
+            <Row gutter={24}>
+               <Col span={12}>
+                <Form.Item  
+                validateStatus={categoryError ? 'error' : ''} help={categoryError || ''}
+                label={
                   <span>
                     Categoria&nbsp;
                     <Tooltip title="Qual a categoria do relato?">
@@ -316,19 +320,18 @@ class CreateReport extends React.Component {
                   </span>
                 } hasFeedback>
                   {getFieldDecorator('category', {
-                    rules: [{ required: true, message: 'Insira a categoria do relato!' }],
+                    rules: [{ required: true, message: 'Insira a categoria do relato!', whitespace: true  }],
                   })(
                     <Select>
-                      <Option value="1">Segurança pública</Option>
-                      <Option value="2">Mobilidade</Option>
-                      <Option value="3">Vias</Option>
-                      <Option value="4">Iluminação</Option>
+                      <Option value="5ce1ed3929c76b630b87a86e">Segurança pública</Option>
+                      <Option value="5d03b273b1ab38158e5b936f">Mobilidade</Option>
+                      <Option value="5d03b2b0b1ab38158e5b9370">Vias</Option>
+                      <Option value="5ce2045e7428ad35f9cfbf64">Iluminação</Option>
                     </Select>,
                   )}
                 </Form.Item>
               </Col>
-            </Row> */}
-
+            </Row> 
             {/* Report's Description */}
             <Row>
               <Form.Item

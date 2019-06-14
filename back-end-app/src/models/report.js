@@ -79,14 +79,16 @@ const schema = new Schema({
         // required: true
     },     
      
-    categories: [{  
-        // DIR'S
-        category: { 
-            type: mongoose.Schema.Types.ObjectId,  
-            ref: 'Category'
-            // required: true
-        }, 
-    }],    
+//    categories: [{  
+    category: {  
+//        type: String, 
+//        required: true, 
+ //       trim: true 
+        type: mongoose.Schema.Types.ObjectId,  
+        ref: 'Category',
+        required: true
+    }, 
+  //  }],    
 
 }); 
   

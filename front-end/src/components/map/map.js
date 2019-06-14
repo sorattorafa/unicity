@@ -3,22 +3,30 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Map, TileLayer, Marker, Popup} from 'react-leaflet';
 import { Card, CardText, Button} from 'reactstrap';
 import "bootstrap/dist/css/bootstrap.min.css";  
-import axios from 'axios'; 
-
+import axios from 'axios';
+import App from '../../App.js';
 import { getLocation, sendMessage} from './map-components/Api';
 
 import L from 'leaflet'; 
 import userLocationURL from './map-components/userlocation.svg'; 
-import messageLocationURL from './map-components/message_location.svg';
-import MessageCardForm from './map-components/MessageCardForm'; 
+import messageLocationURL from './map-components/message_location.svg'; 
+import security from './map-components/downloadd.png'; 
 
+import MessageCardForm from './map-components/MessageCardForm'; 
+import CreateReport from "../report/create-report";
+ 
 var myIcon = L.icon({
   iconUrl: userLocationURL,
   iconSize: [21, 41], 
   iconAnchor: [12.5, 41], 
   popupAnchor: [0,-41]
 
-}); 
+});  
+const securityIcon = L.icon({
+  iconUrl: security,
+  iconSize: [60, 90]
+});
+ 
 
 const messageIcon = L.icon({
   iconUrl: messageLocationURL,
@@ -44,7 +52,7 @@ class ReportMap extends Component {
     },
     showMessageForm: false,
     sendingMessage: false,
-    sentMessage: false,
+    sentMessage: false, 
     messages: [], 
     reports: []
   }  
@@ -135,9 +143,11 @@ class ReportMap extends Component {
     this.setState({
       location2 : e.latlng, 
       haveUserClick: true,
-    });
+    });  
   }
-
+  redirect = () => {
+    document.location.reload()  
+  }
 
   render() { 
     const position = [this.state.location.lat, this.state.location.lng];  
@@ -163,17 +173,21 @@ class ReportMap extends Component {
               icon={myIcon}>    
               <Popup>  
               <p>latitude: {lat}  </p>
-              <p>  longitude: {lng} </p>
+              <p>  longitude: {lng} </p>  
+              <div className="collpase nav-collapse"> 
+              <ul className="navbar-nav mr-auto">
                 <li className="navbar-item">
-                  <Link to= {{ 
+                  <Link to = {{ 
                     pathname:'/createreport',  
                     state: { 
                       position2
-                    }
-                  }} className="nav-link">Criar Relato</Link>
+                    }  
+                  }} className="nav-link">Clique e vá para o final da página </Link>  
                 </li>  
+                </ul>
+              </div>    
                 </Popup>  
-            </Marker> : ''     
+            </Marker> : ''   
           }
           {
             this.state.haveUsersLocation ? 
@@ -181,20 +195,22 @@ class ReportMap extends Component {
               position={position}
               icon={myIcon}> 
             </Marker> : ''
-          } 
+          }   
           { 
-            this.state.reports.map(report => ( 
-              <Marker 
+            this.state.reports.map(report =>    
+              (    
+              <Marker  
                key={report._id} 
                position={[report.lat, report.lng]}
-              icon={messageIcon}> 
+               icon={securityIcon}>  
                   <Popup>   
                     <p>Título: {report.title}  </p>
                     <p>Descrição: {report.description}  </p>   
+                   {/* <p>Categoria: {report.category}  </p>   */}
                   </Popup>
               </Marker>
-              ) 
-            )
+              )  
+            ) 
           }
         </Map>
         {
@@ -219,7 +235,8 @@ class ReportMap extends Component {
               <CardText> Made with <span role="img" aria-label="love">💚</span> by <a href="https://github.com" target="_blank" rel="noopener noreferrer">Unicity Team</a></CardText>
             </Card>
           </div>      
-        }
+        } 
+        <Route path="/createreport" component={ CreateReport } />   
       </Router>
     );
   }

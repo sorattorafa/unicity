@@ -8,7 +8,10 @@ import CreateUser from "./components/simpleuser/create-user.component";
 import EditSimpleuser from "./components/simpleuser/edit-simpleuser.component";
 import SimpleusersList from "./components/simpleuser/list-simpleuser";
 import DeleteSimpleuser from "./components/simpleuser/delete-simpleuser";
+
+//components of reports
 import CreateReport from "./components/report/create-report";
+import ViewReport from "./components/report/view-report";
 
 // List reports
 import ListReports from "./components/report/list-reports";
@@ -29,11 +32,11 @@ import ReportMap from "./components/map/map";
 class App extends Component {
   render() {
     return (
-
       <BrowserRouter>
         <Switch>
           <Route path="/createuser" component={ CreateUser } />
-          <Route path="/createreport" component={ CreateReport } />   
+          <Route path="/createreport" component={ CreateReport } />
+          <Route path="/viewreport/:id" component={ ViewReport } />  
           <Route path="/edit/:id" component={ EditSimpleuser } />
           <Route path="/listusers" component={ SimpleusersList } />  
           <Route path="/delete/:id" component={ DeleteSimpleuser } /> 
