@@ -9,7 +9,9 @@ import { getLocation, sendMessage} from './map-components/Api';
 
 import L from 'leaflet'; 
 import userLocationURL from './map-components/userlocation.svg'; 
-import messageLocationURL from './map-components/message_location.svg';
+import messageLocationURL from './map-components/message_location.svg'; 
+import security from './map-components/downloadd.png'; 
+
 import MessageCardForm from './map-components/MessageCardForm'; 
 import CreateReport from "../report/create-report";
  
@@ -19,7 +21,12 @@ var myIcon = L.icon({
   iconAnchor: [12.5, 41], 
   popupAnchor: [0,-41]
 
-}); 
+});  
+const securityIcon = L.icon({
+  iconUrl: security,
+  iconSize: [60, 90]
+});
+ 
 
 const messageIcon = L.icon({
   iconUrl: messageLocationURL,
@@ -45,7 +52,7 @@ class ReportMap extends Component {
     },
     showMessageForm: false,
     sendingMessage: false,
-    sentMessage: false,
+    sentMessage: false, 
     messages: [], 
     reports: []
   }  
@@ -188,21 +195,22 @@ class ReportMap extends Component {
               position={position}
               icon={myIcon}> 
             </Marker> : ''
-          } 
+          }   
           { 
-            this.state.reports.map(report => ( 
-              <Marker 
+            this.state.reports.map(report =>    
+              (    
+              <Marker  
                key={report._id} 
                position={[report.lat, report.lng]}
-              icon={messageIcon}> 
+               icon={securityIcon}>  
                   <Popup>   
                     <p>Título: {report.title}  </p>
                     <p>Descrição: {report.description}  </p>   
-                    <p>Categoria: {report.category}  </p>   
+                   {/* <p>Categoria: {report.category}  </p>   */}
                   </Popup>
               </Marker>
-              ) 
-            )
+              )  
+            ) 
           }
         </Map>
         {

@@ -11,7 +11,7 @@ import DeleteSimpleuser from "./components/simpleuser/delete-simpleuser";
 
 //components of reports
 import CreateReport from "./components/report/create-report";
-//import ViewReport from "./components/report/view-report";
+import ViewReport from "./components/report/view-report";
 
 //components of admin user
 import CreateAdminUser from "./components/adminuser/create-adminuser";
@@ -33,7 +33,7 @@ class App extends Component {
         <Switch>
           <Route path="/createuser" component={ CreateUser } />
           <Route path="/createreport" component={ CreateReport } />
-          {/*<Route path="/viewreport/:id" component={ ViewReport } /> */}  
+          <Route path="/viewreport/:id" component={ ViewReport } />  
           <Route path="/edit/:id" component={ EditSimpleuser } />
           <Route path="/listusers" component={ SimpleusersList } />  
           <Route path="/delete/:id" component={ DeleteSimpleuser } /> 
@@ -41,7 +41,7 @@ class App extends Component {
           <Route path="/createcompanyuser" component={ CreateCompanyUser } />  
           <Route path="/createcategory" component={ CreateCategory } />
           <Route path = "/" exact component = { ReportMap } /> 
-          {/* <Route path = "*" component = { NotFound } /> */}
+{/*          <Route path = "*" component = { NotFound } /> */}
         </Switch>
       </BrowserRouter>
 
