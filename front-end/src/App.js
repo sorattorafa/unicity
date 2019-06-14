@@ -10,16 +10,19 @@ import SimpleusersList from "./components/simpleuser/list-simpleuser";
 import DeleteSimpleuser from "./components/simpleuser/delete-simpleuser";
 import CreateReport from "./components/report/create-report";
 
-//components of admin user
+// List reports
+import ListReports from "./components/report/list-reports";
+
+// Admin user's component
 import CreateAdminUser from "./components/adminuser/create-adminuser";
 
-//components of company user
+// Company user's component
 import CreateCompanyUser from "./components/companyuser/create-companyuser";
 
-//components of categories
+// Categories' component
 import CreateCategory from "./components/categories/create-category";
 
-//Map's component
+// Map's component
 import ReportMap from "./components/map/map";
 
  
@@ -37,6 +40,7 @@ class App extends Component {
           <Route path="/createadminuser" component={ CreateAdminUser } /> 
           <Route path="/createcompanyuser" component={ CreateCompanyUser } />  
           <Route path="/createcategory" component={ CreateCategory } />
+          <Route path="/listreport" component={ ListReports } />
           <Route path = "/" exact component = { ReportMap } />
 
           {/* <Route path = "*" component = { NotFound } /> */}
