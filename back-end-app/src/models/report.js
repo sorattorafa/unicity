@@ -81,12 +81,12 @@ const schema = new Schema({
      
 //    categories: [{  
     category: {  
-        type: String, 
-        required: true, 
-        trim: true 
-        //type: mongoose.Schema.Types.ObjectId,  
-        // ref: 'Category'
-        // required: true
+//        type: String, 
+//        required: true, 
+ //       trim: true 
+        type: mongoose.Schema.Types.ObjectId,  
+        ref: 'Category',
+        required: true
     }, 
   //  }],    
 

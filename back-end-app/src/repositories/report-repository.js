@@ -7,7 +7,7 @@ const Report =  mongoose.model('Report');
 exports.get = async () => {  
     const res = await Report.find({ 
             status:0  
-        }, 'lat lng title description category'); 
+        }, 'lat lng title description category').populate('category'); 
     return res;    
 }  
 
