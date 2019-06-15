@@ -323,10 +323,10 @@ class CreateReport extends React.Component {
                     rules: [{ required: true, message: 'Insira a categoria do relato!', whitespace: true  }],
                   })(
                     <Select>
-                      <Option value="5ce1ed3929c76b630b87a86e">Segurança pública</Option>
-                      <Option value="5d03b273b1ab38158e5b936f">Mobilidade</Option>
-                      <Option value="5d03b2b0b1ab38158e5b9370">Vias</Option>
-                      <Option value="5ce2045e7428ad35f9cfbf64">Iluminação</Option>
+                      <Option value="5d0431577425506f0589c71b">Segurança pública</Option>
+                      <Option value="5d053c8f9dbdf87818fbfc44">Mobilidade</Option>
+                      <Option value="5d053c469dbdf87818fbfc43">Vias</Option>
+                      <Option value="5d053cc99dbdf87818fbfc45">Iluminação</Option>
                     </Select>,
                   )}
                 </Form.Item>

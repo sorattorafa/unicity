@@ -7,26 +7,54 @@ import axios from 'axios';
 import App from '../../App.js';
 import { getLocation, sendMessage} from './map-components/Api';
 
-import L from 'leaflet'; 
+import L from 'leaflet';  
+// icons to marker
 import userLocationURL from './map-components/userlocation.svg'; 
 import messageLocationURL from './map-components/message_location.svg'; 
-import security from './map-components/downloadd.png'; 
+import securityIcon from './map-components/download.png'; 
+import iluminationIcon from './map-components/ilum.png'; 
+import mobilityIcon from './map-components/mobilidade.png'; 
+import viaIcon from './map-components/vias.jpeg'; 
 
 import MessageCardForm from './map-components/MessageCardForm'; 
 import CreateReport from "../report/create-report";
- 
+
 var myIcon = L.icon({
   iconUrl: userLocationURL,
   iconSize: [21, 41], 
   iconAnchor: [12.5, 41], 
   popupAnchor: [0,-41]
 
-});  
-const securityIcon = L.icon({
-  iconUrl: security,
-  iconSize: [60, 90]
-});
- 
+});   
+
+var icons = {
+  'securityIcon': L.icon({
+    iconUrl: securityIcon,
+    iconSize: [30, 50],  
+    iconAnchor: [12.5, 41], 
+    popupAnchor: [0,-41] 
+  }), 
+  'iluminationIcon': L.icon({ 
+    iconUrl: iluminationIcon,
+    iconSize: [30, 50],  
+    iconAnchor: [12.5, 41], 
+    popupAnchor: [0,-41] 
+  }), 
+
+  'mobilityIcon': L.icon({ 
+    iconUrl: mobilityIcon,
+    iconSize: [30, 50],  
+    iconAnchor: [12.5, 41], 
+    popupAnchor: [0,-41] 
+  }),
+  'viaIcon': L.icon({ 
+    iconUrl: viaIcon,
+    iconSize: [30, 50],  
+    iconAnchor: [12.5, 41], 
+    popupAnchor: [0,-41] 
+  }) 
+}
+
 
 const messageIcon = L.icon({
   iconUrl: messageLocationURL,
@@ -54,7 +82,8 @@ class ReportMap extends Component {
     sendingMessage: false,
     sentMessage: false, 
     messages: [], 
-    reports: []
+    reports: [], 
+    label: ''
   }  
   componentDidMount() { 
     axios.get('/reports')
@@ -86,7 +115,8 @@ class ReportMap extends Component {
     this.setState({
       showMessageForm: false
     });
-  }
+  } 
+  
 
   formIsValid = () => {
     let { name, message } = this.state.userMessage;
@@ -148,11 +178,13 @@ class ReportMap extends Component {
   redirect = () => {
     document.location.reload()  
   }
-
-  render() { 
-    const position = [this.state.location.lat, this.state.location.lng];  
+  render() {  
+    // primeira posição pode ser encontrada automaticamente
+    const position = [this.state.location.lat, this.state.location.lng]; 
+    // posição para o clique do mouse  
     const position2 = this.state.location2; 
-    const {lat, lng} = this.state.location2;
+    //posição dividida em longitude e latitude 
+    const {lat, lng} = this.state.location2;  
     return (  
       <Router>      
         {
@@ -167,7 +199,7 @@ class ReportMap extends Component {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />   
           {
-            this.state.haveUserClick ?   
+            this.state.haveUserClick ?    
             <Marker
               position={position2}
               icon={myIcon}>    
@@ -195,18 +227,17 @@ class ReportMap extends Component {
               position={position}
               icon={myIcon}> 
             </Marker> : ''
-          }   
+          }    
           { 
-            this.state.reports.map(report =>    
-              (    
-              <Marker  
+            this.state.reports.map(report => 
+              (              
+              <Marker    
                key={report._id} 
-               position={[report.lat, report.lng]}
-               icon={securityIcon}>  
+               position={[report.lat, report.lng]} 
+               icon={icons[report.category.label]}>  
                   <Popup>   
                     <p>Título: {report.title}  </p>
-                    <p>Descrição: {report.description}  </p>   
-                   {/* <p>Categoria: {report.category}  </p>   */}
+                    <p>Descrição: {report.description} </p>    
                   </Popup>
               </Marker>
               )  
@@ -228,7 +259,7 @@ class ReportMap extends Component {
             formIsValid={this.formIsValid}
           /> :
           <Card body className="thanks-form">
-            <CardText>Thanks for submitting a message!</CardText>
+            <CardText>Obrigado por enviar a mensagem!</CardText>
           </Card>
         } 
             <Card className="footer">
