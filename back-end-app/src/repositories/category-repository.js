@@ -5,7 +5,7 @@ const Category =  mongoose.model('Category');
 // every functions are async! 
 
 exports.get = async () => {  
-    const res = await Category.find({}, 'id name description'); 
+    const res = await Category.find({}, 'id name description label'); 
     return res;    
 }  
 
