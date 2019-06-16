@@ -23,18 +23,15 @@ const schema = new Schema({
         trim: true 
     },  
     cep: { 
-        type: String, 
-        required: true, 
+        type: String,  
         trim: true 
     },   
     street: { 
-        type: String, 
-        required: true, 
+        type: String,  
         trim: true 
     },  
     number: { 
-        type: String, 
-        required: true, 
+        type: String,  
         trim: true 
     },  
         

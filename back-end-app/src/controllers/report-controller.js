@@ -34,8 +34,6 @@ exports.getById = async (req, res, next) =>{
 exports.post = async(req, res, next) => {  
     let contract = new ValidationContract(); 
     contract.hasMinLen(req.body.title, 4, 'O titulo deve conter 4 caracteres') 
-    contract.hasMinLen(req.body.cep, 4, 'O cep deve conter pelo menos 4 caracteres') 
-    contract.hasMinLen(req.body.street, 3, 'A rua deve conter pelo menos 3 caracteres') 
  
     // if data is valid
     if (!contract.isValid()){ 
