@@ -194,7 +194,7 @@ class CreateReport extends React.Component {
                 }
               >
                 {getFieldDecorator('cep', {
-                  rules: [{ required: true, message: 'Insira o CEP do local do relato!', whitespace: true }],
+                  rules: [{ message: 'Insira o CEP do local do relato!', whitespace: true }],
                 })(<Input />)}
               </Form.Item>
                
@@ -206,7 +206,7 @@ class CreateReport extends React.Component {
                 label={
                   <span>
                     Lat&nbsp;
-                    <Tooltip title="Qual a latitude ?">
+                    <Tooltip title="latitude ?">
                       <Icon type="question-circle-o" />
                     </Tooltip>
                   </span>
@@ -225,7 +225,7 @@ class CreateReport extends React.Component {
                 label={
                   <span>
                     Lng&nbsp;
-                    <Tooltip title="Qual a latitude ?">
+                    <Tooltip title="longitude ?">
                       <Icon type="question-circle-o" />
                     </Tooltip>
                   </span>
@@ -256,7 +256,7 @@ class CreateReport extends React.Component {
                   }
                 >
                   {getFieldDecorator('street', {
-                    rules: [{ required: true, message: 'Insira a rua do local do relato!', whitespace: true }],
+                    rules: [{ message: 'Insira a rua do local do relato!', whitespace: true }],
                   })(<Input />)}
                 </Form.Item>
               </Col>
@@ -275,7 +275,7 @@ class CreateReport extends React.Component {
                   }
                 >
                   {getFieldDecorator('number', {
-                    rules: [{ required: true, message: 'Insira o número do estabelecimento mais próximo do local do relato!' }],
+                    rules: [{ message: 'Insira o número do estabelecimento mais próximo do local do relato!' }],
                   })(<Input />)}
                 </Form.Item>
               </Col>
