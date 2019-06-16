@@ -28,6 +28,9 @@ import CreateCategory from "./components/categories/create-category";
 // Map's component
 import ReportMap from "./components/map/map";
 
+// Homes
+import PublicHome from "./components/home/publichome";
+
  
 class App extends Component {
   render() {
@@ -44,7 +47,8 @@ class App extends Component {
           <Route path="/createcompanyuser" component={ CreateCompanyUser } />  
           <Route path="/createcategory" component={ CreateCategory } />
           <Route path="/listreport" component={ ListReports } />
-          <Route path = "/" exact component = { ReportMap } />
+          <Route path = "/map" exact component = { ReportMap } />
+          <Route path = "/" exact component = { PublicHome } />
 
           {/* <Route path = "*" component = { NotFound } /> */}
         </Switch>

@@ -14,31 +14,53 @@
 }
 
 .buttonForm button {
-    border-radius: 0;
-    height: 45px;
-    font-size: 19px;
-    color: #6f3e00;
-    background: #ff8d00 !important;
-    border: none !important;
-  }
-  
-  .buttonForm button:active {
-    background: #ff8d00 !important;
-    box-shadow: inset 0 0 0 99999px rgba(0, 0, 0, 0.1) !important;
-  }
+  border-radius: 0;
+  height: 45px;
+  font-size: 19px;
+  color: #6f3e00;
+  background: #ff8d00 !important;
+  border: none !important;
+}
 
-  .buttonForm button:disabled {
-    background: #ff8d00ad !important;
-  }
-  
-  .buttonForm button:hover {
-    background: #ff8d00 !important;
-    color: #6f3e00;
-    box-shadow: inset 0 0 0 99999px rgba(255, 255, 255, 0.1);
-  }
+.buttonForm button:active {
+  background: #ff8d00 !important;
+  box-shadow: inset 0 0 0 99999px rgba(0, 0, 0, 0.1) !important;
+}
 
-  @media only screen and (max-width: 400px) {
-    .buttonForm button {
-        width: 100%;
-      }
-  }
+.buttonForm button:disabled {
+  background: #ff8d00ad !important;
+}
+
+.buttonForm button:hover {
+  background: #ff8d00 !important;
+  color: #6f3e00;
+  box-shadow: inset 0 0 0 99999px rgba(255, 255, 255, 0.1);
+}
+
+  /* ======== Home ======== */
+.mainFrameHome {
+  background: #ff8d00 !important;
+  margin-top: 50px;
+  height: 290px;
+}
+
+.nameFrameHome {
+  background: white !important;
+  margin-top: 70px;
+  height: 150px;
+  color: #5f008e;
+  font-size: 50px;
+  text-align: center;
+  font-weight: 900;
+}
+
+.logoHome {
+  margin-right: 20px;
+  /* height: 100px; */
+}
+
+@media only screen and (max-width: 400px) {
+  .buttonForm button {
+      width: 100%;
+    }
+}

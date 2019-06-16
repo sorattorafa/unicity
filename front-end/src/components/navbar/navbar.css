@@ -31,6 +31,8 @@
 
 .menu-mobile {
   display: none !important;
+  text-align: left !important;
+  margin-right: 150px !important;
 }
 
 .ant-layout-header {
@@ -46,10 +48,13 @@
 @media only screen and (max-width: 850px) {
   .menu-web {
     display: none !important;
+    text-align: left !important;
   }
 
   .menu-mobile {
     display: block !important;
+    text-align: left !important;
+    margin-right: 150px !important
   }
 
   .ant-layout-header {

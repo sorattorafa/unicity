@@ -1,11 +1,12 @@
 // navbar.js
 
 import React, {Component} from 'react';
-import { Layout, Menu, Icon, Col, Button, Dropdown, Tabs, message } from 'antd';
+import { Layout, Menu, Icon, Col, Button, Dropdown, message } from 'antd';
 import { Link, Redirect } from "react-router-dom";
 
+import Login from '../login/login';
 import './navbar.css';
-// import { getToken, getStatus, logout } from '../../services/auth';
+import { getToken, getStatus, logout } from '../services/auth';
 
 
 const { Header } = Layout;
@@ -18,7 +19,7 @@ export default class NavBar extends Component {
       nav: '',
       // token: getToken(),
       // status: getStatus(),
-      token: 'token',
+      token: null,
       status: '0',
       modal: false,
       home: this.props.home
@@ -33,16 +34,16 @@ export default class NavBar extends Component {
     });
   }
 
-  // signout = () => {
-  //   let hide = message.loading('Fazendo logout..', 0);
+  signout = () => {
+    let hide = message.loading('Fazendo logout..', 0);
 
-  //   setTimeout(() => {
-  //     setTimeout(hide, 2000);
+    setTimeout(() => {
+      setTimeout(hide, 2000);
 
-  //     logout();
-  //     this.setState({ nav: '/' });
-  //   }, 2000);
-  // }
+      logout();
+      this.setState({ nav: '/' });
+    }, 2000);
+  }
 
   render() {
     if(this.state.nav) {
@@ -59,9 +60,9 @@ export default class NavBar extends Component {
           </Menu.Item>
         : null }
 
-        {/* <Menu.Item key = "logout" onClick = { this.signout }>
+        <Menu.Item key = "logout" onClick = { this.signout }>
           <Icon type = "logout" /> Logout
-        </Menu.Item> */}
+        </Menu.Item>
       </Menu>
     );
 
@@ -81,12 +82,12 @@ export default class NavBar extends Component {
         <Col span = { this.props.home ? 3 : 6 } offset = { this.props.home ? 0 : 9 }>
           <div className = "logo text-center">
             {/* <Link to = "/">
-              <img src = {require("../../images/logo.png")} alt = "Sangue Bom" />
+              <img src = {require("../../images/logo.png")} alt = "logo Sistema" />
             </Link> */}
           </div>
         </Col>
 
-        <Col span = { this.props.home ? 11 : 0 }>
+        {/* <Col span = { this.props.home ? 11 : 0 }>
           { this.props.home ?
             <Tabs defaultKey = "home" onChange = { this.props.onChange } tabPosition = "bottom" className = "menu-site" style = {{ lineHeight: '64px' }}>
               <Tabs.TabPane tab = { <a href = "#home" style = {{ color: 'inherit' }}> Home </a> } key = "home" />
@@ -95,7 +96,7 @@ export default class NavBar extends Component {
               <Tabs.TabPane tab = { <a href = "#contato" style = {{ color: 'inherit' }}> Contato </a> } key = "contato" />
             </Tabs>
           : null }
-        </Col>
+        </Col> */}
 
         <Col span = { this.props.home ? 10 : 8 } className = "menu-usuario">
           { this.state.token && !this.props.home ?
@@ -113,7 +114,7 @@ export default class NavBar extends Component {
           :
             <div>
               <Dropdown className = "menu-mobile" overlay = {menuNone} placement = "bottomRight">
-                <Button style = {{ marginLeft: 'auto', marginTop: '16px' }}>
+                <Button style = {{ marginTop: '16px' }}>
                   <Icon type = "menu" style = {{ fontSize: '18px', marginTop: '5px' }} />
                 </Button>
               </Dropdown>
@@ -130,7 +131,7 @@ export default class NavBar extends Component {
             </div>
           }
         </Col>
-        {/* <Login visible = { this.state.modal } toggle = { this.toggle } /> */}
+        <Login visible = { this.state.modal } toggle = { this.toggle } />
       </Header>
     );
   }

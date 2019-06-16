@@ -1,24 +1,11 @@
 import React, { Component } from 'react';
-import { Divider, Typography, Layout, Row, Col, Icon, List, Avatar } from 'antd';
+import { Divider, Typography, Layout, Row, Col, Icon, List, notification } from 'antd';
 import axios from 'axios';
 import NavBar from '../../components/navbar/navbar';
 import LateralMenu from '../../components/lateralmenu/lateralmenu';
 
 const { Title } = Typography;
 const { Content } = Layout;
-
-const listData = [];
-
-for (let i = 0; i < 23; i++) {
-  listData.push({
-    href: 'http://ant.design',
-    title: `Titulo relato`,
-    description:
-      'Description.',
-    content:
-      'content.',
-  });
-}
 
 const IconText = ({ type, text }) => (
   <span>
@@ -29,14 +16,26 @@ const IconText = ({ type, text }) => (
 
  
 class ListReports extends Component {
+  constructor () {
+    super();
+
+    this.state = {
+      reports: []
+    };
+  }
+
   componentDidMount() { 
-    axios.get('/simpleusers')
-        .then(response => {
-            this.setState({simpleusers: response.data});
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
+    axios.get('/reports')
+      .then(response => {
+        this.setState({reports: response.data});
+      })
+      .catch(function (error) {
+        notification['error']({
+          message: 'Erro!',
+          description: 'Não foi possível carregar os relatos. Tente novamente mais tarde. Se persistir, consulte um técnico.'
+        });
+          console.log(error);
+      })
   }
 
   render() {
@@ -59,7 +58,7 @@ class ListReports extends Component {
                   },
                   pageSize: 3,
               }}
-              dataSource={listData}
+              dataSource={this.state.reports}
               renderItem={item => (
                   <List.Item
                   key={item.title}
@@ -72,10 +71,10 @@ class ListReports extends Component {
                   }
                   >
                   <List.Item.Meta
-                      title={<a href={item.href}>{item.title}</a>}
+                      title={<a href="www.google.com">{item.title}</a>}
                       description={item.description}
                   />
-                  {item.content}
+                  Categoria: {item.category.name}
                 </List.Item>
               )}
             />
