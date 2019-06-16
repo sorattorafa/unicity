@@ -7,7 +7,8 @@ const router = express.Router();
 const controller = require('../controllers/category-controller'); 
 
 // get functions (by id and data)
-router.get('/', controller.get);  
+router.get('/', controller.get); 
+router.get('/:id', controller.getById);    
 
 // post, put and delete (create, update and delete)
 router.post('/', controller.post); 

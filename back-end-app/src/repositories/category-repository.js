@@ -28,4 +28,9 @@ exports.update = async(name,data) => {
             description: data.description,
         }
     });
+}  
+exports.getById = async(id) => { 
+    const res = await Category 
+        .findById(id)
+    return res;    
 } 
