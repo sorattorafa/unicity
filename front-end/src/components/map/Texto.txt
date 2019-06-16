@@ -1,0 +1,22 @@
+ <DivIcon position={this.state.latlng}>
+          <svg className="user-location" viewBox="0 0 120 120" version="1.1"
+            xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="60" r="50"/>
+          </svg>
+        </DivIcon>       
+ 
+
+  { 
+                
+                /*  
+              <Marker    
+               key={report._id} 
+               position={[report.lat, report.lng]} 
+               icon={report.category.label}>  
+                  <Popup>   
+                    <p>Título: {report.title}  </p>
+                    <p>Descrição: {report.description} </p>    
+                    <p>{report.category.label}</p>
+                  </Popup>
+              </Marker> 
+              */} 

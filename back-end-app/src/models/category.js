@@ -10,8 +10,12 @@ const schema = new Schema({
         type: Boolean, 
         required:true, 
         default:true
+    }, 
+    label: { 
+        type: String, 
+        required: true, 
+        trim: true, 
     },
-    
     name: { 
         type: String, 
         required: true, 
