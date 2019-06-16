@@ -244,7 +244,7 @@ class ReportMap extends Component {
             ) 
           }
         </Map>
-        {
+        {/* {
           !this.state.showMessageForm ?
           <Button className="message-form" onClick={this.showMessageForm} color="info">Add a Message</Button> :
           !this.state.sentMessage ?
@@ -261,7 +261,7 @@ class ReportMap extends Component {
           <Card body className="thanks-form">
             <CardText>Obrigado por enviar a mensagem!</CardText>
           </Card>
-        } 
+        }  */}
             <Card className="footer">
               <CardText> Made with <span role="img" aria-label="love">💚</span> by <a href="https://github.com" target="_blank" rel="noopener noreferrer">Unicity Team</a></CardText>
             </Card>
