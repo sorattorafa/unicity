@@ -237,7 +237,12 @@ class ReportMap extends Component {
                icon={icons[report.category.label]}>  
                   <Popup>   
                     <p>Título: {report.title}  </p>
-                    <p>Descrição: {report.description} </p>    
+                    <p>Descrição: {report.description} </p>
+                    <div className="collpase nav-collapse"> 
+                      <Link to = {{ 
+                        pathname:'/viewreport/'+report._id,
+                      }} className="nav-link">Página do Relato</Link> 
+                    </div>    
                   </Popup>
               </Marker>
               )  

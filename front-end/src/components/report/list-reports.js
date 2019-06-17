@@ -71,7 +71,7 @@ class ListReports extends Component {
                   }
                   >
                   <List.Item.Meta
-                      title={<a href="www.google.com">{item.title}</a>}
+                      title={<a href={"/viewreport/"+item._id}>{item.title}</a>}
                       description={item.description}
                   />
                   Categoria: {item.category.name}
