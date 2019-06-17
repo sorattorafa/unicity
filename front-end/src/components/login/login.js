@@ -20,7 +20,8 @@ export default class Login extends Component {
       email: '',
       senha: '',
       nav: '',
-      loading: false
+      loading: false, 
+      simpleusers:[]
     };
   }
 
@@ -39,8 +40,27 @@ export default class Login extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.setState({ loading: true })
-    const { email, senha } = this.state;
-
+    const { email, senha } = this.state; 
+    axios.get('/simpleusers/')
+    .then(response => {
+        this.setState({simpleusers: response.data});  
+        this.state.simpleusers.map(simpleuser => {  
+            if (simpleuser.email === email){ 
+                if(simpleuser.password === senha){  
+                  console.log('oi') 
+                  window.location.replace("http://localhost:3000/map"); 
+                    //this.props.history.push('/map'); 
+                    //console.log(this.state.loginaceito)
+                    //window.location.replace("http://localhost:3000/create"); 
+                } 
+            } 
+        }
+        ) 
+    })
+    .catch(function (error) {
+        console.log(error);
+    })   
+{/* 
     axios.post('/simpleusers/login', {
       email, senha
     }).then(res => {
@@ -80,7 +100,8 @@ export default class Login extends Component {
         });
       // }
       console.log(ex.message);
-    });   
+    });  
+    */}  
   }
 
   render() {
