@@ -114,10 +114,10 @@ function hasErrors(fieldsError) {
   
       return (
         <Layout style = {{ minHeight: '100vh' }}>
-          <NavBar />
+          <NavBar home = {true} />
         
           <Layout>
-          <LateralMenu pagina = "createuser" />
+          {/* <LateralMenu pagina = "createuser" /> */}
           
           <Content className = "contentLayoutForm" style = {{ padding: "30px 20px 0px 20px" }} >
             <Form {...formItemLayout} onSubmit={this.handleSubmit}>

@@ -10,6 +10,7 @@ import { login } from '../services/auth';
 
 import './login.css';
 
+const jwt = require('jsonwebtoken');
 const FormItem = Form.Item;
  
 export default class Login extends Component { 
@@ -46,7 +47,11 @@ export default class Login extends Component {
         this.setState({simpleusers: response.data});  
         this.state.simpleusers.map(simpleuser => {  
             if (simpleuser.email === email){ 
-                if(simpleuser.password === senha){  
+                if(simpleuser.password === senha){
+                  var token = jwt.sign({ id: simpleuser.cpf }, 'secret', { expiresIn: 14400 });
+
+                  login(token, 0);
+
                   window.location.replace("http://localhost:3000/map"); 
                     //this.props.history.push('/map'); 
                     //console.log(this.state.loginaceito)

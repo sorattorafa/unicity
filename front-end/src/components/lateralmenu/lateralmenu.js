@@ -5,7 +5,7 @@ import { Layout, Menu, Icon } from 'antd';
 import { Link } from "react-router-dom";
 
 import './lateralmenu.css';
-// import { getStatus } from '../../services/auth';
+import { getStatus } from '../services/auth';
 
 
 const { Sider } = Layout;
@@ -15,8 +15,8 @@ export default class LateralMenu extends Component {
     super(props);
 
     this.state = {
-      // status: getStatus()
-      status: '0'                 // 0: simpleuser; 1: companyuser; 2: admin
+      status: getStatus()
+      // status: '0'                 // 0: simpleuser; 1: companyuser; 2: admin
     };
   }
 
@@ -29,6 +29,13 @@ export default class LateralMenu extends Component {
         width = "250"
       >
         <Menu theme = "light" mode = "inline" defaultSelectedKeys = {[this.props.pagina]}>
+          <Menu.Item key = "listReport">
+            <Link to = "/listreport">
+              <Icon type = "tag" />
+              <span> Relatos </span>
+            </Link>
+          </Menu.Item>
+
           { this.state.status === '0' ?
             <Menu.Item key = "createReport">
               <Link to = "/createreport">
@@ -37,24 +44,16 @@ export default class LateralMenu extends Component {
               </Link>
             </Menu.Item>
           : null }
-          { this.state.status === '0' ?
+          {/* { this.state.status === '0' ?
             <Menu.Item key = "createSimpleuser">
               <Link to = "/createuser">
                 <Icon type = "notification" />
                 <span> Criar novo usuário </span>
               </Link>
             </Menu.Item>
-          : null }
-          { this.state.status === '0' ?
-            <Menu.Item key = "listReport">
-              <Link to = "/listreport">
-                <Icon type = "tag" />
-                <span> Relatos </span>
-              </Link>
-            </Menu.Item>
-          : null }
+          : null } */}
           
-          { this.state.status === '1' ?
+          { this.state.status === '2' ?
             <Menu.Item key = "createCompanyuser">
               <Link to = "/createcompanyuser">
                 <Icon type = "star" />
@@ -62,7 +61,6 @@ export default class LateralMenu extends Component {
               </Link>
             </Menu.Item>
           : null }
-
           { this.state.status === '2' ?
             <Menu.Item key = "createadminuser">
               <Link to = "/createadminuser">

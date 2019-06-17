@@ -17,10 +17,10 @@ export default class NavBar extends Component {
 
     this.state = {
       nav: '',
-      // token: getToken(),
-      // status: getStatus(),
-      token: null,
-      status: '0',
+      token: getToken(),
+      status: getStatus(),
+      // token: null,
+      // status: '0',
       modal: false,
       home: this.props.home
     };
@@ -71,8 +71,8 @@ export default class NavBar extends Component {
         <Menu.Item key = "login" onClick = { this.toggle }> 
           <Icon type = "login" /> Login
         </Menu.Item>
-        <Menu.Item key = "cadastro"> 
-          <Link to = "/cadastro"> <Icon type = "user-add" /> Cadastre-se </Link>
+        <Menu.Item key = "createuser"> 
+          <Link to = "/createuser"> <Icon type = "user-add" /> Cadastro </Link>
         </Menu.Item>
       </Menu>
     );
