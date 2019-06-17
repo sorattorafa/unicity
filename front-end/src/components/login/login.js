@@ -47,7 +47,6 @@ export default class Login extends Component {
         this.state.simpleusers.map(simpleuser => {  
             if (simpleuser.email === email){ 
                 if(simpleuser.password === senha){  
-                  console.log('oi') 
                   window.location.replace("http://localhost:3000/map"); 
                     //this.props.history.push('/map'); 
                     //console.log(this.state.loginaceito)
