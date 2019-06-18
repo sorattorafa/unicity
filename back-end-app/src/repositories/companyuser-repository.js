@@ -4,9 +4,9 @@ const Companyuser =  mongoose.model('Companyuser'); // include company user mode
  
 // every functions are async! 
 
-// get all company users with name, apresentation, city and categories
+// get all company users with name apresentation city street number and categories
 exports.get = async () => {  
-    const res = await Companyuser.find({},'name apresentation city categories'); 
+    const res = await Companyuser.find({},'name apresentation city street number categories'); 
     return res;    
 }  
 

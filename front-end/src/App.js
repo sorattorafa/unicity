@@ -21,6 +21,7 @@ import CreateAdminUser from "./components/adminuser/create-adminuser";
 
 // Company user's component
 import CreateCompanyUser from "./components/companyuser/create-companyuser";
+import ListCompanyUser from "./components/companyuser/list-companyusers";
 
 // Categories' component
 import CreateCategory from "./components/categories/create-category";
@@ -44,7 +45,8 @@ class App extends Component {
           <Route path="/listusers" component={ SimpleusersList } />  
           <Route path="/delete/:id" component={ DeleteSimpleuser } /> 
           <Route path="/createadminuser" component={ CreateAdminUser } /> 
-          <Route path="/createcompanyuser" component={ CreateCompanyUser } />  
+          <Route path="/createcompanyuser" component={ CreateCompanyUser } />
+          <Route path="/listcompanyusers" component={ ListCompanyUser } />  
           <Route path="/createcategory" component={ CreateCategory } />
           <Route path="/listreport" component={ ListReports } />
           <Route path = "/map" exact component = { ReportMap } />

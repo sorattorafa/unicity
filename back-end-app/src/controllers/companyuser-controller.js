@@ -46,7 +46,7 @@ exports.getByCategory = async (req, res, next) =>{
 //post - create
 exports.post = async(req, res, next) => {  
     let contract = new ValidationContract();    // Usado para fazer a validação de dados
-    contract.hasMinLen(req.body.cnpj, 16, 'Cnpj precisa de 16 caracteres') 
+    contract.hasMinLen(req.body.cnpj, 18, 'Cnpj precisa de 18 caracteres') 
     contract.isEmail(req.body.email, 'Digite um e-mail válido') 
     contract.hasMinLen(req.body.password, 3, 'A senha deve conter pelo menos 3 caracteres') 
  
@@ -99,7 +99,7 @@ exports.delete = (req, res, next) => {
     // and print mensage with sucess or error
 
     let contract = new ValidationContract();    // Usado para fazer a validação de dados
-    contract.hasMinLen(req.body.cnpj, 16, 'Cnpj precisa de 16 caracteres')
+    contract.hasMinLen(req.body.cnpj, 18, 'Cnpj precisa de 18 caracteres')
 
     // if data is valid
     if (!contract.isValid()){ 
