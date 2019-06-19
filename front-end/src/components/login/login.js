@@ -23,7 +23,8 @@ export default class Login extends Component {
       nav: '',
       loading: false, 
       simpleusers:[],  
-      companyuser:[],
+      companyuser:[], 
+      adminusers:[],
       finduser: false
     };
   }
@@ -73,6 +74,29 @@ export default class Login extends Component {
               if (companyuser.email === email){ 
                   if(companyuser.password === senha){
                     var token = jwt.sign({ id: companyuser.cnpj }, 'secret', { expiresIn: 14400 });
+                    login(token, 0);
+                    this.state.finduser = true
+                    window.location.replace("http://localhost:3000/map"); 
+                      //this.props.history.push('/map'); 
+                      //console.log(this.state.loginaceito)
+                      //window.location.replace("http://localhost:3000/create"); 
+                  } 
+              } 
+          }
+          ) 
+      })
+      .catch(function (error) {
+          console.log(error);
+      }) 
+    } 
+    if(this.state.finduser == false){ 
+      axios.get('/adminusers/'+email)
+      .then(response => {
+          this.setState({adminusers: response.data});  
+          this.state.adminusers.map(adminuser => {  
+              if (adminuser.email === email){ 
+                  if(adminuser.password === senha){
+                    var token = jwt.sign({ id: adminuser.cpf }, 'secret', { expiresIn: 14400 });
                     login(token, 0);
                     this.state.finduser = true
                     window.location.replace("http://localhost:3000/map"); 
