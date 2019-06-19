@@ -42,7 +42,7 @@ export default class Login extends Component {
     e.preventDefault();
     this.setState({ loading: true })
     const { email, senha } = this.state; 
-    axios.get('/simpleusers/')
+    axios.get('/simpleusers/'+email)
     .then(response => {
         this.setState({simpleusers: response.data});  
         this.state.simpleusers.map(simpleuser => {  

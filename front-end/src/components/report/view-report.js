@@ -26,7 +26,8 @@ export default class ViewReport extends Component {
             number_of_denunciations: '',
             number_of_supports: '',
             status: '',
-            category: ''
+            category: '', 
+            categoryname: ''
           }
     }
 
@@ -46,11 +47,35 @@ export default class ViewReport extends Component {
                 number_of_supports: response.data.number_of_supports,
                 status: response.data.status,
                 category: response.data.category
-            })
+            }) 
+            if (this.state.category == '5d053c8f9dbdf87818fbfc44'){ 
+                this.setState({ 
+                    categoryname: 'Mobilidade'        
+                }) 
+            } 
+            if (this.state.category == '5d0431577425506f0589c71b'){ 
+                this.setState({ 
+                    categoryname: 'Segurança Pública'        
+                }) 
+            } 
+
+            if (this.state.category == '5d053cc99dbdf87818fbfc45'){ 
+                this.setState({ 
+                    categoryname: 'Iluminação Pública'        
+                }) 
+            }  
+
+            
+            if (this.state.category == '5d058f37631ca618148481f2'){ 
+                this.setState({ 
+                    categoryname: 'Acessibilidade'        
+                }) 
+            } 
         })
         .catch(function(error) {
             console.log(error)
-        })
+        }) 
+       
     }
 
     render() {
@@ -98,6 +123,10 @@ export default class ViewReport extends Component {
                                         Latitude: {this.state.lat}
                                         <br />
                                         Longitude: {this.state.lng}
+                                        <br />
+                                    </Descriptions.Item> 
+                                    <Descriptions.Item label="Categoria">
+                                        {this.state.categoryname}
                                         <br />
                                     </Descriptions.Item>
                                     <Descriptions.Item label="Status">
