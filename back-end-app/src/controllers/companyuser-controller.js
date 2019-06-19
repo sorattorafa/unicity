@@ -15,7 +15,17 @@ exports.get = async (req, res, next) =>{
         });
     }    
 }; 
-
+exports.getByEmail = async (req, res, next) =>{ 
+    try {
+        var data = await repository.getByEmail(req.params.email); 
+        res.status(200).send(data);
+    } catch (e) { 
+        res.status(500).send({ 
+            message: 'Falha ao processar sua requisição'
+        });
+    }    
+}; 
+ 
 // Get company users by city
 exports.getByCity = async (req, res, next) =>{ 
     try {

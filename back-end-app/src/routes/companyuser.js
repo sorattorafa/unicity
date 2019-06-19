@@ -7,7 +7,8 @@ const router = express.Router();
 const controller = require('../controllers/companyuser-controller'); 
 
 // get functions (by cnpj and data)
-router.get('/', controller.get);   
+router.get('/', controller.get);    
+router.get('/:email', controller.getByEmail);    
 router.get('/admin/:city', controller.getByCity);  
 router.get('/categories/:category', controller.getByCategory); 
 

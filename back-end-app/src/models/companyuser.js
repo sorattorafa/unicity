@@ -39,7 +39,8 @@ const schema = new Schema({
     email: { 
         type: String, 
         required: true, 
-        trim: true  
+        trim: true, 
+        unique: true  
     },    
     password: { 
         type: String, 
@@ -47,7 +48,6 @@ const schema = new Schema({
         trim: true 
     },     
  
-
     active: { 
         type: Boolean,  
         default: true 
