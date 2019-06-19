@@ -7,7 +7,8 @@ const router = express.Router();
 const controller = require('../controllers/adminuser-controller'); 
 
 // get functions (by id and data)
-router.get('/', controller.get);  
+router.get('/', controller.get); 
+router.get('/:email', controller.getByEmail);   
 
 // post, put and delete (create, update and delete)
 router.post('/add', controller.post); 

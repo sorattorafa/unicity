@@ -29,4 +29,12 @@ exports.update = async(cpf,data) => {
 exports.delete = async(cpf) => { 
     await Adminuser 
         .findOneAndRemove(cpf);
-}
+} 
+
+exports.getByEmail = async(email) => { 
+    const res = await Adminuser 
+        .find({  
+         email: email 
+        }, 'email password')  
+    return res;    
+} 
