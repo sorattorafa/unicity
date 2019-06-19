@@ -6,11 +6,7 @@ const Companyuser =  mongoose.model('Companyuser'); // include company user mode
 
 // get all company users with name apresentation city street number and categories
 exports.get = async () => {  
-<<<<<<< HEAD
-    const res = await Companyuser.find({},'name apresentation city street number email category'); 
-=======
-    const res = await Companyuser.find({},'name apresentation city street number categories'); 
->>>>>>> bfb54040cdf5fa94948f9a0f35e11e1bad9d3c6c
+    const res = await Companyuser.find({},'name apresentation city street number categories email password'); 
     return res;    
 }  
 
