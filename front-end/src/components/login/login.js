@@ -99,7 +99,7 @@ export default class Login extends Component {
                     var token = jwt.sign({ id: adminuser.cpf }, 'secret', { expiresIn: 14400 });
                     login(token, 0);
                     this.state.finduser = true
-                    window.location.replace("http://localhost:3000/map"); 
+                    window.location.replace("http://localhost:3000/listusers"); 
                       //this.props.history.push('/map'); 
                       //console.log(this.state.loginaceito)
                       //window.location.replace("http://localhost:3000/create"); 
