@@ -48,14 +48,21 @@ export default class ViewReport extends Component {
                 status: response.data.status,
                 category: response.data.category
             }) 
-            if (this.state.category === '5d053c8f9dbdf87818fbfc44'){ 
-                this.setState({ 
-                    categoryname: 'Mobilidade'        
-                }) 
-            } 
             if (this.state.category === '5d0431577425506f0589c71b'){ 
                 this.setState({ 
                     categoryname: 'Segurança Pública'        
+                }) 
+            } 
+
+            if (this.state.category === '5d053c469dbdf87818fbfc43'){ 
+                this.setState({ 
+                    categoryname: 'Vias Públicas'        
+                }) 
+            } 
+
+            if (this.state.category === '5d053c8f9dbdf87818fbfc44'){ 
+                this.setState({ 
+                    categoryname: 'Mobilidade'        
                 }) 
             } 
 
@@ -71,6 +78,12 @@ export default class ViewReport extends Component {
                     categoryname: 'Acessibilidade'        
                 }) 
             } 
+
+            if (this.state.category === '5d0bfc8591baa12cf537b9ec'){ 
+                this.setState({ 
+                    categoryname: 'Natureza'        
+                }) 
+            }
         })
         .catch(function(error) {
             console.log(error)
@@ -110,6 +123,7 @@ export default class ViewReport extends Component {
                                     <Descriptions.Item label="Descrição" span={3}>
                                         {this.state.description}
                                         <br />
+                                        Categoria : {this.state.categoryname}
                                     </Descriptions.Item>
                                     <Descriptions.Item label="Endereço">
                                         Rua: {this.state.street}
@@ -117,23 +131,16 @@ export default class ViewReport extends Component {
                                         Número: {this.state.number}
                                         <br />
                                         Cep: {this.state.cep}
-                                        <br />
                                     </Descriptions.Item>
                                     <Descriptions.Item label="Posição">
                                         Latitude: {this.state.lat}
                                         <br />
                                         Longitude: {this.state.lng}
-                                        <br />
                                     </Descriptions.Item> 
-                                    <Descriptions.Item label="Categoria">
-                                        {this.state.categoryname}
-                                        <br />
-                                    </Descriptions.Item>
                                     <Descriptions.Item label="Status">
                                         <StatusCheck ReportStatus={this.state.status} />,
                                         <br />
-                                         Data de Criação: {FormatDate}
-                                         <br />
+                                        Data de Criação: {FormatDate}
                                     </Descriptions.Item>
                                     <Descriptions.Item label="Apoiadores" span={3}>
                                         {this.state.number_of_supports} <Icon type="like" />
