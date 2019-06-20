@@ -36,6 +36,13 @@ export default class LateralMenu extends Component {
             </Link>
           </Menu.Item>
 
+          <Menu.Item key = "listCompanyUsers">
+            <Link to = "/listcompanyusers">
+              <Icon type = "tag" />
+              <span> Empresas </span>
+            </Link>
+          </Menu.Item>
+
           { this.state.status === '0' ?
             <Menu.Item key = "createReport">
               <Link to = "/createreport">

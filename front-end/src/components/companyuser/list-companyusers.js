@@ -74,7 +74,7 @@ class ListCompanyUsers extends Component {
                       title={<a href={"www.google.com.br"}>{item.name}</a>}
                       description={item.apresentation}
                   />
-                  Cidade: {item.city}
+                  Endereço: {item.street}, {item.number} - {item.city}
                 </List.Item>
               )}
             />
