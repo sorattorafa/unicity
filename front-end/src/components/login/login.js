@@ -66,7 +66,7 @@ export default class Login extends Component {
     .catch(function (error) {
         console.log(error);
     }) 
-    if(this.state.finduser == false){ 
+    if(this.state.finduser === false){ 
       axios.get('/companyusers/'+email)
       .then(response => {
           this.setState({companyusers: response.data});  
@@ -89,7 +89,7 @@ export default class Login extends Component {
           console.log(error);
       }) 
     } 
-    if(this.state.finduser == false){ 
+    if(this.state.finduser === false){ 
       axios.get('/adminusers/'+email)
       .then(response => {
           this.setState({adminusers: response.data});  

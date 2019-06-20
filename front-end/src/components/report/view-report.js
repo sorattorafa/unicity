@@ -48,25 +48,25 @@ export default class ViewReport extends Component {
                 status: response.data.status,
                 category: response.data.category
             }) 
-            if (this.state.category == '5d053c8f9dbdf87818fbfc44'){ 
+            if (this.state.category === '5d053c8f9dbdf87818fbfc44'){ 
                 this.setState({ 
                     categoryname: 'Mobilidade'        
                 }) 
             } 
-            if (this.state.category == '5d0431577425506f0589c71b'){ 
+            if (this.state.category === '5d0431577425506f0589c71b'){ 
                 this.setState({ 
                     categoryname: 'Segurança Pública'        
                 }) 
             } 
 
-            if (this.state.category == '5d053cc99dbdf87818fbfc45'){ 
+            if (this.state.category === '5d053cc99dbdf87818fbfc45'){ 
                 this.setState({ 
                     categoryname: 'Iluminação Pública'        
                 }) 
             }  
 
             
-            if (this.state.category == '5d058f37631ca618148481f2'){ 
+            if (this.state.category === '5d058f37631ca618148481f2'){ 
                 this.setState({ 
                     categoryname: 'Acessibilidade'        
                 }) 

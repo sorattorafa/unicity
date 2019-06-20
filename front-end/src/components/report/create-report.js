@@ -121,7 +121,8 @@ class CreateReport extends React.Component {
           category:'',
           description: '',
           active: true
-        })
+        }) 
+        window.location.replace("http://localhost:3000/map"); 
       }
     });
   };
@@ -326,7 +327,8 @@ class CreateReport extends React.Component {
                       <Option value="5d0431577425506f0589c71b">Segurança pública</Option>
                       <Option value="5d053c8f9dbdf87818fbfc44">Mobilidade</Option>
                       <Option value="5d053c469dbdf87818fbfc43">Vias</Option>
-                      <Option value="5d053cc99dbdf87818fbfc45">Iluminação</Option>
+                      <Option value="5d053cc99dbdf87818fbfc45">Iluminação</Option> 
+                      <Option value="5d0bfc8591baa12cf537b9ec">Natureza</Option>
                     </Select>,
                   )}
                 </Form.Item>
