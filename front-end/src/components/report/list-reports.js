@@ -74,6 +74,8 @@ class ListReports extends Component {
                       title={<a href={"/viewreport/"+item._id}>{item.title}</a>}
                       description={item.description}
                   />
+                  {item.street}, {item.number}
+                  <br/>
                   Categoria: {item.category.name}
                 </List.Item>
               )}
