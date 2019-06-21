@@ -16,6 +16,8 @@ import iluminationIcon from './map-components/ilum.png';
 import mobilityIcon from './map-components/mobilidade.png'; 
 import viaIcon from './map-components/vias.jpeg'; 
 import naturezaIcon from './map-components/natureza.png'; 
+import accessIcon from './map-components/acessibilidade.png'; 
+
 
 import MessageCardForm from './map-components/MessageCardForm'; 
 import CreateReport from "../report/create-report";
@@ -59,7 +61,13 @@ var icons = {
     iconSize: [30, 50],  
     iconAnchor: [12.5, 41], 
     popupAnchor: [0,-41] 
-  })  
+  }), 
+  'accessIcon':  L.icon({ 
+    iconUrl: accessIcon,
+    iconSize: [30, 50],  
+    iconAnchor: [12.5, 41], 
+    popupAnchor: [0,-41] 
+  }),   
 }
 
 

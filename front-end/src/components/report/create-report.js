@@ -324,7 +324,8 @@ class CreateReport extends React.Component {
                       <Option value="5d053c8f9dbdf87818fbfc44">Mobilidade</Option>
                       <Option value="5d053c469dbdf87818fbfc43">Vias</Option>
                       <Option value="5d053cc99dbdf87818fbfc45">Iluminação</Option> 
-                      <Option value="5d0bfc8591baa12cf537b9ec">Natureza</Option>
+                      <Option value="5d0bfc8591baa12cf537b9ec">Natureza</Option> 
+                      <Option value="5d0d451a27bb113f9265cf4b">Acessibilidade</Option>
                     </Select>,
                   )}
                 </Form.Item>

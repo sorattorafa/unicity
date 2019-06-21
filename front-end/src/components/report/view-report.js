@@ -82,7 +82,13 @@ export default class ViewReport extends Component {
                 this.setState({ 
                     categoryname: 'Natureza'        
                 }) 
-            }
+            }  
+
+            if (this.state.category === '5d0d451a27bb113f9265cf4b'){ 
+                this.setState({ 
+                    categoryname: 'Acessibilidade'        
+                }) 
+            } 
         })
         .catch(function(error) {
             console.log(error)
