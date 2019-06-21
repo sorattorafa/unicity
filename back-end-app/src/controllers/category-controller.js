@@ -51,28 +51,10 @@ exports.post = async(req, res, next) => {
     }
 }; 
  
-// put - set 
-exports.put = (req, any, next) => { 
-    const id = req.params.id; 
-    res.status(200).send({ 
-        id: id, 
-        item: req.body 
-    });     
-}; 
- 
 //put- update request
 exports.put = (req, res, next) => {   
-    let contract = new ValidationContract();    // Usado para fazer a validação de dados
-    contract.hasMinLen(req.body.description, 3, 'A descrição deve conter pelo menos 3 caracteres')
-    
-    // if data is valid
-    if (!contract.isValid()){ 
-        res.status(400).send(contract.errors()).end();  // Manda mensagens de erros para tela
-        return;
-    }
-
     repository  
-        .update(req.params.name, req.body)
+        .update(req.params.id, req.body)
         .then(x=>{ 
             res.status(201).send({ 
                 message: 'Categoria atualizado com sucesso!' 

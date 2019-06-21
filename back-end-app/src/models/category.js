@@ -22,7 +22,11 @@ const schema = new Schema({
         trim: true, 
         unique: true 
     }, 
-
+    color: { 
+        type: String, 
+      //required: true, 
+      //trim: true 
+    },
     description: { 
         type: String, 
         required: true, 

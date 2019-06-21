@@ -12,7 +12,7 @@ router.get('/:id', controller.getById);
 
 // post, put and delete (create, update and delete)
 router.post('/', controller.post); 
-router.put('/:nome', controller.put); 
+router.put('/:id', controller.put); 
 router.delete('/', controller.delete); 
 
 module.exports = router;

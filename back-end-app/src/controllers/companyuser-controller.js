@@ -15,6 +15,19 @@ exports.get = async (req, res, next) =>{
         });
     }    
 }; 
+
+// Get companyuser by id 
+exports.getById = async (req, res, next) =>{ 
+    try {
+        var data = await repository.getById(req.params.id); 
+        res.status(200).send(data);
+    } catch (e) { 
+        res.status(500).send({ 
+            message: 'Falha ao processar sua requisição'
+        });
+    }    
+}; 
+
 exports.getByEmail = async (req, res, next) =>{ 
     try {
         var data = await repository.getByEmail(req.params.email); 
@@ -90,7 +103,7 @@ exports.put = (req, res, next) => {
     }
 
     repository  
-        .update(req.params.cnpj, req.body)
+        .update(req.params.id, req.body)
         .then(x=>{ 
             res.status(201).send({ 
                 message: 'Usuario atualizado com sucesso!' 

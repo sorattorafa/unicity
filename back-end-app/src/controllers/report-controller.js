@@ -16,7 +16,6 @@ exports.get = async (req, res, next) =>{
     }    
 }; 
 
-
 // Get report by id 
 exports.getById = async (req, res, next) =>{ 
     try {
