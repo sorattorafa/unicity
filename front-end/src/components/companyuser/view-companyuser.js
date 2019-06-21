@@ -21,8 +21,10 @@ export default class ViewCompanyUser extends Component {
             city: '',
             street: '',
             number: '',
-            categories:'',
-            color:''
+            category:[],
+            color:'', 
+            catname:'', 
+            categories: []
           }
     }
 
@@ -35,15 +37,27 @@ export default class ViewCompanyUser extends Component {
                 city: response.data.city, 
                 street: response.data.street, 
                 number: response.data.number,
-                categories: response.data.categories
-            })
+                category: response.data.category 
+            })  
         })
 
-        axios.get('/categories/'+this.state.categories)
+        axios.get('/categories/')
         .then(response => {
             this.setState({  
-                color: response.data.color
-            })
+                categories: response.data
+            })  
+            this.state.categories.map(category => 
+                {             
+                    if(category._id === this.state.category){ 
+                    this.setState({ 
+                        color: category.color, 
+                        catname: category.name
+                    }) 
+                    } 
+                }
+                  
+            )
+            console.log(this.state.color)
         })
     }
 
@@ -69,7 +83,7 @@ export default class ViewCompanyUser extends Component {
                                     <br/>
                                     {this.state.city}
                                     <br/>
-                                    <Tag color="#87d068"> {this.state.categories} </Tag>
+                                    <Tag color={this.state.color}> {this.state.catname} </Tag>
                                 </Col>
                             </Row>
                             <Row>
