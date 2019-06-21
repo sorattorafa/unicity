@@ -58,31 +58,27 @@ class CreateReport extends React.Component {
     this.setState({
         title: e.target.value
     });
-  } 
-
+  }
   onChangeCep(e) {
     this.setState({
         cep: e.target.value
     });
   }
-
   onChangeStreet(e) {
     this.setState({
         street: e.target.value
     });
   }
-
   onChangeNumber(e) {
     this.setState({
         number: e.target.value
     });
   }
- 
   onChangeCategory(e) {
     this.setState({
         category: e.target.value
     });
-  }  
+  }
   onChangeDescription(e) {
     this.setState({
         description: e.target.value

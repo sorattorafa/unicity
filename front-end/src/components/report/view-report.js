@@ -71,7 +71,6 @@ export default class ViewReport extends Component {
                     categoryname: 'Iluminação Pública'        
                 }) 
             }  
-
             
             if (this.state.category === '5d058f37631ca618148481f2'){ 
                 this.setState({ 
@@ -122,25 +121,26 @@ export default class ViewReport extends Component {
                                 >
                                     <Descriptions.Item label="Descrição" span={3}>
                                         {this.state.description}
-                                        <br />
-                                        Categoria : {this.state.categoryname}
                                     </Descriptions.Item>
-                                    <Descriptions.Item label="Endereço">
+                                    <Descriptions.Item label="Categoria" span={1}>
+                                        {this.state.categoryname}
+                                    </Descriptions.Item>
+                                    <Descriptions.Item label="Status" span ={2}>
+                                        <StatusCheck ReportStatus={this.state.status} />,
+                                        <br />
+                                        Data de Criação: {FormatDate}
+                                    </Descriptions.Item>
+                                    <Descriptions.Item label="Endereço" span={1}>
                                         Rua: {this.state.street}
                                         <br />
                                         Número: {this.state.number}
                                         <br />
                                         Cep: {this.state.cep}
                                     </Descriptions.Item>
-                                    <Descriptions.Item label="Posição">
+                                    <Descriptions.Item label="Posição" span={2}>
                                         Latitude: {this.state.lat}
                                         <br />
                                         Longitude: {this.state.lng}
-                                    </Descriptions.Item> 
-                                    <Descriptions.Item label="Status">
-                                        <StatusCheck ReportStatus={this.state.status} />,
-                                        <br />
-                                        Data de Criação: {FormatDate}
                                     </Descriptions.Item>
                                     <Descriptions.Item label="Apoiadores" span={3}>
                                         {this.state.number_of_supports} <Icon type="like" />

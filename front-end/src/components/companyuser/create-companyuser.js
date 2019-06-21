@@ -1,4 +1,4 @@
-import { Divider, Typography, Layout, Form, Row, Col, Icon, Input, Button, Tooltip } from 'antd';
+import { Divider, Typography, Layout, Form, Row, Col, Icon, Input, Button, Tooltip, Select } from 'antd';
 import React, {Component} from 'react';
 import ReactDOM from "react-dom";
 import "antd/dist/antd.css";
@@ -11,6 +11,7 @@ import LateralMenu from '../../components/lateralmenu/lateralmenu';
 const TextArea = Input.TextArea;
 const { Title } = Typography;
 const { Content } = Layout;
+const { Option } = Select;
 
 // Return errors in fields
 function hasErrors(fieldsError) {
@@ -31,6 +32,7 @@ class CreateCompanyUser extends React.Component {
         this.onChangeEmail = this.onChangeEmail.bind(this); 
         this.onChangePassword = this.onChangePassword.bind(this);
         this.onChangeConfirmpassword = this.onChangeConfirmpassword.bind(this);
+        this.onChangeCategories = this.onChangeCategories.bind(this);
     
         this.state = { 
             cnpj: '',
@@ -42,6 +44,7 @@ class CreateCompanyUser extends React.Component {
             email: '',  
             password: '',
             confirmpassword: '',
+            categories: '',
             active: true
         }
     }
@@ -90,7 +93,12 @@ class CreateCompanyUser extends React.Component {
         this.setState({
             confirmpassword: e.target.value
         });
-    } 
+    }
+    onChangeCategories(e) {
+        this.setState({
+            categories: e.target.value
+        });
+      } 
     
     componentDidMount() {
         this.props.form.validateFields();
@@ -114,6 +122,7 @@ class CreateCompanyUser extends React.Component {
                     number: '',
                     email: '',  
                     password: '',
+                    categories:'',
                     active: true
                 })
             }
@@ -143,6 +152,7 @@ class CreateCompanyUser extends React.Component {
         const emailError = isFieldTouched('email') && getFieldError('email');
         const passwordError = isFieldTouched('password') && getFieldError('password');
         const confirmpasswordError = isFieldTouched('confirmpassword') && getFieldError('confirmpassword');
+        const categoriesError = isFieldTouched('categories') && getFieldError('categories');
 
         return (
             <Layout style = {{ minHeight: '100vh' }}>
@@ -211,6 +221,35 @@ class CreateCompanyUser extends React.Component {
                                     rules: [{ required: true, message: 'Insira uma mensagem de apresentação da empresa', whitespace: true }],
                                 })(<TextArea rows={4} />)}
                             </Form.Item>
+                        </Row>
+
+                        {/* Company User's Category */}  
+                        <Row gutter={24}>
+                        <Col span={12}>
+                            <Form.Item  
+                            validateStatus={categoriesError ? 'error' : ''} help={categoriesError || ''}
+                            label={
+                            <span>
+                                Categoria&nbsp;
+                                <Tooltip title="Qual a categoria da empresa?">
+                                <Icon type="question-circle-o" />
+                                </Tooltip>
+                            </span>
+                            } hasFeedback>
+                            {getFieldDecorator('categories', {
+                                rules: [{ required: true, message: 'Insira a categoria da empresa!', whitespace: true  }],
+                            })(
+                                <Select>
+                                <Option value="5d0431577425506f0589c71b">Segurança pública</Option>
+                                <Option value="5d053c8f9dbdf87818fbfc44">Mobilidade</Option>
+                                <Option value="5d053c469dbdf87818fbfc43">Vias</Option>
+                                <Option value="5d053cc99dbdf87818fbfc45">Iluminação</Option> 
+                                <Option value="5d0bfc8591baa12cf537b9ec">Natureza</Option>
+                                <Option value="5d058f37631ca618148481f2">Acessibilidade</Option>
+                                </Select>,
+                            )}
+                            </Form.Item>
+                        </Col>
                         </Row>
 
                         {/* Company User's City */}

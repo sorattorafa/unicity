@@ -71,7 +71,7 @@ class ListCompanyUsers extends Component {
                   }
                   >
                   <List.Item.Meta
-                      title={<a href={"www.google.com.br"}>{item.name}</a>}
+                      title={<a href={"/viewcompanyuser/"+item._id}>{item.name}</a>}
                       description={item.apresentation}
                   />
                   Endereço: {item.street}, {item.number} - {item.city}
