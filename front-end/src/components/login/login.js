@@ -44,7 +44,8 @@ export default class Login extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.setState({ loading: true })
-    const { email, senha } = this.state; 
+    const { email, senha } = this.state;  
+
     axios.get('/simpleusers/'+email)
     .then(response => {
         this.setState({simpleusers: response.data});  
@@ -66,28 +67,29 @@ export default class Login extends Component {
     .catch(function (error) {
         console.log(error);
     }) 
+
     if(this.state.finduser === false){ 
-      axios.get('/companyusers/'+email)
-      .then(response => {
-          this.setState({companyusers: response.data});  
-          this.state.companyusers.map(companyuser => {  
-              if (companyuser.email === email){ 
-                  if(companyuser.password === senha){
-                    var token = jwt.sign({ id: companyuser.cnpj }, 'secret', { expiresIn: 14400 });
-                    login(token, 0);
-                    this.state.finduser = true
-                    window.location.replace("http://localhost:3000/map"); 
-                      //this.props.history.push('/map'); 
-                      //console.log(this.state.loginaceito)
-                      //window.location.replace("http://localhost:3000/create"); 
-                  } 
-              } 
-          }
-          ) 
-      })
-      .catch(function (error) {
-          console.log(error);
-      }) 
+       axios.get('/companyusers/')
+    .then(response => {
+        this.setState({companyusers: response.data});  
+        this.state.companyusers.map(companyuser => {  
+            if (companyuser.email === email){ 
+                if(companyuser.password === senha){
+                  var token = jwt.sign({ id: companyuser.cnpj }, 'secret', { expiresIn: 14400 });
+                  login(token, 0);
+                  this.state.finduser = true
+                  window.location.replace("http://localhost:3000/viewcompanyuser/"+companyuser._id); 
+                    //this.props.history.push('/map'); 
+                    //console.log(this.state.loginaceito)
+                    //window.location.replace("http://localhost:3000/create"); 
+                } 
+            } 
+        }
+        ) 
+    })
+    .catch(function (error) {
+        console.log(error);
+    }) 
     } 
     if(this.state.finduser === false){ 
       axios.get('/adminusers/'+email)
