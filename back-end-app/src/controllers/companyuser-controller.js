@@ -16,6 +16,29 @@ exports.get = async (req, res, next) =>{
     }    
 }; 
 
+// Get companyuser by id 
+exports.getById = async (req, res, next) =>{ 
+    try {
+        var data = await repository.getById(req.params.id); 
+        res.status(200).send(data);
+    } catch (e) { 
+        res.status(500).send({ 
+            message: 'Falha ao processar sua requisição'
+        });
+    }    
+}; 
+
+exports.getByEmail = async (req, res, next) =>{ 
+    try {
+        var data = await repository.getByEmail(req.params.email); 
+        res.status(200).send(data);
+    } catch (e) { 
+        res.status(500).send({ 
+            message: 'Falha ao processar sua requisição'
+        });
+    }    
+}; 
+ 
 // Get company users by city
 exports.getByCity = async (req, res, next) =>{ 
     try {
@@ -46,7 +69,7 @@ exports.getByCategory = async (req, res, next) =>{
 //post - create
 exports.post = async(req, res, next) => {  
     let contract = new ValidationContract();    // Usado para fazer a validação de dados
-    contract.hasMinLen(req.body.cnpj, 16, 'Cnpj precisa de 16 caracteres') 
+    contract.hasMinLen(req.body.cnpj, 18, 'Cnpj precisa de 18 caracteres') 
     contract.isEmail(req.body.email, 'Digite um e-mail válido') 
     contract.hasMinLen(req.body.password, 3, 'A senha deve conter pelo menos 3 caracteres') 
  
@@ -80,7 +103,7 @@ exports.put = (req, res, next) => {
     }
 
     repository  
-        .update(req.params.cnpj, req.body)
+        .update(req.params.id, req.body)
         .then(x=>{ 
             res.status(201).send({ 
                 message: 'Usuario atualizado com sucesso!' 
@@ -99,7 +122,7 @@ exports.delete = (req, res, next) => {
     // and print mensage with sucess or error
 
     let contract = new ValidationContract();    // Usado para fazer a validação de dados
-    contract.hasMinLen(req.body.cnpj, 16, 'Cnpj precisa de 16 caracteres')
+    contract.hasMinLen(req.body.cnpj, 18, 'Cnpj precisa de 18 caracteres')
 
     // if data is valid
     if (!contract.isValid()){ 

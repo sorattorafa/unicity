@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import { Descriptions, Divider, Typography, Layout, Badge, Icon, Row } from 'antd';
+import { Descriptions, Divider, Typography, Layout, Badge, Icon, Tag, Row } from 'antd';
 import "antd/dist/antd.css";
 
 import NavBar from '../../components/navbar/navbar';
@@ -26,7 +26,9 @@ export default class ViewReport extends Component {
             number_of_denunciations: '',
             number_of_supports: '',
             status: '',
-            category: ''
+            category: '', 
+            catname: '',
+            color:''
           }
     }
 
@@ -48,8 +50,24 @@ export default class ViewReport extends Component {
                 category: response.data.category
             })
         })
-        .catch(function(error) {
-            console.log(error)
+
+        axios.get('/categories/')
+        .then(response => {
+            this.setState({  
+                categories: response.data
+            })  
+            this.state.categories.map(category => 
+                {             
+                    if(category._id === this.state.category){ 
+                    this.setState({ 
+                        color: category.color, 
+                        catname: category.name
+                    }) 
+                    } 
+                }
+                  
+            )
+            console.log(this.state.color)
         })
     }
 
@@ -84,27 +102,26 @@ export default class ViewReport extends Component {
                                 >
                                     <Descriptions.Item label="Descrição" span={3}>
                                         {this.state.description}
-                                        <br />
                                     </Descriptions.Item>
-                                    <Descriptions.Item label="Endereço">
+                                    <Descriptions.Item label="Categoria" span={1}>
+                                        <Tag color={this.state.color}> {this.state.catname} </Tag>
+                                    </Descriptions.Item>
+                                    <Descriptions.Item label="Status" span ={2}>
+                                        <StatusCheck ReportStatus={this.state.status} />,
+                                        <br />
+                                        Data de Criação: {FormatDate}
+                                    </Descriptions.Item>
+                                    <Descriptions.Item label="Endereço" span={1}>
                                         Rua: {this.state.street}
                                         <br />
                                         Número: {this.state.number}
                                         <br />
                                         Cep: {this.state.cep}
-                                        <br />
                                     </Descriptions.Item>
-                                    <Descriptions.Item label="Posição">
+                                    <Descriptions.Item label="Posição" span={2}>
                                         Latitude: {this.state.lat}
                                         <br />
                                         Longitude: {this.state.lng}
-                                        <br />
-                                    </Descriptions.Item>
-                                    <Descriptions.Item label="Status">
-                                        <StatusCheck ReportStatus={this.state.status} />,
-                                        <br />
-                                         Data de Criação: {FormatDate}
-                                         <br />
                                     </Descriptions.Item>
                                     <Descriptions.Item label="Apoiadores" span={3}>
                                         {this.state.number_of_supports} <Icon type="like" />

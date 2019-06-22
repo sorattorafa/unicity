@@ -7,9 +7,15 @@ const Report =  mongoose.model('Report');
 exports.get = async () => {  
     const res = await Report.find({ 
             status:0  
-        }, 'lat lng title description category').populate('category'); 
+        }, 'lat lng title description category street number').populate('category'); 
     return res;    
 }  
+
+exports.getById = async(id) => { 
+    const res = await Report 
+        .findById(id)
+    return res;    
+} 
 
 exports.create = async (data) => { 
     var report = new Report(data); 
@@ -27,13 +33,7 @@ exports.update = async(id,data) => {
         }
     });
 } 
+
 exports.delete = async(id) => { 
     await Report.findByIdAndDelete(id);
 }  
-
-
-exports.getById = async(id) => { 
-    const res = await Report 
-        .findById(id)
-    return res;    
-} 

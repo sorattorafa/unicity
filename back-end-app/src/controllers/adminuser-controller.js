@@ -14,7 +14,17 @@ exports.get = async (req, res, next) =>{
             message: 'Falha ao processar sua requisição'
         });
     }    
-};
+}; 
+exports.getByEmail = async (req, res, next) =>{ 
+    try {
+        var data = await repository.getByEmail(req.params.email); 
+        res.status(200).send(data);
+    } catch (e) { 
+        res.status(500).send({ 
+            message: 'Falha ao processar sua requisição'
+        });
+    }    
+}; 
  
 // create / set / update / delete  
 

@@ -18,9 +18,9 @@ exports.get = async (req, res, next) =>{
 
 
 // Get simple users by id 
-exports.getById = async (req, res, next) =>{ 
+exports.getByEmail = async (req, res, next) =>{ 
     try {
-        var data = await repository.getById(req.params.id); 
+        var data = await repository.getByEmail(req.params.email); 
         res.status(200).send(data);
     } catch (e) { 
         res.status(500).send({ 
@@ -28,7 +28,7 @@ exports.getById = async (req, res, next) =>{
         });
     }    
 }; 
- 
+  
 // create / set / update / delete  
 
 //post - create

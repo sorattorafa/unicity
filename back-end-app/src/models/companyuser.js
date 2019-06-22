@@ -39,7 +39,8 @@ const schema = new Schema({
     email: { 
         type: String, 
         required: true, 
-        trim: true  
+        trim: true, 
+        unique: true  
     },    
     password: { 
         type: String, 
@@ -47,7 +48,6 @@ const schema = new Schema({
         trim: true 
     },     
  
-
     active: { 
         type: Boolean,  
         default: true 
@@ -59,10 +59,10 @@ const schema = new Schema({
     }],  
 
     categories: [{ 
-        type: String, 
-  //      required: true, 
-        trim: true  
-    }] 
+        type: mongoose.Schema.Types.ObjectId,  
+        ref: 'Category',
+        required: true 
+    }]
 
 }); 
   

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Divider, Typography, Layout, Row, Col, Icon, List, Tag, notification } from 'antd';
+import { Divider, Typography, Layout, Icon, List, Tag, notification } from 'antd';
 import axios from 'axios';
 import NavBar from '../../components/navbar/navbar';
 import LateralMenu from '../../components/lateralmenu/lateralmenu';
@@ -15,24 +15,24 @@ const IconText = ({ type, text }) => (
 );
 
  
-class ListReports extends Component {
+class ListCompanyUsers extends Component {
   constructor () {
     super();
 
     this.state = {
-      reports: []
+      companyusers: []
     };
   }
 
   componentDidMount() { 
-    axios.get('/reports')
+    axios.get('/companyusers')
       .then(response => {
-        this.setState({reports: response.data});
+        this.setState({companyusers: response.data});
       })
       .catch(function (error) {
         notification['error']({
           message: 'Erro!',
-          description: 'Não foi possível carregar os relatos. Tente novamente mais tarde. Se persistir, consulte um técnico.'
+          description: 'Não foi possível carregar a lista de empresas. Tente novamente mais tarde. Se persistir, consulte um técnico.'
         });
           console.log(error);
       })
@@ -46,7 +46,7 @@ class ListReports extends Component {
         <Layout>
           <LateralMenu pagina = "createadminuser" />
           <Content className = "contentLayoutForm" style = {{ padding: "30px 20px 0px 20px" }} >
-            <Title className = "titleForm" level={1}> Relatos </Title>
+            <Title className = "titleForm" level={1}> Empresas </Title>
             <Divider className = "dividerForm" />
             
             <List
@@ -56,12 +56,12 @@ class ListReports extends Component {
                   onChange: page => {
                   console.log(page);
                   },
-                  pageSize: 3,
+                  pageSize: 4,
               }}
-              dataSource={this.state.reports}
+              dataSource={this.state.companyusers}
               renderItem={item => (
                   <List.Item
-                  key={item.title}
+                  key={item.name}
                   extra={
                       <img
                       width={100}
@@ -71,12 +71,12 @@ class ListReports extends Component {
                   }
                   >
                   <List.Item.Meta
-                      title={<a href={"/viewreport/"+item._id}>{item.title}</a>}
-                      description={item.description}
+                      title={<a href={"/viewcompanyuser/"+item._id}>{item.name}</a>}
+                      description={item.apresentation}
                   />
-                  {item.street}, {item.number}
+                  Endereço: {item.street}, {item.number} - {item.city}
                   <br/>
-                  <Tag color={item.category.color}> {item.category.name} </Tag>
+                  <Tag color={item.categories.color}> {item.categories.name} </Tag>
                 </List.Item>
               )}
             />
@@ -87,4 +87,4 @@ class ListReports extends Component {
   }
 }
 
-export default ListReports;
+export default ListCompanyUsers;

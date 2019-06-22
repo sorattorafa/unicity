@@ -32,8 +32,9 @@ exports.delete = async(id) => {
 }  
 
 
-exports.getById = async(id) => { 
-    const res = await Simpleuser 
-        .findById(id)
+exports.getByEmail = async(email) => { 
+    const res = await Simpleuser.find({  
+        email: email 
+       }, 'email password')  
     return res;    
-} 
+}    

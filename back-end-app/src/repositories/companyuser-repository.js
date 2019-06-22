@@ -4,34 +4,17 @@ const Companyuser =  mongoose.model('Companyuser'); // include company user mode
  
 // every functions are async! 
 
-// get all company users with name, apresentation, city and categories
+// get all company users with name apresentation city street number and categories
 exports.get = async () => {  
-    const res = await Companyuser.find({},'name apresentation city categories'); 
+    const res = await Companyuser.find({},'name apresentation city street number categories email password').populate('categories'); 
     return res;    
 }  
 
-exports.create = async (data) => { 
-    var companyuser = new Companyuser(data); 
-    await companyuser.save(); 
-}  
-
-exports.update = async(cnpj,data) => { 
-    await Companyuser 
-    .findOneAndUpdate(cnpj, { 
-        $set: {  
-            // can update anything 
-            city: data.city, 
-            email: data.email,
-            apresentation: data.apresentation,
-            password: data.password
-        }
-    });
+exports.getById = async(id) => { 
+    const res = await Companyuser 
+        .findById(id)
+    return res;    
 } 
-
-exports.delete = async(cnpj) => { 
-    await Companyuser 
-        .findOneAndRemove(cnpj);
-}
 
 exports.getByCity = async(city) => { 
     const res = await Companyuser 
@@ -47,4 +30,35 @@ exports.getByCategory = async (category) => {
             categories: category 
         }, 'name apresentation city categories') 
     return res;    
+} 
+exports.getByEmail = async(email) => { 
+    const res = await Companyuser 
+        .find({  
+         email: email 
+        }, 'email password')  
+    return res;    
+} 
+
+exports.create = async (data) => { 
+    var companyuser = new Companyuser(data); 
+    await companyuser.save(); 
+}  
+
+exports.update = async(id,data) => { 
+    await Companyuser 
+    .findByIdAndUpdate(id, { 
+        $set: {  
+            // can update anything 
+            city: data.city, 
+            email: data.email,
+            apresentation: data.apresentation,
+            password: data.password,
+            categories: data.categories
+        }
+    });
+} 
+
+exports.delete = async(cnpj) => { 
+    await Companyuser 
+        .findOneAndRemove(cnpj);
 }

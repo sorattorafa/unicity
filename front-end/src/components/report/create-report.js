@@ -58,31 +58,27 @@ class CreateReport extends React.Component {
     this.setState({
         title: e.target.value
     });
-  } 
-
+  }
   onChangeCep(e) {
     this.setState({
         cep: e.target.value
     });
   }
-
   onChangeStreet(e) {
     this.setState({
         street: e.target.value
     });
   }
-
   onChangeNumber(e) {
     this.setState({
         number: e.target.value
     });
   }
- 
   onChangeCategory(e) {
     this.setState({
         category: e.target.value
     });
-  }  
+  }
   onChangeDescription(e) {
     this.setState({
         description: e.target.value
@@ -121,7 +117,8 @@ class CreateReport extends React.Component {
           category:'',
           description: '',
           active: true
-        })
+        }) 
+        window.location.replace("http://localhost:3000/map"); 
       }
     });
   };
@@ -326,7 +323,9 @@ class CreateReport extends React.Component {
                       <Option value="5d0431577425506f0589c71b">Segurança pública</Option>
                       <Option value="5d053c8f9dbdf87818fbfc44">Mobilidade</Option>
                       <Option value="5d053c469dbdf87818fbfc43">Vias</Option>
-                      <Option value="5d053cc99dbdf87818fbfc45">Iluminação</Option>
+                      <Option value="5d053cc99dbdf87818fbfc45">Iluminação</Option> 
+                      <Option value="5d0bfc8591baa12cf537b9ec">Natureza</Option> 
+                      <Option value="5d0d451a27bb113f9265cf4b">Acessibilidade</Option>
                     </Select>,
                   )}
                 </Form.Item>

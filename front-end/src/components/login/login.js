@@ -22,7 +22,10 @@ export default class Login extends Component {
       senha: '',
       nav: '',
       loading: false, 
-      simpleusers:[]
+      simpleusers:[],  
+      companyuser:[], 
+      adminusers:[],
+      finduser: false
     };
   }
 
@@ -41,17 +44,17 @@ export default class Login extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.setState({ loading: true })
-    const { email, senha } = this.state; 
-    axios.get('/simpleusers/')
+    const { email, senha } = this.state;  
+
+    axios.get('/simpleusers/'+email)
     .then(response => {
         this.setState({simpleusers: response.data});  
         this.state.simpleusers.map(simpleuser => {  
             if (simpleuser.email === email){ 
                 if(simpleuser.password === senha){
                   var token = jwt.sign({ id: simpleuser.cpf }, 'secret', { expiresIn: 14400 });
-
                   login(token, 0);
-
+                  this.state.finduser = true
                   window.location.replace("http://localhost:3000/map"); 
                     //this.props.history.push('/map'); 
                     //console.log(this.state.loginaceito)
@@ -63,7 +66,54 @@ export default class Login extends Component {
     })
     .catch(function (error) {
         console.log(error);
-    })   
+    }) 
+
+    if(this.state.finduser === false){ 
+       axios.get('/companyusers/')
+    .then(response => {
+        this.setState({companyusers: response.data});  
+        this.state.companyusers.map(companyuser => {  
+            if (companyuser.email === email){ 
+                if(companyuser.password === senha){
+                  var token = jwt.sign({ id: companyuser.cnpj }, 'secret', { expiresIn: 14400 });
+                  login(token, 0);
+                  this.state.finduser = true
+                  window.location.replace("http://localhost:3000/viewcompanyuser/"+companyuser._id); 
+                    //this.props.history.push('/map'); 
+                    //console.log(this.state.loginaceito)
+                    //window.location.replace("http://localhost:3000/create"); 
+                } 
+            } 
+        }
+        ) 
+    })
+    .catch(function (error) {
+        console.log(error);
+    }) 
+    } 
+    if(this.state.finduser === false){ 
+      axios.get('/adminusers/'+email)
+      .then(response => {
+          this.setState({adminusers: response.data});  
+          this.state.adminusers.map(adminuser => {  
+              if (adminuser.email === email){ 
+                  if(adminuser.password === senha){
+                    var token = jwt.sign({ id: adminuser.cpf }, 'secret', { expiresIn: 14400 });
+                    login(token, 0);
+                    this.state.finduser = true
+                    window.location.replace("http://localhost:3000/listusers"); 
+                      //this.props.history.push('/map'); 
+                      //console.log(this.state.loginaceito)
+                      //window.location.replace("http://localhost:3000/create"); 
+                  } 
+              } 
+          }
+          ) 
+      })
+      .catch(function (error) {
+          console.log(error);
+      }) 
+    }   
 {/* 
     axios.post('/simpleusers/login', {
       email, senha
@@ -131,7 +181,7 @@ export default class Login extends Component {
           <FormItem>
             <Input prefix = { <Icon type = "lock" style = {{ color: 'rgba(0,0,0,.25)' }} /> }
               suffix = { this.state.senha ? <Icon type = "close-circle" onClick = { (event) => this.emitEmpty("senha") } /> : null }
-              name = "senha" type = "password" placeholder = "Senha" size = "large" minLength = {8} required = {true}
+              name = "senha" type = "password" placeholder = "Senha" size = "large" minLength = {6} required = {true}
               onChange = { (event) => this.onChangeText(event) } value = { this.state.senha }
             />
           </FormItem>

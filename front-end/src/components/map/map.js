@@ -15,6 +15,9 @@ import securityIcon from './map-components/download.png';
 import iluminationIcon from './map-components/ilum.png'; 
 import mobilityIcon from './map-components/mobilidade.png'; 
 import viaIcon from './map-components/vias.jpeg'; 
+import naturezaIcon from './map-components/natureza.png'; 
+import accessIcon from './map-components/acessibilidade.png'; 
+
 
 import MessageCardForm from './map-components/MessageCardForm'; 
 import CreateReport from "../report/create-report";
@@ -52,7 +55,19 @@ var icons = {
     iconSize: [30, 50],  
     iconAnchor: [12.5, 41], 
     popupAnchor: [0,-41] 
-  }) 
+  }),
+  'naturezaIcon': L.icon({ 
+    iconUrl: naturezaIcon,
+    iconSize: [30, 50],  
+    iconAnchor: [12.5, 41], 
+    popupAnchor: [0,-41] 
+  }), 
+  'accessIcon':  L.icon({ 
+    iconUrl: accessIcon,
+    iconSize: [30, 50],  
+    iconAnchor: [12.5, 41], 
+    popupAnchor: [0,-41] 
+  }),   
 }
 
 
@@ -236,8 +251,8 @@ class ReportMap extends Component {
                position={[report.lat, report.lng]} 
                icon={icons[report.category.label]}>  
                   <Popup>   
-                    <p>Título: {report.title}  </p>
-                    <p>Descrição: {report.description} </p> 
+                    <p><strong> {report.title} </strong> </p>
+                    <p><em> {report.description} </em></p> 
                     <nav>
                     <a href={"http://localhost:3000/viewreport/"+report._id}>Visualizar Relato</a>
                      </nav> 
