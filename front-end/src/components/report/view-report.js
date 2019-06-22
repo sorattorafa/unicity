@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import { Descriptions, Divider, Typography, Layout, Badge, Icon, Row } from 'antd';
+import { Descriptions, Divider, Typography, Layout, Badge, Icon, Tag, Row } from 'antd';
 import "antd/dist/antd.css";
 
 import NavBar from '../../components/navbar/navbar';
@@ -27,7 +27,8 @@ export default class ViewReport extends Component {
             number_of_supports: '',
             status: '',
             category: '', 
-            categoryname: ''
+            catname: '',
+            color:''
           }
     }
 
@@ -47,53 +48,27 @@ export default class ViewReport extends Component {
                 number_of_supports: response.data.number_of_supports,
                 status: response.data.status,
                 category: response.data.category
-            }) 
-            if (this.state.category === '5d0431577425506f0589c71b'){ 
-                this.setState({ 
-                    categoryname: 'Segurança Pública'        
-                }) 
-            } 
-
-            if (this.state.category === '5d053c469dbdf87818fbfc43'){ 
-                this.setState({ 
-                    categoryname: 'Vias Públicas'        
-                }) 
-            } 
-
-            if (this.state.category === '5d053c8f9dbdf87818fbfc44'){ 
-                this.setState({ 
-                    categoryname: 'Mobilidade'        
-                }) 
-            } 
-
-            if (this.state.category === '5d053cc99dbdf87818fbfc45'){ 
-                this.setState({ 
-                    categoryname: 'Iluminação Pública'        
-                }) 
-            }  
-            
-            if (this.state.category === '5d058f37631ca618148481f2'){ 
-                this.setState({ 
-                    categoryname: 'Acessibilidade'        
-                }) 
-            } 
-
-            if (this.state.category === '5d0bfc8591baa12cf537b9ec'){ 
-                this.setState({ 
-                    categoryname: 'Natureza'        
-                }) 
-            }  
-
-            if (this.state.category === '5d0d451a27bb113f9265cf4b'){ 
-                this.setState({ 
-                    categoryname: 'Acessibilidade'        
-                }) 
-            } 
+            })
         })
-        .catch(function(error) {
-            console.log(error)
-        }) 
-       
+
+        axios.get('/categories/')
+        .then(response => {
+            this.setState({  
+                categories: response.data
+            })  
+            this.state.categories.map(category => 
+                {             
+                    if(category._id === this.state.category){ 
+                    this.setState({ 
+                        color: category.color, 
+                        catname: category.name
+                    }) 
+                    } 
+                }
+                  
+            )
+            console.log(this.state.color)
+        })
     }
 
     render() {
@@ -129,7 +104,7 @@ export default class ViewReport extends Component {
                                         {this.state.description}
                                     </Descriptions.Item>
                                     <Descriptions.Item label="Categoria" span={1}>
-                                        {this.state.categoryname}
+                                        <Tag color={this.state.color}> {this.state.catname} </Tag>
                                     </Descriptions.Item>
                                     <Descriptions.Item label="Status" span ={2}>
                                         <StatusCheck ReportStatus={this.state.status} />,

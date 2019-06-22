@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Divider, Typography, Layout, Icon, List, notification } from 'antd';
+import { Divider, Typography, Layout, Icon, List, Tag, notification } from 'antd';
 import axios from 'axios';
 import NavBar from '../../components/navbar/navbar';
 import LateralMenu from '../../components/lateralmenu/lateralmenu';
@@ -75,6 +75,8 @@ class ListCompanyUsers extends Component {
                       description={item.apresentation}
                   />
                   Endereço: {item.street}, {item.number} - {item.city}
+                  <br/>
+                  <Tag color={item.categories.color}> {item.categories.name} </Tag>
                 </List.Item>
               )}
             />

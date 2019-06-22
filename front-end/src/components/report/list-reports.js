@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Divider, Typography, Layout, Row, Col, Icon, List, notification } from 'antd';
+import { Divider, Typography, Layout, Row, Col, Icon, List, Tag, notification } from 'antd';
 import axios from 'axios';
 import NavBar from '../../components/navbar/navbar';
 import LateralMenu from '../../components/lateralmenu/lateralmenu';
@@ -76,7 +76,7 @@ class ListReports extends Component {
                   />
                   {item.street}, {item.number}
                   <br/>
-                  Categoria: {item.category.name}
+                  <Tag color={item.category.color}> {item.category.name} </Tag>
                 </List.Item>
               )}
             />
