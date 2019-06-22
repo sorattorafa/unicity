@@ -119,7 +119,7 @@ function hasErrors(fieldsError) {
           <Layout>
           {/* <LateralMenu pagina = "createuser" /> */}
           
-          <Content className = "contentLayoutForm" style = {{ padding: "30px 20px 0px 20px" }} >
+          <Content className = "contentLayoutForm" style = {{ padding: "80px 20px 0px 20px" }} >
             <Form {...formItemLayout} onSubmit={this.handleSubmit}>
               <Title className = "titleForm" level={1}> Cadastrar usuários </Title>
               <Divider className = "dividerForm" />

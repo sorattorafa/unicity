@@ -106,9 +106,9 @@ export default class NavBar extends Component {
               </Button>
             </Dropdown>
           : this.state.token && this.state.status && this.props.home ?
-            <Link to = { this.state.status === "0" ? "/validacaoPromocao" : this.state.status === "1" ? "/nivelSangue" : "/confirmacaoPromocao"}>
-              <Button className = "menu-web" type = "primary" style = {{ marginLeft: 8 }}>
-                <Icon type = "logout"/> Voltar Sistema
+            <Link to = { this.state.status === "0" ? "/" : this.state.status === "1" ? "/" : "/"}>
+              <Button onClick = { this.signout } className = "menu-web" type = "primary" style = {{ marginLeft: 8 }}>
+                <Icon type = "logout"/> Sair
               </Button>
             </Link>
           :
@@ -123,9 +123,9 @@ export default class NavBar extends Component {
                 <Icon type = "login"/> Login
               </Button>
               
-              <Link to = "/cadastro">
+              <Link to = "/createuser">
                 <Button className = "menu-web" type = "primary" style = {{ marginLeft: 8 }}>
-                  <Icon type = "user-add"/> Cadastre-se
+                  <Icon type = "user-add"/> Cadastro
                 </Button>
               </Link>
             </div>
