@@ -1,11 +1,14 @@
-import React, { Component } from 'react'; 
+import React, { Component } from 'react';
+import { Layout } from 'antd';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Map, TileLayer, Marker, Popup} from 'react-leaflet';
-import { Card, CardText, Button} from 'reactstrap';
-import "bootstrap/dist/css/bootstrap.min.css";  
 import axios from 'axios';
 import App from '../../App.js';
 import { getLocation, sendMessage} from './map-components/Api';
+
+import NavBar from '../../components/navbar/navbar';
+import Footer from '../../components/footer/footer';
+import LateralMenu from '../../components/lateralmenu/lateralmenu';
 
 import L from 'leaflet';  
 // icons to marker
@@ -21,6 +24,8 @@ import accessIcon from './map-components/acessibilidade.png';
 
 import MessageCardForm from './map-components/MessageCardForm'; 
 import CreateReport from "../report/create-report";
+
+const { Content } = Layout;
 
 var myIcon = L.icon({
   iconUrl: userLocationURL,
@@ -200,9 +205,14 @@ class ReportMap extends Component {
     const position2 = this.state.location2; 
     //posição dividida em longitude e latitude 
     const {lat, lng} = this.state.location2;  
-    return (  
-      <Router>      
-        {
+    return (
+      <Layout style = {{ minHeight: '100vh', width: '100%' }}>
+        <NavBar />
+        
+        <Layout>
+          <LateralMenu pagina = "createreport" />
+          
+          <Content className = "contentLayoutForm" style = {{ padding: "0px 0px 0px 0px" }} >
         <div className="map">
         <Map
           className="map"
@@ -229,7 +239,7 @@ class ReportMap extends Component {
                     state: { 
                       position2
                     }  
-                  }} className="nav-link">Clique e vá para o final da página </Link>  
+                  }} className="nav-link">Abrir relato </Link>  
                 </li>  
                 </ul>
               </div>    
@@ -280,13 +290,13 @@ class ReportMap extends Component {
             <CardText>Obrigado por enviar a mensagem!</CardText>
           </Card>
         }  */}
-            <Card className="footer">
-              <CardText> Made with <span role="img" aria-label="love">💚</span> by <a href="https://github.com" target="_blank" rel="noopener noreferrer">Unicity Team</a></CardText>
-            </Card>
+
           </div>      
-        } 
-        <Route path="/createreport" component={ CreateReport } />   
-      </Router>
+          </Content>
+        </Layout>
+      </Layout>
+        // <Route path="/createreport" component={ CreateReport } />
+
     );
   }
 }

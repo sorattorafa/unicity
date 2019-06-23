@@ -195,10 +195,8 @@ class CreateReport extends React.Component {
                 })(<Input />)}
               </Form.Item>
                
-             
-
-
-            <Col span={8}>
+             {/* Report's LogLat */}
+            {/* <Col span={8}>
               <Form.Item
                 label={
                   <span>
@@ -234,7 +232,7 @@ class CreateReport extends React.Component {
                     disabled={true}
                   />)}
               </Form.Item>
-            </Col> 
+            </Col>  */}
 
           </Row>
 
