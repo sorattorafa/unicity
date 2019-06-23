@@ -12,23 +12,19 @@ const columns = [
   {
     title: 'Cpf',
     dataIndex: 'cpf',
-    key: 'cpf',
   },
   {
-    title: 'Name',
+    title: 'Nome',
     dataIndex: 'name',
-    key: 'name',
     onFilter: (value, record) => record.name.indexOf(value) === 0,
-    sorter: (a, b) => {("" + a.name).localeCompare(b.name)},
+    sorter: (a, b) => ("" + a.name).localeCompare(b.name),
     defaultSortOrder: 'ascend',
-    sortDirections: ['descend', 'ascend'],
+    sortDirections: ['ascend', 'descend'],
   },
   {
     title: 'Email',
     dataIndex: 'email',
-    key: 'email',
   },
-  
 ];
 
 export default class SimpleUsersList extends Component {
@@ -57,7 +53,7 @@ export default class SimpleUsersList extends Component {
           <Content className = "contentLayoutForm" style = {{ padding: "30px 20px 0px 20px" }} >
               <Title className = "titleForm" level={1}> Lista de usuários </Title>
               <Divider className = "dividerForm" />
-              <Table columns={columns} dataSource={this.state.simpleusers} />
+              <Table rowKey="_id" columns={columns} dataSource={this.state.simpleusers} />
               </Content>
             </Layout>
           </Layout>

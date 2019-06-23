@@ -17,10 +17,10 @@ export default class NavBar extends Component {
 
     this.state = {
       nav: '',
-      //token: getToken(),
-      //status: getStatus(),
-      token: null,
-      status: '2',
+      token: getToken(),
+      status: getStatus(),
+      // token: null,
+      // status: '2',
       modal: false,
       home: this.props.home
     };
@@ -87,17 +87,6 @@ export default class NavBar extends Component {
           </div>
         </Col>
 
-        {/* <Col span = { this.props.home ? 11 : 0 }>
-          { this.props.home ?
-            <Tabs defaultKey = "home" onChange = { this.props.onChange } tabPosition = "bottom" className = "menu-site" style = {{ lineHeight: '64px' }}>
-              <Tabs.TabPane tab = { <a href = "#home" style = {{ color: 'inherit' }}> Home </a> } key = "home" />
-              <Tabs.TabPane tab = { <a href = "#quemSomos" style = {{ color: 'inherit' }}> Quem Somos </a> } key = "quemSomos" />
-              <Tabs.TabPane tab = { <a href = "#parcerias" style = {{ color: 'inherit' }}> Parcerias </a> } key = "parcerias" />
-              <Tabs.TabPane tab = { <a href = "#contato" style = {{ color: 'inherit' }}> Contato </a> } key = "contato" />
-            </Tabs>
-          : null }
-        </Col> */}
-
         <Col span = { this.props.home ? 10 : 8 } className = "menu-usuario">
           { this.state.token && !this.props.home ?
             <Dropdown overlay = { menu } placement = "bottomRight">
@@ -106,9 +95,9 @@ export default class NavBar extends Component {
               </Button>
             </Dropdown>
           : this.state.token && this.state.status && this.props.home ?
-            <Link to = { this.state.status === "0" ? "/" : this.state.status === "1" ? "/" : "/"}>
-              <Button onClick = { this.signout } className = "menu-web" type = "primary" style = {{ marginLeft: 8 }}>
-                <Icon type = "logout"/> Sair
+            <Link to = { this.state.status === "0" ? "/map" : this.state.status === "1" ? "/listReport" : "/listusers"}>
+              <Button className = "menu-web" type = "primary" style = {{ marginLeft: 8 }}>
+                <Icon type = "logout"/> Voltar Sistema
               </Button>
             </Link>
           :

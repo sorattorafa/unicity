@@ -16,7 +16,7 @@ const columns = [
     onFilter: (value, record) => record.name.indexOf(value) === 0,
     sorter: (a, b) => ("" + a.name).localeCompare(b.name),
     defaultSortOrder: 'ascend',
-    sortDirections: ['descend', 'ascend'],
+    sortDirections: ['ascend', 'descend'],
   },
   {
     title: 'E-mail',
@@ -84,7 +84,7 @@ export default class ListAdminUser extends React.Component {
   //   }
   // }
 
-  componentDidMount() { 
+  componentWillMount() { 
     axios.get('/adminusers')
       .then(response => {
         console.log(response.data);

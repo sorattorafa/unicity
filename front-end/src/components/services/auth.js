@@ -1,5 +1,5 @@
-export const TOKEN_KEY = "blood_token";
-export const STATUS = "blood_status";
+export const TOKEN_KEY = "uni_token";
+export const STATUS = "uni_status";
 
 export const isAuthenticated = () => localStorage.getItem(TOKEN_KEY) !== null;
 

@@ -15,8 +15,8 @@ export default class LateralMenu extends Component {
     super(props);
 
     this.state = {
-      //status: getStatus()
-      status: '2'                 // 0: simpleuser; 1: companyuser; 2: admin
+      status: getStatus()                 // 0: simpleuser; 1: companyuser; 2: admin
+      // status: '2'                 // 0: simpleuser; 1: companyuser; 2: admin
     };
   }
 
@@ -29,6 +29,7 @@ export default class LateralMenu extends Component {
         width = "250"
       >
         <Menu theme = "light" mode = "inline" defaultSelectedKeys = {[this.props.pagina]}>
+          {/* Visível para todos */}
           <Menu.Item key = "listReport">
             <Link to = "/listreport">
               <Icon type = "tag" />
@@ -43,13 +44,7 @@ export default class LateralMenu extends Component {
             </Link>
           </Menu.Item>
 
-          <Menu.Item key = "listAdminUser">
-            <Link to = "/listadminusers">
-              <Icon type = "tag" />
-              <span> Administradores </span>
-            </Link>
-          </Menu.Item>
-
+          {/* Visível para simpleuser */}
           { this.state.status === '0' ?
             <Menu.Item key = "createReport">
               <Link to = "/createreport">
@@ -67,6 +62,7 @@ export default class LateralMenu extends Component {
             </Menu.Item>
           : null } */}
           
+          {/* Visível para adminuser */}
           { this.state.status === '2' ?
             <Menu.Item key = "createCompanyuser">
               <Link to = "/createcompanyuser">
@@ -83,19 +79,27 @@ export default class LateralMenu extends Component {
               </Link>
             </Menu.Item>
           : null }
-          { this.state.status === '2' ?
+          {/* { this.state.status === '2' ?
             <Menu.Item key = "CreateCategory">
               <Link to = "/createcategory">
                 <Icon type = "star" />
                 <span> Criar categoria </span>
               </Link>
             </Menu.Item>
-          : null }
+          : null } */}
           { this.state.status === '2' ?
-            <Menu.Item key = "listUsers">
+            <Menu.Item key = "listusers">
               <Link to = "/listusers">
                 <Icon type = "star" />
                 <span> Listar usuários </span>
+              </Link>
+            </Menu.Item>
+          : null }
+          { this.state.status === '2' ?
+            <Menu.Item key = "listAdminUser">
+              <Link to = "/listadminusers">
+                <Icon type = "tag" />
+                <span> Administradores </span>
               </Link>
             </Menu.Item>
           : null }

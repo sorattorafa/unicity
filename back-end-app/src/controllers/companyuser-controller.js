@@ -51,7 +51,7 @@ exports.getByCity = async (req, res, next) =>{
     }    
 }; 
   
-// Get company users by city
+// Get company users by category
 exports.getByCategory = async (req, res, next) =>{ 
     try {
         var data = await repository.getByCategory(req.params.category); 

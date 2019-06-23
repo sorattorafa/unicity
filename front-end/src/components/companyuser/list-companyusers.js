@@ -27,6 +27,7 @@ class ListCompanyUsers extends Component {
   componentDidMount() { 
     axios.get('/companyusers')
       .then(response => {
+        console.log(response.data);
         this.setState({companyusers: response.data});
       })
       .catch(function (error) {

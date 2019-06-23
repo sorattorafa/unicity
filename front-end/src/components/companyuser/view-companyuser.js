@@ -31,6 +31,7 @@ export default class ViewCompanyUser extends Component {
     componentDidMount() {
         axios.get('/companyusers/'+this.props.match.params.id)
         .then(response => {
+            console.log(response.data);
             this.setState({  
                 name: response.data.name, 
                 apresentation: response.data.apresentation,
@@ -68,7 +69,7 @@ export default class ViewCompanyUser extends Component {
                 <NavBar />
 
                 <Layout>
-                    <LateralMenu pagina = "createadminuser" />
+                    <LateralMenu pagina = "listCompanyUsers" />
                     <Content className = "contentLayoutForm" style = {{ padding: "30px 20px 0px 20px" }} >
                         <Title className = "titleForm" level={1}> {this.state.name} </Title>
                         <Divider className = "dividerForm" />
@@ -77,8 +78,6 @@ export default class ViewCompanyUser extends Component {
                                     <Avatar size={120} icon="user" />
                                 </Col>
                                 <Col xs={12} sm={16} md={12} lg={8} xl={10}>
-                                    {this.state.name}
-                                    <br/>
                                     {this.state.street}, {this.state.number}
                                     <br/>
                                     {this.state.city}
