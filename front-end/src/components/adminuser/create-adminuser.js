@@ -5,6 +5,7 @@ import ReactDOM from "react-dom";
 import "./create-adminuser.css";
 import axios from 'axios';
 import NavBar from '../../components/navbar/navbar';
+import Footer from '../../components/footer/footer';
 import LateralMenu from '../../components/lateralmenu/lateralmenu';
 
 const { Title } = Typography;
@@ -241,6 +242,7 @@ class CreateAdminUser extends React.Component {
             </Form>
           </Content>
         </Layout>
+        <Footer />
       </Layout>
     );
   }

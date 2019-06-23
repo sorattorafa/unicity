@@ -69,7 +69,7 @@ export default class ViewCompanyUser extends Component {
                 <NavBar />
 
                 <Layout>
-                    <LateralMenu pagina = "listCompanyUsers" />
+                    <LateralMenu pagina = "listcompanyusers" />
                     <Content className = "contentLayoutForm" style = {{ padding: "30px 20px 0px 20px" }} >
                         <Title className = "titleForm" level={1}> {this.state.name} </Title>
                         <Divider className = "dividerForm" />

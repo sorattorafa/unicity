@@ -45,7 +45,7 @@ class ListCompanyUsers extends Component {
         <NavBar />
         
         <Layout>
-          <LateralMenu pagina = "createadminuser" />
+          <LateralMenu pagina = "listcompanyusers" />
           <Content className = "contentLayoutForm" style = {{ padding: "30px 20px 0px 20px" }} >
             <Title className = "titleForm" level={1}> Empresas </Title>
             <Divider className = "dividerForm" />

@@ -37,30 +37,41 @@
   box-shadow: inset 0 0 0 99999px rgba(255, 255, 255, 0.1);
 }
 
+@media only screen and (max-width: 400px) {
+  .buttonForm button {
+      width: 100%;
+    }
+}
+
   /* ======== Home ======== */
 .mainFrameHome {
   background: #ff8d00 !important;
-  margin-top: 50px;
-  height: 290px;
+  margin-top: 30px;
+  height: 610px;
 }
 
 .nameFrameHome {
   background: white !important;
-  margin-top: 70px;
-  height: 150px;
+  margin-top: 180px;
+  padding-top: 3%;
+  height: 250px;
   color: #5f008e;
-  font-size: 50px;
+  font-size: 100px;
   text-align: center;
   font-weight: 900;
 }
 
 .logoHome {
   margin-right: 20px;
-  /* height: 100px; */
 }
 
 @media only screen and (max-width: 400px) {
-  .buttonForm button {
-      width: 100%;
+  .nameFrameHome {
+    font-size: 60px;
+    padding-top: 15%;
     }
+  
+  .logoHome {
+    margin-right: 0px;
+  }
 }

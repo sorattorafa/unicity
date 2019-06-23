@@ -30,14 +30,14 @@ export default class LateralMenu extends Component {
       >
         <Menu theme = "light" mode = "inline" defaultSelectedKeys = {[this.props.pagina]}>
           {/* Visível para todos */}
-          <Menu.Item key = "listReport">
+          <Menu.Item key = "listreport">
             <Link to = "/listreport">
               <Icon type = "tag" />
               <span> Relatos </span>
             </Link>
           </Menu.Item>
 
-          <Menu.Item key = "listCompanyUsers">
+          <Menu.Item key = "listcompanyusers">
             <Link to = "/listcompanyusers">
               <Icon type = "tag" />
               <span> Empresas </span>

@@ -53,14 +53,14 @@ export default class NavBar extends Component {
     let menu = (
       <Menu>
         { this.state.token && (this.state.status === '0' || this.state.status === '1') ?
-          <Menu.Item key = "perfil">
-            <Link to = "/perfil">
+          <Menu.Item className = "linkNav" key = "perfil">
+            <Link className = "linkNav" to = "/perfil">
               <Icon type = "setting" /> Perfil
             </Link>
           </Menu.Item>
         : null }
 
-        <Menu.Item key = "logout" onClick = { this.signout }>
+        <Menu.Item className = "linkNav" key = "logout" onClick = { this.signout }>
           <Icon type = "logout" /> Logout
         </Menu.Item>
       </Menu>
@@ -87,33 +87,33 @@ export default class NavBar extends Component {
           </div>
         </Col>
 
-        <Col span = { this.props.home ? 10 : 8 } className = "menu-usuario">
+        <Col span = { this.props.home ? 10 : 8 } className = "buttonNav menu-usuario">
           { this.state.token && !this.props.home ?
             <Dropdown overlay = { menu } placement = "bottomRight">
-              <Button style = {{ marginLeft: 8 }}>
+              <Button className = "buttonNav" style = {{ marginLeft: 8 }}>
                 <Icon type = "user" style = {{ fontSize: '18px', marginTop: '5px' }} />
               </Button>
             </Dropdown>
           : this.state.token && this.state.status && this.props.home ?
             <Link to = { this.state.status === "0" ? "/map" : this.state.status === "1" ? "/listReport" : "/listusers"}>
-              <Button className = "menu-web" type = "primary" style = {{ marginLeft: 8 }}>
+              <Button className = "buttonNav menu-web" type = "primary" style = {{ marginLeft: 8 }}>
                 <Icon type = "logout"/> Voltar Sistema
               </Button>
             </Link>
           :
-            <div>
+            <div className = "buttonNav">
               <Dropdown className = "menu-mobile" overlay = {menuNone} placement = "bottomRight">
                 <Button style = {{ marginTop: '16px' }}>
                   <Icon type = "menu" style = {{ fontSize: '18px', marginTop: '5px' }} />
                 </Button>
               </Dropdown>
 
-              <Button className = "menu-web" style = {{ marginLeft: 8 }} onClick = { this.toggle }>
+              <Button className = "buttonNav menu-web" style = {{ marginLeft: 8 }} onClick = { this.toggle }>
                 <Icon type = "login"/> Login
               </Button>
               
               <Link to = "/createuser">
-                <Button className = "menu-web" type = "primary" style = {{ marginLeft: 8 }}>
+                <Button className = "buttonNav menu-web" type = "primary" style = {{ marginLeft: 8 }}>
                   <Icon type = "user-add"/> Cadastro
                 </Button>
               </Link>

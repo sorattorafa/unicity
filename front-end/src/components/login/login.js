@@ -1,7 +1,7 @@
 // login.js
 
 import React, {Component} from 'react';
-import { Modal, Icon, Form, Input, Button, notification } from 'antd';
+import { Divider, Typography, Modal, Icon, Form, Input, Button, notification } from 'antd';
 import { Redirect } from "react-router-dom";
 
 import axios from 'axios';
@@ -12,6 +12,7 @@ import './login.css';
 
 const jwt = require('jsonwebtoken');
 const FormItem = Form.Item;
+const { Title } = Typography;
  
 export default class Login extends Component { 
   constructor(props) {
@@ -76,9 +77,10 @@ export default class Login extends Component {
             if (companyuser.email === email){ 
                 if(companyuser.password === senha){
                   var token = jwt.sign({ id: companyuser.cnpj }, 'secret', { expiresIn: 14400 });
-                  login(token, 0);
-                  this.state.finduser = true
-                  window.location.replace("http://localhost:3000/viewcompanyuser/"+companyuser._id); 
+                  login(token, 1);
+                  this.state.finduser = true;
+                  window.location.replace("http://localhost:3000/listReport"); 
+                  // window.location.replace("http://localhost:3000/viewcompanyuser/"+companyuser._id); 
                     //this.props.history.push('/map'); 
                     //console.log(this.state.loginaceito)
                     //window.location.replace("http://localhost:3000/create"); 
@@ -99,7 +101,7 @@ export default class Login extends Component {
               if (adminuser.email === email){ 
                   if(adminuser.password === senha){
                     var token = jwt.sign({ id: adminuser.cpf }, 'secret', { expiresIn: 14400 });
-                    login(token, 0);
+                    login(token, 2);
                     this.state.finduser = true
                     window.location.replace("http://localhost:3000/listusers"); 
                       //this.props.history.push('/map'); 
@@ -164,12 +166,14 @@ export default class Login extends Component {
     }
 
     return (
-      <Modal title = { "Login" }
+      <Modal
         visible = { this.props.visible }
         onCancel = { this.props.toggle }
         footer = { null }
       >
         <Form onSubmit = { this.handleSubmit } className = "login-form">
+          <Title className = "titleForm" level={1}> Login </Title>
+          <Divider className = "dividerForm" />
           <FormItem>
             <Input prefix = { <Icon type = "mail" style = {{ color: 'rgba(0,0,0,.25)' }} /> }
               suffix = { this.state.email ? <Icon type = "close-circle" onClick = { (event) => this.emitEmpty("email") } /> : null }
@@ -187,7 +191,7 @@ export default class Login extends Component {
           </FormItem>
           
           <FormItem className = "buttonForm" style = {{ textAlign: 'center' }}>
-            <Button loading = { this.state.loading } type = "primary" htmlType = "submit" className = "buttonForm" size = "large"> Login </Button>
+            <Button loading = { this.state.loading } type = "primary" htmlType = "submit" className = "buttonForm" size = "large"> Logar </Button>
           </FormItem>
         </Form>
       </Modal>

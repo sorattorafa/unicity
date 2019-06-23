@@ -24,6 +24,7 @@
   
   .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected, .ant-menu-item:active {
     background-color: #ff8d005c !important;
+    text-decoration: none !important;
   }
   
   .ant-menu-item:after {
@@ -36,6 +37,7 @@
   
   .ant-menu-item-selected a, .ant-menu-item:hover a {
     color: #ff8d00 !important;
+    text-decoration: none !important;
   }
   
   .ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {

@@ -44,7 +44,7 @@ class ListReports extends Component {
         <NavBar />
         
         <Layout>
-          <LateralMenu pagina = "createadminuser" />
+          <LateralMenu pagina = "listreport" />
           <Content className = "contentLayoutForm" style = {{ padding: "30px 20px 0px 20px" }} >
             <Title className = "titleForm" level={1}> Relatos </Title>
             <Divider className = "dividerForm" />

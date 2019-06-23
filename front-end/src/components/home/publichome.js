@@ -5,7 +5,7 @@ import NavBar from '../../components/navbar/navbar';
 import LateralMenu from '../../components/lateralmenu/lateralmenu';
 
 const { Title } = Typography;
-const { Content } = Layout;
+const { Content, Footer } = Layout;
  
 class PublicHome extends Component {
   constructor () {
@@ -53,6 +53,10 @@ class PublicHome extends Component {
             
           </Content>
         </Layout>
+
+        <Footer style = {{ textAlign: 'center', color: "white" }}>
+          <p> Para a sua cidade </p>
+        </Footer>
       </Layout>
     );
   }
