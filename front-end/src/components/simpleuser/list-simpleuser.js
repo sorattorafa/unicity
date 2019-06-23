@@ -18,7 +18,10 @@ const columns = [
     title: 'Name',
     dataIndex: 'name',
     key: 'name',
-    render: text => <a href="javascript:;">{text}</a>,
+    onFilter: (value, record) => record.name.indexOf(value) === 0,
+    sorter: (a, b) => {("" + a.name).localeCompare(b.name)},
+    defaultSortOrder: 'ascend',
+    sortDirections: ['descend', 'ascend'],
   },
   {
     title: 'Email',

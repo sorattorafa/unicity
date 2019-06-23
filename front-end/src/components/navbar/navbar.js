@@ -18,9 +18,9 @@ export default class NavBar extends Component {
     this.state = {
       nav: '',
       //token: getToken(),
-      status: getStatus(),
+      //status: getStatus(),
       token: null,
-      // status: '0',
+      status: '2',
       modal: false,
       home: this.props.home
     };

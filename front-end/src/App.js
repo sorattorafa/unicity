@@ -18,6 +18,7 @@ import ListReports from "./components/report/list-reports";
 
 // Components of Admin Users
 import CreateAdminUser from "./components/adminuser/create-adminuser";
+import ListAdminUser from "./components/adminuser/list-adminuser";
 
 // Components of Company Users
 import CreateCompanyUser from "./components/companyuser/create-companyuser";
@@ -47,6 +48,7 @@ class App extends Component {
           <Route path="/viewreport/:id" component={ ViewReport } /> 
           <Route path="/listreport" component={ ListReports } />
           <Route path="/createadminuser" component={ CreateAdminUser } />
+          <Route path="/listadminusers" component={ ListAdminUser } />
           <Route path="/createcompanyuser" component={ CreateCompanyUser } />
           <Route path="/viewcompanyuser/:id" component={ ViewCompanyUser } /> 
           <Route path="/listcompanyusers" component={ ListCompanyUsers } /> 

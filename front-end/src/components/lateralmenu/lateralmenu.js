@@ -15,8 +15,8 @@ export default class LateralMenu extends Component {
     super(props);
 
     this.state = {
-      status: getStatus()
-      // status: '0'                 // 0: simpleuser; 1: companyuser; 2: admin
+      //status: getStatus()
+      status: '2'                 // 0: simpleuser; 1: companyuser; 2: admin
     };
   }
 
@@ -40,6 +40,13 @@ export default class LateralMenu extends Component {
             <Link to = "/listcompanyusers">
               <Icon type = "tag" />
               <span> Empresas </span>
+            </Link>
+          </Menu.Item>
+
+          <Menu.Item key = "listAdminUser">
+            <Link to = "/listadminusers">
+              <Icon type = "tag" />
+              <span> Administradores </span>
             </Link>
           </Menu.Item>
 
