@@ -58,11 +58,13 @@ const schema = new Schema({
         ref: 'Report' 
     }],  
 
-    categories: [{ 
+  //categories: [{ 
+    categories: {
         type: mongoose.Schema.Types.ObjectId,  
         ref: 'Category',
         required: true 
-    }]
+    },
+  //}]
 
 }); 
   
