@@ -21,10 +21,10 @@ export default class ViewCompanyUser extends Component {
             city: '',
             street: '',
             number: '',
-            category:[],
+            categories:'',
             color:'', 
-            catname:'', 
-            categories: []
+            catname:'',
+            category: ''
           }
     }
 
@@ -38,21 +38,21 @@ export default class ViewCompanyUser extends Component {
                 city: response.data.city, 
                 street: response.data.street, 
                 number: response.data.number,
-                category: response.data.category 
+                categories: response.data.categories
             })  
         })
 
         axios.get('/categories/')
         .then(response => {
             this.setState({  
-                categories: response.data
+                category: response.data
             })  
-            this.state.categories.map(category => 
+            this.state.category.map(categories => 
                 {             
-                    if(category._id === this.state.category){ 
+                    if(categories._id === this.state.categories){ 
                     this.setState({ 
-                        color: category.color, 
-                        catname: category.name
+                        color: categories.color, 
+                        catname: categories.name
                     }) 
                     } 
                 }
