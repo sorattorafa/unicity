@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Menu, Icon } from 'antd';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 // import { Map, TileLayer, Marker} from 'react-leaflet';
 // import { Card, CardText, Button} from 'reactstrap';
@@ -22,6 +21,7 @@ import ListAdminUser from "./components/adminuser/list-adminuser";
 
 // Components of Company Users
 import CreateCompanyUser from "./components/companyuser/create-companyuser";
+import EditCompanyUser from "./components/companyuser/edit-companyuser";
 import ViewCompanyUser from "./components/companyuser/view-companyuser";
 import ListCompanyUsers from "./components/companyuser/list-companyusers";
 
@@ -50,6 +50,7 @@ class App extends Component {
           <Route path="/createadminuser" component={ CreateAdminUser } />
           <Route path="/listadminusers" component={ ListAdminUser } />
           <Route path="/createcompanyuser" component={ CreateCompanyUser } />
+          <Route path="/editcompanyuser/:id" component={ EditCompanyUser } />
           <Route path="/viewcompanyuser/:id" component={ ViewCompanyUser } /> 
           <Route path="/listcompanyusers" component={ ListCompanyUsers } /> 
           <Route path="/createcategory" component={ CreateCategory } />
