@@ -105,7 +105,7 @@ exports.put = (req, res, next) => {
     repository  
         .update(req.params.id, req.body)
         .then(x=>{ 
-            res.status(201).send({ 
+            res.status(200).send({ 
                 message: 'Usuario atualizado com sucesso!' 
             });
         }).catch(e=>{ 

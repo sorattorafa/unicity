@@ -42,17 +42,36 @@ exports.post = async(req, res, next) => {
 
 // put - set
 exports.put = (req, any, next) => {
+    let contract = new ValidationContract();
+    contract.isRequired(req.body.description, 'O comentario deve ter conteudo')
+    
     const id = req.params.id;
-    res.status(200).send({
-        id: id,
-        item: req.body
-    });
+
+    // if data is valid
+    if (!contract.isValid()){
+        res.status(400).send(contract.errors()).end();
+        return;
+    }
+    try{
+        // await repository.create(req.body);
+        repository.create(req.body);
+        res.status(200).send({
+            id: id,
+            item: req.body,
+            message: 'Requisição cadastrada com sucesso!'
+        });
+    } catch (e){
+        res.status(500).send({
+            message: 'Falha ao processar a requisição'
+        })
+    }
 };
 
 //put- update request
 exports.put = (req, res, next) => {
     let contract = new ValidationContract();    // Usado para fazer a validação de dados
     contract.isRequired(req.body.description, 'O comentario deve ter conteudo')
+    contract.isRequired(req.body.city, 'Preencha a cidade do relato.')
 
     // if data is valid
     if (!contract.isValid()){

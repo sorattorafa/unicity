@@ -1,5 +1,5 @@
-import { Divider, Typography, Layout, Form, Row, Col, Icon, Input, Button, Tooltip, Select } from 'antd';
-import React, {Component} from 'react';
+import { Divider, Typography, Layout, Form, Row, Col, Icon, Input, Button, Tooltip, Select, notification } from 'antd';
+import React from 'react';
 import { Redirect } from "react-router-dom";
 import "antd/dist/antd.css";
 // import "./index.css";
@@ -7,7 +7,7 @@ import axios from 'axios';
 
 import NavBar from '../../components/navbar/navbar';
 import LateralMenu from '../../components/lateralmenu/lateralmenu';
-import { getStatus } from '../services/auth';
+import { getToken, getStatus } from '../services/auth';
 
 const TextArea = Input.TextArea;
 const { Title } = Typography;
@@ -36,20 +36,21 @@ class CreateCompanyUser extends React.Component {
         this.onChangeCategories = this.onChangeCategories.bind(this);
     
         this.state = {
-            id: '',
-            cnpj: '',
-            name: '',
-            apresentation: '',
-            city: '',
-            street: '',
-            number: '',
-            email: '',  
-            password: '',
-            confirmpassword: '',
-            categories: '',
-            active: true,
-            visibility: true,
-            status: getStatus()                 // 0: simpleuser; 1: companyuser; 2: admin
+          nav: '',                      // Controla página exibida
+          id: '',
+          cnpj: '',
+          name: '',
+          apresentation: '',
+          city: '',
+          street: '',
+          number: '',
+          email: '',  
+          password: '',
+          confirmpassword: '',
+          categories: '',
+          active: true,
+          visibility: true,
+          status: getStatus()                 // 0: simpleuser; 1: companyuser; 2: admin
           // status: '2'                 // 0: simpleuser; 1: companyuser; 2: admin
         }
 
@@ -59,25 +60,28 @@ class CreateCompanyUser extends React.Component {
 
     }
 
-    componentWillMount() {
-      console.log(this.props.match.params);
+    componentWillMount(){
+    // componentDidMount() {
+      // console.log(this.props.match.params);
       axios.get('/companyusers/' + this.props.match.params.id)
       .then(response => {
           console.log(response.data);
+          this.props.form.setFieldsValue({
+            cnpj: response.data.cnpj,
+            name: response.data.name, 
+            apresentation: response.data.apresentation,
+            city: response.data.city, 
+            street: response.data.street,
+            categories: response.data.categories,
+            number: response.data.number,
+            email: response.data.email,
+            password: response.data.password,
+            confirmpassword: response.data.password
+          });
           this.setState({
-              id: this.props.match.params.id,
-              cnpj: response.data.cnpj,
-              name: response.data.name, 
-              apresentation: response.data.apresentation,
-              city: response.data.city, 
-              street: response.data.street, 
-              number: response.data.number,
-              email: response.data.email,
-              password: response.data.password,
-              confirmpassword: response.data.password,
-              category: response.data.category 
-          })  
-      })
+              id: this.props.match.params.id
+          });
+      });
 
   }
 
@@ -140,12 +144,25 @@ class CreateCompanyUser extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                // console.log('Received values of form: ', values);
     
-                axios.put('/companyusers/' + this.state.id , values)
-                    .then(res => console.log(res.data));
-    
-                // return <Redirect to = { this.state.nav } />
+                let res = axios.put('/companyusers/' + this.state.id , values)
+                    .then(res => {
+                      // console.log(res.data);
+                      // console.log("Status: " + res.status);
+
+                      // Exibe notificação de sucesso
+                      if(res.status === 200) {
+                        notification['success']({
+                          message: 'Sucesso!',
+                          description: 'Empresa atualizada!'
+                        });
+                        
+                        // Atualiza página
+                        let id_company = this.state.id;
+                        this.setState({ nav: '/viewcompanyuser/' + id_company });
+                      }
+                    });
             }
         });
     };
@@ -175,7 +192,13 @@ class CreateCompanyUser extends React.Component {
         const confirmpasswordError = isFieldTouched('confirmpassword') && getFieldError('confirmpassword');
         const categoriesError = isFieldTouched('categories') && getFieldError('categories');
 
-        return (
+        // Controla página exibida - Ao atualizar, muda de página
+        if(this.state.nav)
+          return <Redirect to = { this.state.nav } />
+        // Só exibe se estiver logado
+        else if(getToken())
+        // else if(getToken() && getStatus() === '2')
+          return (
             <Layout style = {{ minHeight: '100vh' }}>
                 <NavBar />
         
@@ -201,8 +224,8 @@ class CreateCompanyUser extends React.Component {
                                 }
                             >
                                 {getFieldDecorator('cnpj', {
-                                    // rules: [ {required: true}, {message: 'Insira o CNPJ da empresa!' }],
-                                    initialValue: this.state.cnpj,
+                                    rules: [ {required: true}, {message: 'Insira o CNPJ da empresa!' }],
+                                    // initialValue: this.state.cnpj,
                                 })(<Input disabled={this.state.visibility} />)}
                             </Form.Item>
                         </Row>
@@ -221,8 +244,8 @@ class CreateCompanyUser extends React.Component {
                                 }
                             >
                                 {getFieldDecorator('name', {
-                                    initialValue: this.state.name
-                                    // rules: [{ required: true, message: 'Insira o nome da empresa!', whitespace: true }],
+                                    // initialValue: this.state.name
+                                    rules: [{ required: true, message: 'Insira o nome da empresa!', whitespace: true }],
                                 })(<Input disabled={this.state.visibility} />)}
                             </Form.Item>
                         </Row>
@@ -241,8 +264,8 @@ class CreateCompanyUser extends React.Component {
                                 }
                             >
                                 {getFieldDecorator('apresentation', {
-                                    initialValue: this.state.apresentation,
-                                    // rules: [{ required: true, message: 'Insira uma mensagem de apresentação da empresa', whitespace: true }],
+                                    // initialValue: this.state.apresentation,
+                                    rules: [{ required: true, message: 'Insira uma mensagem de apresentação da empresa', whitespace: true }],
                                 })(<TextArea rows={4} disabled={!this.state.visibility} />)}
                             </Form.Item>
                         </Row>
@@ -290,8 +313,8 @@ class CreateCompanyUser extends React.Component {
                                 }
                             >
                                 {getFieldDecorator('city', {
-                                    initialValue: this.state.city,
-                                    // rules: [{ required: true, message: 'Insira a cidade da empresa!', whitespace: true }],
+                                    // initialValue: this.state.city,
+                                    rules: [{ required: true, message: 'Insira a cidade da empresa!', whitespace: true }],
                                 })(<Input disabled={this.state.visibility} />)}
                             </Form.Item>
                         </Row>
@@ -311,8 +334,8 @@ class CreateCompanyUser extends React.Component {
                                     }
                                 >
                                     {getFieldDecorator('street', {
-                                        initialValue: this.state.street,
-                                        // rules: [{ required: true, message: 'Insira a rua do endereço da empresa!', whitespace: true }],
+                                        // initialValue: this.state.street,
+                                        rules: [{ required: true, message: 'Insira a rua do endereço da empresa!', whitespace: true }],
                                     })(<Input disabled={this.state.visibility} />)}
                                 </Form.Item>
                             </Col>
@@ -331,8 +354,8 @@ class CreateCompanyUser extends React.Component {
                                     }
                                 >
                                     {getFieldDecorator('number', {
-                                        initialValue: this.state.number,
-                                        // rules: [{ required: true, message: 'Insira o número do endereço da empresa!', whitespace: true }],
+                                        // initialValue: this.state.number,
+                                        rules: [{ required: true, message: 'Insira o número do endereço da empresa!', whitespace: true }],
                                     })(<Input disabled={this.state.visibility} />)}
                                 </Form.Item>
                             </Col>
@@ -352,9 +375,9 @@ class CreateCompanyUser extends React.Component {
                                 }
                             >
                                 {getFieldDecorator('email', {
-                                    initialValue: this.state.email,
-                                    // rules: [{ type: 'email', message: 'Esse não é um e-mail válido!' },
-                                    // { required: true, message: 'Insira o email da empresa!', whitespace: true }],
+                                    // initialValue: this.state.email,
+                                    rules: [{ type: 'email', message: 'Esse não é um e-mail válido!' },
+                                    { required: true, message: 'Insira o email da empresa!', whitespace: true }],
                                 })(<Input disabled={!this.state.visibility} />)}
                             </Form.Item>
                         </Row>
@@ -374,8 +397,8 @@ class CreateCompanyUser extends React.Component {
                                     }
                                 >
                                     {getFieldDecorator('password', {
-                                      initialValue: this.state.password,
-                                        // rules: [{ required: true, message: 'Insira uma senha para a empresa!' }],
+                                      // initialValue: this.state.password,
+                                        rules: [{ required: true, message: 'Insira uma senha para a empresa!' }],
                                     })(<Input
                                         disabled={!this.state.visibility}
                                         prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -399,8 +422,8 @@ class CreateCompanyUser extends React.Component {
                                     }
                                 >
                                     {getFieldDecorator('confirmpassword', {
-                                        initialValue: this.state.password,
-                                        // rules: [{ required: true, message: 'Confirme a senha para a empresa!' }],
+                                        // initialValue: this.state.password,
+                                        rules: [{ required: true, message: 'Confirme a senha para a empresa!' }],
                                     })(<Input
                                         disabled={!this.state.visibility}
                                         prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}

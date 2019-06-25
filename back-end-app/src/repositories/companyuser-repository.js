@@ -48,8 +48,12 @@ exports.update = async(id,data) => {
     await Companyuser 
     .findByIdAndUpdate(id, { 
         $set: {  
-            // can update anything 
-            city: data.city, 
+            // can update anything
+            cnpj: data.cnpj,
+            name: data.name,
+            city: data.city,
+            street: data.street,
+            number: data.number, 
             email: data.email,
             apresentation: data.apresentation,
             password: data.password,
