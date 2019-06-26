@@ -13,7 +13,8 @@ import DeleteSimpleuser from "./components/simpleuser/delete-simpleuser";
 //Components of Reports
 import CreateReport from "./components/report/create-report";
 import ViewReport from "./components/report/view-report";
-import ListReports from "./components/report/list-reports";
+import ListReports from "./components/report/list-reports"; 
+import EditReport from  "./components/report/edit-report";
 
 // Components of Admin Users
 import CreateAdminUser from "./components/adminuser/create-adminuser";
@@ -45,7 +46,8 @@ class App extends Component {
           <Route path="/listusers" component={ SimpleusersList } />  
           <Route path="/delete/:id" component={ DeleteSimpleuser } />
           <Route path="/createreport" component={ CreateReport } />
-          <Route path="/viewreport/:id" component={ ViewReport } /> 
+          <Route path="/viewreport/:id" component={ ViewReport } />  
+          <Route path="/editreport/:id" component={ EditReport } /> 
           <Route path="/listreport" component={ ListReports } />
           <Route path="/createadminuser" component={ CreateAdminUser } />
           <Route path="/listadminusers" component={ ListAdminUser } />

@@ -207,7 +207,7 @@ class CreateCompanyUser extends React.Component {
           
           <Content className = "contentLayoutForm" style = {{ padding: "30px 20px 0px 20px" }} >
             <Form {...formItemLayout} onSubmit={this.handleSubmit}>
-              <Title className = "titleForm" level={1}> Cadastrar usuário empresarial </Title>
+              <Title className = "titleForm" level={1}> Editar usuário empresarial </Title>
               <Divider className = "dividerForm" />
 
                         {/* Company User's Cnpj */}
