@@ -19,7 +19,10 @@ import iluminationIcon from './map-components/ilum.png';
 import mobilityIcon from './map-components/mobilidade.png'; 
 import viaIcon from './map-components/vias.jpeg'; 
 import naturezaIcon from './map-components/natureza.png'; 
-import accessIcon from './map-components/acessibilidade.png'; 
+import accessIcon from './map-components/acessibilidade.png';  
+import prefeituraIcon from './map-components/prefeitura.png';  
+import saneamentoIcon from './map-components/saneamento.png';  
+
 
 
 import MessageCardForm from './map-components/MessageCardForm'; 
@@ -35,13 +38,29 @@ var myIcon = L.icon({
 
 });   
 
-var icons = {
+var icons = { 
+  
+  'prefeituraIcon': L.icon({
+    iconUrl: prefeituraIcon,
+    iconSize: [30, 50],  
+    iconAnchor: [12.5, 41], 
+    popupAnchor: [0,-41] 
+  }), 
+  
+  'saneamentoIcon': L.icon({
+    iconUrl: saneamentoIcon,
+    iconSize: [30, 50],  
+    iconAnchor: [12.5, 41], 
+    popupAnchor: [0,-41] 
+  }), 
+  
   'securityIcon': L.icon({
     iconUrl: securityIcon,
     iconSize: [30, 50],  
     iconAnchor: [12.5, 41], 
     popupAnchor: [0,-41] 
   }), 
+
   'iluminationIcon': L.icon({ 
     iconUrl: iluminationIcon,
     iconSize: [30, 50],  
@@ -239,7 +258,7 @@ class ReportMap extends Component {
                     state: { 
                       position2
                     }  
-                  }} className="nav-link">Abrir relato </Link>  
+                  }} className="nav-link">Adicionar relato </Link>  
                 </li>  
                 </ul>
               </div>    

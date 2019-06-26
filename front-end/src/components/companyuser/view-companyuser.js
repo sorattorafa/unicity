@@ -50,27 +50,28 @@ export default class ViewCompanyUser extends Component {
                 street: response.data.street, 
                 number: response.data.number,
                 categories: response.data.categories
-            })  
+            })    
+            axios.get('/categories/')
+            .then(response => {
+                this.setState({  
+                    category: response.data
+                })  
+                this.state.category.map(categories => 
+                    {             
+                        if(categories._id === this.state.categories){ 
+                        this.setState({ 
+                            color: categories.color, 
+                            catname: categories.name
+                        }) 
+                        } 
+                    }
+                      
+                )
+                console.log(this.state.color)
+            })
         })
 
-        axios.get('/categories/')
-        .then(response => {
-            this.setState({  
-                category: response.data
-            })  
-            this.state.category.map(categories => 
-                {             
-                    if(categories._id === this.state.categories){ 
-                    this.setState({ 
-                        color: categories.color, 
-                        catname: categories.name
-                    }) 
-                    } 
-                }
-                  
-            )
-            console.log(this.state.color)
-        })
+      
     }
 
     render() {

@@ -29,10 +29,11 @@ class CreateReport extends React.Component {
     this.onChangeDescription = this.onChangeDescription.bind(this); 
     this.onChangeCategory = this.onChangeCategory.bind(this);
     this.onChangeLat = this.onChangeLat.bind(this); 
-    this.onChangeLng = this.onChangeLng.bind(this);
+    this.onChangeLng = this.onChangeLng.bind(this); 
+    const {lat,lng} = this.props.location.state.position2 
     this.state = {  
-      lat:'',  
-      lng:'',
+      lat: lat,  
+      lng: lng,
       title: '',
       cep: '',
       street: '',  
@@ -40,7 +41,7 @@ class CreateReport extends React.Component {
       category: '',
       description: '', 
       active: true
-    }
+    } 
   }
  
 
@@ -95,15 +96,16 @@ class CreateReport extends React.Component {
     this.props.form.setFieldsValue ({ 
       lat: this.props.location.state.position2.lat, 
       lng: this.props.location.state.position2.lng
-    }); 
+    });  
   }
 
   handleSubmit = e => {
-    e.preventDefault();
+    e.preventDefault(); 
+
+    console.log(this.state.position2)
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
-
         axios.post('/reports/add', values)
             .then(res => console.log(res.data));
 
@@ -195,47 +197,6 @@ class CreateReport extends React.Component {
                 })(<Input />)}
               </Form.Item>
                
-             {/* Report's LogLat */}
-            {/* <Col span={8}>
-              <Form.Item
-                label={
-                  <span>
-                    Lat&nbsp;
-                    <Tooltip title="latitude ?">
-                      <Icon type="question-circle-o" />
-                    </Tooltip>
-                  </span>
-                }
-              >
-                {getFieldDecorator('lat', {
-                  rules: [{ required: true, message: 'Insira o número da latitude relato!' }],
-                })(<Input
-                    disabled={true}
-                  />)}
-              </Form.Item>
-            </Col>  
-
-            <Col span={8}>
-              <Form.Item
-                label={
-                  <span>
-                    Lng&nbsp;
-                    <Tooltip title="longitude ?">
-                      <Icon type="question-circle-o" />
-                    </Tooltip>
-                  </span>
-                }
-              >
-                {getFieldDecorator('lng', {
-                  rules: [{ required: true, message: 'Insira o número da latitude relato!' }], 
-                })(<Input
-                    disabled={true}
-                  />)}
-              </Form.Item>
-            </Col>  */}
-
-          </Row>
-
             {/* Report's Street */}
             <Row gutter={24}>
               <Col span={14}>
@@ -323,7 +284,9 @@ class CreateReport extends React.Component {
                       <Option value="5d053c469dbdf87818fbfc43">Vias</Option>
                       <Option value="5d053cc99dbdf87818fbfc45">Iluminação</Option> 
                       <Option value="5d0bfc8591baa12cf537b9ec">Natureza</Option> 
-                      <Option value="5d0d451a27bb113f9265cf4b">Acessibilidade</Option>
+                      <Option value="5d0d451a27bb113f9265cf4b">Acessibilidade</Option> 
+                      <Option value="5d12b26269d6b84798edc226">Saneamento</Option> 
+                      <Option value="5d12b2a769d6b84798edc227">Prefeitura</Option>
                     </Select>,
                   )}
                 </Form.Item>
@@ -347,7 +310,51 @@ class CreateReport extends React.Component {
                 })(<TextArea rows={4} />)}
               </Form.Item>
             </Row>
-            
+             
+
+             {/* Report's LogLat */}
+             <Col span={8}>
+              <Form.Item
+                label={
+                  <span>
+                    Lat&nbsp;
+                    <Tooltip title="latitude ?">
+                      <Icon type="question-circle-o" />
+                    </Tooltip>
+                  </span>
+                }
+              >
+                {getFieldDecorator('lat', {
+                  rules: [{ required: true, message: 'Insira o número da latitude relato!' }],
+                })(<Input
+                    disabled={true}
+                  />)}
+              </Form.Item>
+            </Col>  
+
+            <Col span={8}>
+              <Form.Item
+                label={
+                  <span>
+                    Lng&nbsp;
+                    <Tooltip title="longitude ?">
+                      <Icon type="question-circle-o" />
+                    </Tooltip>
+                  </span>
+                }
+              >
+                {getFieldDecorator('lng', {
+                  rules: [{ required: true, message: 'Insira o número da latitude relato!' }], 
+                })(<Input
+                    disabled={true}
+                  />)}
+              </Form.Item>
+            </Col>  
+
+          </Row>
+
+
+
             {/* Submit Button */}
             <Row className="buttonForm">
               <Col span={24} style={{ textAlign: 'right' }}>

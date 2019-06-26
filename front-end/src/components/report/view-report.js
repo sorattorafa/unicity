@@ -32,7 +32,7 @@ export default class ViewReport extends Component {
           }
     }
 
-    componentDidMount() {
+    componentWillMount() {
         axios.get('/reports/'+this.props.match.params.id)
         .then(response => {
             this.setState({  
@@ -48,10 +48,8 @@ export default class ViewReport extends Component {
                 number_of_supports: response.data.number_of_supports,
                 status: response.data.status,
                 category: response.data.category
-            })
-        })
-
-        axios.get('/categories/')
+            }) 
+            axios.get('/categories/')
         .then(response => {
             this.setState({  
                 categories: response.data
@@ -69,6 +67,9 @@ export default class ViewReport extends Component {
             )
             console.log(this.state.color)
         })
+        })
+
+        
     }
 
     render() {
