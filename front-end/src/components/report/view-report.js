@@ -129,7 +129,12 @@ export default class ViewReport extends Component {
                                     </Descriptions.Item>
                                     <Descriptions.Item label="Denúncias" span={3}>
                                         {this.state.number_of_denunciations} <Icon type="dislike" />
-                                    </Descriptions.Item>
+                                    </Descriptions.Item>  
+                                    <Descriptions.Item label="Resolver Relato" span={3}>
+                                    <nav>
+                                     <a href={"http://localhost:3000/editreport/"+this.props.match.params.id}>Editar Estado Relato</a>
+                                    </nav>  
+                                    </Descriptions.Item>  
                                 </Descriptions>
                             </div>
                     </Content>

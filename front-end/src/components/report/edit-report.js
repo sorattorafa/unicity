@@ -148,7 +148,11 @@ class EditReport extends React.Component {
                                 {getFieldDecorator('status', {
                                     rules: [ {required: true}, {message: 'Insira o status!' }],
                                     initialValue: this.state.report.status,
-                                })(<Input disabled={this.state.visibility} />)}
+                                })(  <Select>
+                      <Option value="0">Aberto</Option>
+                      <Option value="1">Em andamento</Option>
+                      <Option value="2">Resolvido</Option>
+                    </Select>,<Input disabled={this.state.visibility}  />)}
                             </Form.Item>
                         </Row>
 
