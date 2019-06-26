@@ -26,7 +26,8 @@ class EditReport extends React.Component {
     
         this.onChangeStatusreport = this.onChangeStatusreport.bind(this);
         this.state = {
-          statusreport: '',
+          statusreport: '', 
+          report:[],
           active: true, 
           id:'',
           visibility: true,
@@ -34,7 +35,7 @@ class EditReport extends React.Component {
           // status: '2'                 // 0: simpleuser; 1: companyuser; 2: admin
         }
 
-        if (this.state.status === '2') {
+        if (this.state.status === '1') {
           this.state.visibility = false;
         }
 
@@ -45,14 +46,15 @@ class EditReport extends React.Component {
       // console.log(this.props.match.params);
       axios.get('/reports/' + this.props.match.params.id)
       .then(response => {
-          console.log(response.data);
           this.props.form.setFieldsValue({
             statusreport: response.data.status,
           });
           this.setState({
               id: this.props.match.params.id, 
-              statusreport: response.data.status
-          });
+              report: response.data    
+          }); 
+
+          console.log(this.state.report);
       });
 
   }
@@ -79,7 +81,7 @@ class EditReport extends React.Component {
                       // console.log("Status: " + res.status);
 
                       // Exibe notificação de sucesso
-                      if(res.status === 200) {
+                     // if(res.status === 200) {
                         notification['success']({
                           message: 'Sucesso!',
                           description: 'Empresa atualizada!'
@@ -87,8 +89,9 @@ class EditReport extends React.Component {
                         console.log('Relato atualizado com sucesso');
                         // Atualiza página
                         let id_report = this.state.id;
-                        this.setState({ nav: '/reports/' + id_report });
-                      } 
+                        this.setState({ nav: '/reports/' + id_report }); 
+                      window.location.replace("http://localhost:3000/viewreport/"+id_report);
+                     // }   
 
                     });
             }
@@ -144,7 +147,7 @@ class EditReport extends React.Component {
                             >
                                 {getFieldDecorator('status', {
                                     rules: [ {required: true}, {message: 'Insira o status!' }],
-                                    initialValue: this.state.statusreport.toString(),
+                                    initialValue: this.state.report.status,
                                 })(<Input disabled={this.state.visibility} />)}
                             </Form.Item>
                         </Row>
