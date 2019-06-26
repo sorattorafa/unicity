@@ -27,9 +27,7 @@ exports.update = async(id,data) => {
     .findByIdAndUpdate(id, { 
         $set: {  
             // can update anything 
-            cep:data.cep,  
-            street: data.street,
-            number: data.number
+            status:data.status
         }
     });
 } 
