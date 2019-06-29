@@ -64,17 +64,21 @@ const schema = new Schema({
         required: true, 
         default:0 
     },    
-     
     comment: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Comment' 
     },  
-
     city: {  
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'City'
         // required: true
     },     
+        
+    simpleuser: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Simpleuser', 
+        required:true 
+    }, 
      
   //categories: [{  
     category: {  
