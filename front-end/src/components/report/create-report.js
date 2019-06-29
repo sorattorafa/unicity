@@ -27,10 +27,12 @@ class CreateReport extends React.Component {
     this.onChangeStreet = this.onChangeStreet.bind(this); 
     this.onChangeNumber = this.onChangeNumber.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this); 
-    this.onChangeCategory = this.onChangeCategory.bind(this);
+    this.onChangeCategory = this.onChangeCategory.bind(this); 
+    this.onChangeSimpleuser = this.onChangeSimpleuser.bind(this);
     this.onChangeLat = this.onChangeLat.bind(this); 
     this.onChangeLng = this.onChangeLng.bind(this); 
-    const {lat,lng} = this.props.location.state.position2 
+    const {lat,lng} = this.props.location.state.position2; 
+    const iduser = this.props.match.params.id; 
     this.state = {  
       lat: lat,  
       lng: lng,
@@ -39,7 +41,8 @@ class CreateReport extends React.Component {
       street: '',  
       number: '', 
       category: '',
-      description: '', 
+      description: '',  
+      simpleuser:iduser,
       active: true
     } 
   }
@@ -49,7 +52,14 @@ class CreateReport extends React.Component {
     this.setState({
         lng: e.target.value
     });
-  } 
+  }  
+
+  onChangeSimpleuser(e) {
+    this.setState({
+        simpleuser: e.target.value
+    });
+  }  
+
   onChangeLat(e) {
     this.setState({
         lat: e.target.value
@@ -91,7 +101,7 @@ class CreateReport extends React.Component {
    // this.setState({
    //   lat:
    //   lng
-   // }) 
+   // })  
     this.props.form.validateFields(); 
     this.props.form.setFieldsValue ({ 
       lat: this.props.location.state.position2.lat, 
@@ -104,8 +114,9 @@ class CreateReport extends React.Component {
 
     console.log(this.state.position2)
     this.props.form.validateFields((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values);
+      if (!err) {  
+        values.simpleuser = this.state.simpleuser
+        console.log('Received values of form: ', values); 
         axios.post('/reports/add', values)
             .then(res => console.log(res.data));
 
@@ -117,10 +128,10 @@ class CreateReport extends React.Component {
           street: '',  
           number: '', 
           category:'',
-          description: '',
+          description: '', 
           active: true
         }) 
-        window.location.replace("http://localhost:3000/map"); 
+//        window.location.replace("http://localhost:3000/map"); 
       }
     });
   };
@@ -140,7 +151,8 @@ class CreateReport extends React.Component {
     };
 
     // Only show error after a field is touched.
-    const titleError = isFieldTouched('title') && getFieldError('title');
+    const titleError = isFieldTouched('title') && getFieldError('title'); 
+    const simpleuserError = isFieldTouched('simpleuser') && getFieldError('simpleuser');
     const cepError = isFieldTouched('cep') && getFieldError('cep');
     const streetError = isFieldTouched('street') && getFieldError('street');
     const numberError = isFieldTouched('number') && getFieldError('number'); 
@@ -352,8 +364,6 @@ class CreateReport extends React.Component {
             </Col>  
 
           </Row>
-
-
 
             {/* Submit Button */}
             <Row className="buttonForm">

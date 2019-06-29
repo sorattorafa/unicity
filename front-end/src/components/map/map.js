@@ -124,7 +124,8 @@ class ReportMap extends Component {
     reports: [], 
     label: ''
   }  
-  componentDidMount() { 
+  componentDidMount() {  
+    console.log(this.props.match.params.id)
     axios.get('/reports')
     .then(response => {
         this.setState({reports: response.data}); 
@@ -221,7 +222,8 @@ class ReportMap extends Component {
     // primeira posição pode ser encontrada automaticamente
     const position = [this.state.location.lat, this.state.location.lng]; 
     // posição para o clique do mouse  
-    const position2 = this.state.location2; 
+    const position2 = this.state.location2;   
+    const iduser = this.props.match.params.id;
     //posição dividida em longitude e latitude 
     const {lat, lng} = this.state.location2;  
     return (
@@ -254,7 +256,7 @@ class ReportMap extends Component {
               <ul className="navbar-nav mr-auto">
                 <li className="navbar-item">
                   <Link to = {{ 
-                    pathname:'/createreport',  
+                    pathname:'/createreport/'+iduser,  
                     state: { 
                       position2
                     }  

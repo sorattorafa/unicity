@@ -45,7 +45,7 @@ class App extends Component {
           <Route path="/edit/:id" component={ EditSimpleuser } />
           <Route path="/listusers" component={ SimpleusersList } />  
           <Route path="/delete/:id" component={ DeleteSimpleuser } />
-          <Route path="/createreport" component={ CreateReport } />
+          <Route path="/createreport/:id" component={ CreateReport } />
           <Route path="/viewreport/:id" component={ ViewReport } />  
           <Route path="/editreport/:id" component={ EditReport } /> 
           <Route path="/listreport" component={ ListReports } />
@@ -56,7 +56,8 @@ class App extends Component {
           <Route path="/viewcompanyuser/:id" component={ ViewCompanyUser } /> 
           <Route path="/listcompanyusers" component={ ListCompanyUsers } /> 
           <Route path="/createcategory" component={ CreateCategory } />
-          <Route path = "/map" exact component = { ReportMap } />
+          <Route path = "/map/:id" exact component = { ReportMap } /> 
+          <Route path = "/map/" exact component = { ReportMap } />
           <Route path = "/" exact component = { PublicHome } />
 
           {/* <Route path = "*" component = { NotFound } /> */}
