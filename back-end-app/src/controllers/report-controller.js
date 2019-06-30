@@ -26,6 +26,16 @@ exports.getById = async (req, res, next) =>{
             message: 'Falha ao processar sua requisição'
         });
     }    
+};  
+exports.getBySimpleuser = async (req, res, next) =>{ 
+    try {
+        var data = await repository.getBySimpleuser(req.params.id); 
+        res.status(200).send(data);
+    } catch (e) { 
+        res.status(500).send({ 
+            message: 'Falha ao processar sua requisição'
+        });
+    }    
 }; 
  
 // create / set / update / delete  
