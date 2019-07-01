@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
-// import { Map, TileLayer, Marker} from 'react-leaflet';
-// import { Card, CardText, Button} from 'reactstrap';
-// import "bootstrap/dist/css/bootstrap.min.css";
 
 //Components of Simple Users
 import CreateUser from "./components/simpleuser/create-user.component";
@@ -24,12 +21,13 @@ import ListAdminUser from "./components/adminuser/list-adminuser";
 
 // Components of Company Users
 import CreateCompanyUser from "./components/companyuser/create-companyuser";
+import ProfileCompanyUser from "./components/companyuser/profile-companyuser";
 import EditCompanyUser from "./components/companyuser/edit-companyuser";
 import ViewCompanyUser from "./components/companyuser/view-companyuser";
 import ListCompanyUsers from "./components/companyuser/list-companyusers";
 
 // Components of Categories
-import CreateCategory from "./components/categories/create-category";
+// import CreateCategory from "./components/categories/create-category";
 
 // Components of Map
 import ReportMap from "./components/map/map";
@@ -56,10 +54,11 @@ class App extends Component {
           <Route path="/createadminuser" component={ CreateAdminUser } />
           <Route path="/listadminusers" component={ ListAdminUser } />
           <Route path="/createcompanyuser" component={ CreateCompanyUser } />
+          <Route path="/profilecompanyuser/:id" component={ ProfileCompanyUser } />
           <Route path="/editcompanyuser/:id" component={ EditCompanyUser } />
           <Route path="/viewcompanyuser/:id" component={ ViewCompanyUser } /> 
           <Route path="/listcompanyusers" component={ ListCompanyUsers } /> 
-          <Route path="/createcategory" component={ CreateCategory } />
+          {/* <Route path="/createcategory" component={ CreateCategory } /> */}
           <Route path = "/map/:id" exact component = { ReportMap } /> 
           <Route path = "/map/" exact component = { ReportMap } />
           <Route path = "/" exact component = { PublicHome } />

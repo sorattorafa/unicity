@@ -1,6 +1,6 @@
 import { Divider, Typography, Layout, Form, Row, Col, Icon, Input, Button, Tooltip, Select, notification } from 'antd';
 import React from 'react';
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import "antd/dist/antd.css";
 // import "./index.css";
 import axios from 'axios';
@@ -54,6 +54,7 @@ class CreateCompanyUser extends React.Component {
           // status: '2'                 // 0: simpleuser; 1: companyuser; 2: admin
         }
 
+        // Se for ADM
         if (this.state.status === '2') {
           this.state.visibility = false;
         }
@@ -207,7 +208,11 @@ class CreateCompanyUser extends React.Component {
           
           <Content className = "contentLayoutForm" style = {{ padding: "30px 20px 0px 20px" }} >
             <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+
+              {this.state.visibility === false ?
               <Title className = "titleForm" level={1}> Editar usuário empresarial </Title>
+              : <Title className = "titleForm" level={1}> Editar Perfil </Title>
+              }
               <Divider className = "dividerForm" />
 
                         {/* Company User's Cnpj */}
@@ -441,6 +446,11 @@ class CreateCompanyUser extends React.Component {
                                     <Button type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())}>
                                         Atualizar
                                     </Button>
+                                    <Link style = {{paddingLeft: "5px"}} to = { "/viewcompanyuser/" + this.state.id} >
+                                        <Button className = "buttonNav" type = "primary">
+                                            Cancelar
+                                        </Button>
+                                    </Link>
                                 </Form.Item>
                             </Col>
                         </Row>

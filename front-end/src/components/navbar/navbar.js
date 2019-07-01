@@ -6,7 +6,7 @@ import { Link, Redirect } from "react-router-dom";
 
 import Login from '../login/login';
 import './navbar.css';
-import { getToken, getStatus, logout } from '../services/auth';
+import { getToken, getStatus, getUserId, logout } from '../services/auth';
 
 
 const { Header } = Layout;
@@ -52,13 +52,19 @@ export default class NavBar extends Component {
 
     let menu = (
       <Menu>
-        { this.state.token && (this.state.status === '0' || this.state.status === '1') ?
+        { this.state.token && (this.state.status === '0') ?
           <Menu.Item className = "linkNav" key = "perfil">
-            <Link className = "linkNav" to = "/perfil">
+            <Link className = "linkNav" to = {"/perfil/" + getUserId()}>
               <Icon type = "setting" /> Perfil
             </Link>
           </Menu.Item>
-        : null }
+        : this.state.token && (this.state.status === '1') ?
+        <Menu.Item className = "linkNav" key = "perfil">
+          <Link className = "linkNav" to = {"/profilecompanyuser/" + getUserId()} >
+            <Icon type = "setting" /> Perfil
+          </Link>
+        </Menu.Item>
+      : null }
 
         <Menu.Item className = "linkNav" key = "logout" onClick = { this.signout }>
           <Icon type = "logout" /> Logout

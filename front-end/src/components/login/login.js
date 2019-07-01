@@ -54,7 +54,7 @@ export default class Login extends Component {
             if (simpleuser.email === email){ 
                 if(simpleuser.password === senha){
                   var token = jwt.sign({ id: simpleuser.cpf }, 'secret', { expiresIn: 14400 });
-                  login(token, 0);
+                  login(token, 0, simpleuser._id);
                   this.state.finduser = true 
                   const menuuser = "http://localhost:3000/menusimpleuser/"+simpleuser._id
                      window.location.replace(menuuser); 
@@ -78,7 +78,7 @@ export default class Login extends Component {
             if (companyuser.email === email){ 
                 if(companyuser.password === senha){
                   var token = jwt.sign({ id: companyuser.cnpj }, 'secret', { expiresIn: 14400 });
-                  login(token, 1);
+                  login(token, 1, companyuser._id);
                   this.state.finduser = true;
                   window.location.replace("http://localhost:3000/listReport"); 
                   // window.location.replace("http://localhost:3000/viewcompanyuser/"+companyuser._id); 
@@ -102,7 +102,7 @@ export default class Login extends Component {
               if (adminuser.email === email){ 
                   if(adminuser.password === senha){
                     var token = jwt.sign({ id: adminuser.cpf }, 'secret', { expiresIn: 14400 });
-                    login(token, 2);
+                    login(token, 2, adminuser._id);
                     this.state.finduser = true
                     window.location.replace("http://localhost:3000/listusers"); 
                       //this.props.history.push('/map'); 
