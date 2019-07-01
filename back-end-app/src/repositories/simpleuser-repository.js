@@ -31,6 +31,11 @@ exports.delete = async(id) => {
     await Simpleuser.findByIdAndDelete(id);
 }  
 
+exports.getById = async(id) => { 
+    const res = await Simpleuser
+        .findById(id)  
+    return res;    
+}
 
 exports.getByEmail = async(email) => { 
     const res = await Simpleuser.find({  

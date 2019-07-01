@@ -29,7 +29,6 @@ export default class ProfileCompanyUser extends React.Component {
           number: '',
           email: '',  
           password: '',
-          confirmpassword: '',
           categories: '',
           active: true,
           visibility: true,
@@ -44,7 +43,6 @@ export default class ProfileCompanyUser extends React.Component {
     }
 
     componentWillMount(){
-    // componentDidMount() {
       // console.log(this.props.match.params);
       axios.get('/companyusers/' + this.props.match.params.id)
       .then(response => {

@@ -16,8 +16,19 @@ exports.get = async (req, res, next) =>{
     }    
 }; 
 
-
 // Get simple users by id 
+exports.getById = async (req, res, next) =>{ 
+    try {
+        var data = await repository.getById(req.params.id); 
+        res.status(200).send(data);
+    } catch (e) { 
+        res.status(500).send({ 
+            message: 'Falha ao processar sua requisição'
+        });
+    }    
+};
+
+// Get simple users by email 
 exports.getByEmail = async (req, res, next) =>{ 
     try {
         var data = await repository.getByEmail(req.params.email); 
@@ -80,7 +91,7 @@ exports.put = (req, res, next) => {
         });  
 }; 
 
- 
+// delete - remove
 exports.delete = (req, res, next) => {  
     repository.delete(req.params.id) 
         .then(x=>{ 

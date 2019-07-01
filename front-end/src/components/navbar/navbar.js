@@ -54,7 +54,7 @@ export default class NavBar extends Component {
       <Menu>
         { this.state.token && (this.state.status === '0') ?
           <Menu.Item className = "linkNav" key = "perfil">
-            <Link className = "linkNav" to = {"/perfil/" + getUserId()}>
+            <Link className = "linkNav" to = {"/profilesimpleuser/" + getUserId()}>
               <Icon type = "setting" /> Perfil
             </Link>
           </Menu.Item>

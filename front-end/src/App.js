@@ -3,6 +3,7 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 
 //Components of Simple Users
 import CreateUser from "./components/simpleuser/create-user.component";
+import ProfileSimpleuser from "./components/simpleuser/profile-simpleuser";
 import EditSimpleuser from "./components/simpleuser/edit-simpleuser.component";
 import SimpleusersList from "./components/simpleuser/list-simpleuser";
 import DeleteSimpleuser from "./components/simpleuser/delete-simpleuser";
@@ -42,6 +43,7 @@ class App extends Component {
       <BrowserRouter>
         <Switch>
           <Route path="/createuser" component={ CreateUser } />
+          <Route path="/profilesimpleuser/:id" component={ ProfileSimpleuser } />
           <Route path="/edit/:id" component={ EditSimpleuser } />
           <Route path="/listusers" component={ SimpleusersList } />  
           <Route path="/menusimpleuser/:id" component={ MenuSimpleUser } />  
