@@ -80,7 +80,7 @@ exports.put = (req, res, next) => {
     repository  
         .update(req.params.id, req.body)
         .then(x=>{ 
-            res.status(201).send({ 
+            res.status(200).send({ 
                 message: 'Usuario atualizado com sucesso!' 
             });
         }).catch(e=>{ 
@@ -105,3 +105,41 @@ exports.delete = (req, res, next) => {
             });
         });  
 };  
+
+//Login
+exports.login = async(req, res, next) => {   
+    // console.log("email: " + req.params.email);
+    // console.log("senha: " + req.params.password);
+    let email = req.params.email;
+    let password = req.params.password;
+    let contract = new ValidationContract();    // Usado para fazer a validação de dados
+    contract.isEmail(req.params.email, 'Digite um e-mail válido!') 
+    
+    // if data is valid
+    if (!contract.isValid()){ 
+        res.status(400).send(contract.errors()).end();  // Manda mensagens de erros para tela
+        return;
+    }
+
+    try {
+        var list_users = await repository.getByEmail(email);
+        // console.log("users: " + list_users);
+        if (list_users){
+            list_users.map(simpleuser => {
+                if (simpleuser.email === email){ 
+                    if(simpleuser.password === password){
+                        res.status(200).send(simpleuser);
+                    }
+                }
+            });
+        } else {
+            res.status(401).send({ 
+                message: 'Usuário não cadastrado.'
+            });
+        }
+    } catch (e) { 
+        res.status(500).send({ 
+            message: 'Falha ao processar sua requisição'
+        });
+    }
+}; 

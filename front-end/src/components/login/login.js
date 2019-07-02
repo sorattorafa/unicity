@@ -46,28 +46,46 @@ export default class Login extends Component {
     e.preventDefault();
     this.setState({ loading: true })
     const { email, senha } = this.state;  
-
-    axios.get('/simpleusers/'+email)
+// console.log("Passou 3");
+    axios.post('/simpleusers/login/'+ email + '/' + senha)
     .then(response => {
-        this.setState({simpleusers: response.data});  
-        this.state.simpleusers.map(simpleuser => {  
-            if (simpleuser.email === email){ 
-                if(simpleuser.password === senha){
-                  var token = jwt.sign({ id: simpleuser.cpf }, 'secret', { expiresIn: 14400 });
-                  login(token, 0, simpleuser._id);
-                  this.state.finduser = true 
-                  const menuuser = "http://localhost:3000/menusimpleuser/"+simpleuser._id
-                     window.location.replace(menuuser); 
-                    //this.props.history.push('/map'); 
-                    //console.log(this.state.loginaceito)
-                    //window.location.replace("http://localhost:3000/create"); 
-                } 
-            } 
-        }
-        ) 
+      if(response.status === 200) {
+        var token = jwt.sign({ id: response.data._id }, 'secret', { expiresIn: 14400 });
+        login(token, 0, response.data._id);
+        this.state.finduser = true 
+        const menuuser = "http://localhost:3000/menusimpleuser/" + response.data._id
+            window.location.replace(menuuser); 
+
+      } else if (response.status === 401) {
+        notification['error']({
+          message: 'Não foi possível realizar o login.',
+          description: 'Email não cadastrado!'
+        });
+
+      } else {
+        notification['error']({
+          message: 'Não foi possível realizar o login.',
+          description: 'Senha incompatível.'
+        });
+      }
+      
     })
     .catch(function (error) {
-        console.log(error);
+      // console.log("Erro:" + error.response);
+      // console.log("Erro:" + error.response.status);
+      if (error.response.status === 400) {
+        notification['error']({
+          message: 'Não foi possível realizar o login.',
+          description: 'Digite um email válido!'
+        });
+
+      } else if (error.response.status === 500) {
+        notification['error']({
+          message: 'Não foi possível realizar o login.',
+          description: 'Problemas com o servidor. Consulte um técnico.'
+        });
+
+      }
     }) 
 
     if(this.state.finduser === false){ 
