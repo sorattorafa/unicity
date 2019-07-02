@@ -10,7 +10,8 @@ export default class MenuSimpleUser extends Component {
     }
     render() {  
         const url = "/listreportbyuser/"+this.props.match.params.id; 
-        const mapuser = "/map/"+this.props.match.params.id;
+        const mapuser = "/map/"+this.props.match.params.id; 
+        const perfiluser = "/profilesimpleuser/"+this.props.match.params.id;
         return (    
             <div className="container">  
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -21,6 +22,9 @@ export default class MenuSimpleUser extends Component {
                 </li> 
                 <li className="navbar-item">
                   <Link to={url} className="nav-link">Listar meus relatos</Link>
+                </li>  
+                <li className="navbar-item">
+                  <Link to={perfiluser} className="nav-link">Perfil do Usuário</Link>
                 </li> 
                    
                 {/*
