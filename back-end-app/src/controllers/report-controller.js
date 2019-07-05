@@ -37,7 +37,17 @@ exports.getBySimpleuser = async (req, res, next) =>{
         });
     }    
 }; 
- 
+
+exports.getByCategory = async (req, res, next) =>{ 
+    try {
+        var data = await repository.getByCategory(req.params.id); 
+        res.status(200).send(data);
+    } catch (e) { 
+        res.status(500).send({ 
+            message: 'Falha ao processar sua requisição'
+        });
+    }    
+};  
 // create / set / update / delete  
 //post - create
 exports.post = async(req, res, next) => {  

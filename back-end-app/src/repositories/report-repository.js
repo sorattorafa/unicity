@@ -18,6 +18,11 @@ exports.getById = async(id) => {
 exports.getBySimpleuser = async(id) => { 
     const res = await Report.find({simpleuser:id}, 'lat lng title description category street number').populate('category');
     return res;    
+}  
+
+exports.getByCategory = async(id) => { 
+    const res = await Report.find({category:id}, 'lat lng title description category street number').populate('category');
+    return res;    
 } 
 exports.create = async (data) => { 
     var report = new Report(data); 
