@@ -12,8 +12,10 @@ import MenuSimpleUser from "./components/simpleuser/menu-user";
 //Components of Reports
 import CreateReport from "./components/report/create-report";
 import ViewReport from "./components/report/view-report";
+import ViewReportCompany from "./components/report/view-report-company"; 
 import ListReports from "./components/report/list-reports";  
 import ListReportsByuser from "./components/report/list-reports-byuser"; 
+import ListReportsByCompanyuser from "./components/report/list-reports-by-companyuser"; 
 import EditReport from  "./components/report/edit-report";
 
 // Components of Admin Users
@@ -49,10 +51,12 @@ class App extends Component {
           <Route path="/menusimpleuser/:id" component={ MenuSimpleUser } />  
           <Route path="/delete/:id" component={ DeleteSimpleuser } />
           <Route path="/createreport/:id" component={ CreateReport } />
-          <Route path="/viewreport/:id" component={ ViewReport } />  
+          <Route path="/viewreport/:id" component={ ViewReport } />   
+          <Route path="/viewreportcompany/:id" component={ ViewReportCompany } />  
           <Route path="/editreport/:id" component={ EditReport } /> 
           <Route path="/listreport" component={ ListReports } /> 
-          <Route path="/listreportbyuser/:id" component={ ListReportsByuser } />
+          <Route path="/listreportbyuser/:id" component={ ListReportsByuser } /> 
+          <Route path="/listreportbycompanyuser/:id" component={ ListReportsByCompanyuser } />
           <Route path="/createadminuser" component={ CreateAdminUser } />
           <Route path="/listadminusers" component={ ListAdminUser } />
           <Route path="/createcompanyuser" component={ CreateCompanyUser } />
