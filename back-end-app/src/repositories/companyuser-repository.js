@@ -60,7 +60,7 @@ exports.update = async(id,data) => {
             categories: data.categories
         }
     });
-} 
+}  
 
 exports.delete = async(cnpj) => { 
     await Companyuser 

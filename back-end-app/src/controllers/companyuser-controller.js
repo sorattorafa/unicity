@@ -114,7 +114,8 @@ exports.put = (req, res, next) => {
                 data: e 
             });
         });  
-};
+}; 
+ 
  
 // delete product  
 exports.delete = (req, res, next) => {  
