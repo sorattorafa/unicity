@@ -107,7 +107,7 @@ export default class ListAdminUser extends React.Component {
         <NavBar />
         
         <Layout>
-          <LateralMenu pagina = "listadminuser" />
+          <LateralMenu pagina = "listAdminUser" />
           
           <Content className = "contentLayoutForm" style = {{ padding: "30px 20px 0px 20px" }} >
 

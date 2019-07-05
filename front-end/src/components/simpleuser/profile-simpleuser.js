@@ -1,4 +1,4 @@
-import { Divider, Typography, Layout, Avatar, Row, Col, Icon, Button, Tag } from 'antd';
+import { Divider, Typography, Layout, Row, Col, Icon, Button, Table, notification } from 'antd';
 import React from 'react';
 import { Redirect, Link } from "react-router-dom";
 import "antd/dist/antd.css";
@@ -7,10 +7,29 @@ import axios from 'axios';
 
 import NavBar from '../../components/navbar/navbar';
 import LateralMenu from '../../components/lateralmenu/lateralmenu';
-import { getToken, getStatus } from '../services/auth';
+import { getToken, getStatus, getUserId } from '../services/auth';
 
 const { Title } = Typography;
 const { Content } = Layout;
+
+const columns = [ 
+  {
+    title: 'Nome',
+    dataIndex: 'title',
+    onFilter: (value, record) => record.name.indexOf(value) === 0,
+    sorter: (a, b) => ("" + a.name).localeCompare(b.name),
+    defaultSortOrder: 'ascend',
+    sortDirections: ['ascend', 'descend'],
+  },
+  {
+    title: 'View',
+    dataIndex: '',
+    key: 'x',
+    render: (text, record) => 
+                                <Icon type = "eye" theme = "twoTone" twoToneColor = "#f5222d" />
+   
+  },
+];
 
 
 export default class ProfileSimpleUser extends React.Component {
@@ -24,6 +43,7 @@ export default class ProfileSimpleUser extends React.Component {
         cpf: '',
         name: '',
         email: '',
+        reports: [],
         active: true,
         visibility: true,
         status: getStatus()            // 0: simpleuser; 1: companyuser; 2: admin
@@ -33,19 +53,31 @@ export default class ProfileSimpleUser extends React.Component {
 
   componentWillMount(){
     // console.log(this.props.match.params);
-    axios.get('/simpleusers/' + this.props.match.params.id)
+    axios.get('/simpleusers/' + getUserId())
     .then(response => {
         console.log(response.data);
         
         this.setState({
-          id: this.props.match.params.id,
+          id: getUserId(),
           cpf: response.data.cpf,
           name: response.data.name,
           email: response.data.email
         });
+
+        axios.get('/reports/byuser/' + getUserId())
+        .then(response => {
+          this.setState({reports: response.data}); 
+          console.log(this.state.reports)
+        })
+        .catch(function (error) {
+          notification['error']({
+            message: 'Erro!',
+            description: 'Não foi possível carregar os relatos. Tente novamente mais tarde. Se persistir, consulte um técnico.'
+          });
+            console.log(error);
+        })
     });
   }
-
 
     render() {
 
@@ -87,6 +119,13 @@ export default class ProfileSimpleUser extends React.Component {
                                 {this.state.email}  
                             </Col>
                         </Row>
+
+                        <Divider />
+                        <Title level={4}> Seus Relatos </Title>
+                        <Row>
+                          <Table rowKey="_id" columns={columns} dataSource={this.state.reports} />
+                        </Row>
+
                     
                     </Content>
                 </Layout>

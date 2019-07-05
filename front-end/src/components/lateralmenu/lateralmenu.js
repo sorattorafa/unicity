@@ -71,14 +71,14 @@ export default class LateralMenu extends Component {
               </Link>
             </Menu.Item>
           : null }
-          { this.state.status === '2' ?
+          {/* { this.state.status === '2' ?
             <Menu.Item key = "createadminuser">
               <Link to = "/createadminuser">
                 <Icon type = "team" />
                 <span> Criar ADM </span>
               </Link>
             </Menu.Item>
-          : null }
+          : null } */}
           {/* { this.state.status === '2' ?
             <Menu.Item key = "CreateCategory">
               <Link to = "/createcategory">

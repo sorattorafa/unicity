@@ -32,7 +32,7 @@ export default class SimpleUsersList extends Component {
         super(props);
         this.state = {simpleusers: []};
     }
-    componentDidMount() { 
+    componentWillMount() { 
         axios.get('/simpleusers')
             .then(response => {
                 this.setState({simpleusers: response.data});
