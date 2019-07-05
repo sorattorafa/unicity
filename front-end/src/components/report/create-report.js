@@ -7,6 +7,7 @@ import axios from 'axios';
 
 import NavBar from '../../components/navbar/navbar';
 import LateralMenu from '../../components/lateralmenu/lateralmenu';
+import { getUserId } from '../services/auth';
 
 const { Option } = Select;
 const TextArea = Input.TextArea;
@@ -32,7 +33,7 @@ class CreateReport extends React.Component {
     this.onChangeLat = this.onChangeLat.bind(this); 
     this.onChangeLng = this.onChangeLng.bind(this); 
     const {lat,lng} = this.props.location.state.position2; 
-    const iduser = this.props.match.params.id; 
+    const iduser = getUserId(); 
     this.state = {  
       lat: lat,  
       lng: lng,
@@ -101,7 +102,7 @@ class CreateReport extends React.Component {
    // this.setState({
    //   lat:
    //   lng
-   // })  
+   // })   
     this.props.form.validateFields(); 
     this.props.form.setFieldsValue ({ 
       lat: this.props.location.state.position2.lat, 
@@ -115,7 +116,7 @@ class CreateReport extends React.Component {
     console.log(this.state.position2)
     this.props.form.validateFields((err, values) => {
       if (!err) {  
-        values.simpleuser = this.state.simpleuser
+        values.simpleuser = getUserId()
         console.log('Received values of form: ', values); 
         axios.post('/reports/add', values)
             .then(res => console.log(res.data));
@@ -131,7 +132,7 @@ class CreateReport extends React.Component {
           description: '', 
           active: true
         }) 
-//        window.location.replace("http://localhost:3000/map"); 
+        window.location.replace("http://localhost:3000/map"); 
       }
     });
   };

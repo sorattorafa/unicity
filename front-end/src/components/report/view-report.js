@@ -109,8 +109,10 @@ export default class ViewReport extends Component {
                                     </Descriptions.Item>
                                     <Descriptions.Item label="Status" span ={2}>
                                         <StatusCheck ReportStatus={this.state.status} />,
-                                        <br />
-                                        Data de Criação: {FormatDate}
+                                        <br />  
+                                        </Descriptions.Item> 
+                                    <Descriptions.Item label="Data de criação" span ={2}>
+                                        {FormatDate}
                                     </Descriptions.Item>
                                     <Descriptions.Item label="Endereço" span={1}>
                                         Rua: {this.state.street}
@@ -118,12 +120,14 @@ export default class ViewReport extends Component {
                                         Número: {this.state.number}
                                         <br />
                                         Cep: {this.state.cep}
-                                    </Descriptions.Item>
+                                    </Descriptions.Item> 
+                                    {/** 
                                     <Descriptions.Item label="Posição" span={2}>
                                         Latitude: {this.state.lat}
                                         <br />
                                         Longitude: {this.state.lng}
-                                    </Descriptions.Item>
+                                    </Descriptions.Item> 
+                                    */}
                                     <Descriptions.Item label="Apoiadores" span={3}>
                                         {this.state.number_of_supports} <Icon type="like" />
                                     </Descriptions.Item>

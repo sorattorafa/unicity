@@ -53,8 +53,8 @@ export default class Login extends Component {
         var token = jwt.sign({ id: response.data._id }, 'secret', { expiresIn: 14400 });
         login(token, 0, response.data._id);
         this.state.finduser = true 
-        const menuuser = "http://localhost:3000/menusimpleuser/" + response.data._id
-            window.location.replace(menuuser); 
+        const menuuser = "http://localhost:3000/listreport"
+            window.location.replace("http://localhost:3000/listreport"); 
 
       } else if (response.status === 401) {
         notification['error']({

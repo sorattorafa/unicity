@@ -32,7 +32,7 @@ export default class ViewReportCompany extends Component {
           }
     }
 
-    componentWillMount() {
+    componentWillMount() { 
         axios.get('/reports/'+this.props.match.params.id)
         .then(response => {
             this.setState({  

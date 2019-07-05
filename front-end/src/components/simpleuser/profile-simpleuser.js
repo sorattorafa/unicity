@@ -20,15 +20,26 @@ const columns = [
     sorter: (a, b) => ("" + a.name).localeCompare(b.name),
     defaultSortOrder: 'ascend',
     sortDirections: ['ascend', 'descend'],
-  },
+  }, 
+  /**
   {
     title: 'View',
     dataIndex: '',
     key: 'x',
     render: (text, record) => 
-                                <Icon type = "eye" theme = "twoTone" twoToneColor = "#f5222d" />
-   
-  },
+  },  
+   */
+  {
+    title: 'Visualizar Relato',
+    key: 'action',
+    render:  (text, record) =>  
+     (  
+      <span>  
+        <Icon type = "eye" theme = "twoTone" twoToneColor = "#f5222d" />   
+        <a href={"http://localhost:3000/viewreport/"+record._id}> Visualizar Relato</a>
+      </span> 
+    ), 
+  }, 
 ];
 
 

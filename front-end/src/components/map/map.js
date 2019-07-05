@@ -256,7 +256,7 @@ class ReportMap extends Component {
               <ul className="navbar-nav mr-auto">
                 <li className="navbar-item">
                   <Link to = {{ 
-                    pathname:'/createreport/'+iduser,  
+                    pathname:'/createreport',  
                     state: { 
                       position2
                     }  

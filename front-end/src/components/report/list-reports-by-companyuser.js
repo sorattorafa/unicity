@@ -3,7 +3,7 @@ import { Divider, Typography, Layout, Row, Col, Icon, List, Tag, notification } 
 import axios from 'axios';
 import NavBar from '../../components/navbar/navbar';
 import LateralMenu from '../../components/lateralmenu/lateralmenu';
-
+import { TOKEN_KEY, getToken, getStatus } from '../services/auth';
 const { Title } = Typography;
 const { Content } = Layout;
 
@@ -26,7 +26,7 @@ class ListReportsByCompanyuser extends Component {
   }
 
   componentDidMount() { 
-      console.log(this.props.match.params.id)  
+      //console.log(this.props.match.params.id)  
       axios.get('/companyusers/'+this.props.match.params.id)
       .then(response => {
         this.setState({companyusers: response.data});  

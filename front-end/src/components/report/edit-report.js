@@ -7,7 +7,7 @@ import axios from 'axios';
 
 import NavBar from '../../components/navbar/navbar';
 import LateralMenu from '../../components/lateralmenu/lateralmenu';
-import { getToken, getStatus } from '../services/auth';
+import { getToken, getStatus, getUserId } from '../services/auth';
 
 const TextArea = Input.TextArea;
 const { Title } = Typography;
@@ -41,7 +41,8 @@ class EditReport extends React.Component {
 
     }
 
-    componentWillMount(){
+    componentWillMount(){ 
+        console.log(getUserId())
     // componentDidMount() {
       // console.log(this.props.match.params);
       axios.get('/reports/' + this.props.match.params.id)
@@ -139,7 +140,7 @@ class EditReport extends React.Component {
                                 label={
                                     <span>
                                         Status&nbsp;
-                                        <Tooltip title="Qual é o status da empresa?">
+                                        <Tooltip title="Qual é o status do relato?">
                                             <Icon type="question-circle-o" />
                                         </Tooltip>
                                     </span>
