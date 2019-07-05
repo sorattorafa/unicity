@@ -75,7 +75,7 @@ class EditReport extends React.Component {
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 // console.log('Received values of form: ', values);
-    
+                values.solver = getUserId()        
                 axios.put('/reports/' + this.state.id , values)
                     .then(res => {
                       // console.log(res.data);
@@ -85,13 +85,13 @@ class EditReport extends React.Component {
                      // if(res.status === 200) {
                         notification['success']({
                           message: 'Sucesso!',
-                          description: 'Empresa atualizada!'
+                          description: 'Relato atualizada!'
                         });
                         console.log('Relato atualizado com sucesso');
                         // Atualiza página
                         let id_report = this.state.id;
-                        this.setState({ nav: '/reports/' + id_report }); 
-                      window.location.replace("http://localhost:3000/viewreport/"+id_report);
+                        this.setState({ nav: '/viewreportcompany/' + id_report }); 
+                        //window.location.replace("http://localhost:3000/viewreport/"+id_report);
                      // }   
 
                     });

@@ -36,7 +36,7 @@ const columns = [
      (  
       <span>  
         <Icon type = "eye" theme = "twoTone" twoToneColor = "#f5222d" />   
-        <a href={"http://localhost:3000/viewreport/"+record._id}> Visualizar Relato</a>
+        <a href={"http://localhost:3000/viewreportcompany/"+record._id}> Visualizar Relato</a>
       </span> 
     ), 
   }, 

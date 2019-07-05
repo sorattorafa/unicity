@@ -1,4 +1,4 @@
-import { Divider, Typography, Layout, Avatar, Row, Col, Icon, Button, Tag } from 'antd';
+import { Divider, Typography, Layout, Avatar, Row, Tag, Col, Icon, Button, Table, notification } from 'antd';
 import React from 'react';
 import { Redirect, Link } from "react-router-dom";
 import "antd/dist/antd.css";
@@ -7,11 +7,39 @@ import axios from 'axios';
 
 import NavBar from '../../components/navbar/navbar';
 import LateralMenu from '../../components/lateralmenu/lateralmenu';
-import { getToken, getStatus } from '../services/auth';
+import { getToken, getStatus, getUserId } from '../services/auth';
 
 const { Title } = Typography;
 const { Content } = Layout;
-
+const columns = [ 
+    {
+      title: 'Nome',
+      dataIndex: 'title',
+      onFilter: (value, record) => record.name.indexOf(value) === 0,
+      sorter: (a, b) => ("" + a.name).localeCompare(b.name),
+      defaultSortOrder: 'ascend',
+      sortDirections: ['ascend', 'descend'],
+    }, 
+    /**
+    {
+      title: 'View',
+      dataIndex: '',
+      key: 'x',
+      render: (text, record) => 
+    },  
+     */
+    {
+      title: 'Visualizar Relato',
+      key: 'action',
+      render:  (text, record) =>  
+       (  
+        <span>  
+          <Icon type = "eye" theme = "twoTone" twoToneColor = "#f5222d" />   
+          <a href={"http://localhost:3000/viewreportcompany/"+record._id}> Visualizar Relato</a>
+        </span> 
+      ), 
+    }, 
+  ];
 
 export default class ProfileCompanyUser extends React.Component {
 
@@ -31,7 +59,8 @@ export default class ProfileCompanyUser extends React.Component {
           password: '',
           categories: '',
           active: true,
-          visibility: true,
+          visibility: true, 
+          reports:[],
           status: getStatus()                 // 0: simpleuser; 1: companyuser; 2: admin
           // status: '2'                 // 0: simpleuser; 1: companyuser; 2: admin
         }
@@ -80,7 +109,19 @@ export default class ProfileCompanyUser extends React.Component {
                       
                 )
                 console.log(this.state.color)
-            });
+            }); 
+            axios.get('/reports/bysolver/' + getUserId())
+            .then(response => {
+              this.setState({reports: response.data}); 
+              console.log(this.state.reports)
+            })
+            .catch(function (error) {
+              notification['error']({
+                message: 'Erro!',
+                description: 'Não foi possível carregar os relatos. Tente novamente mais tarde. Se persistir, consulte um técnico.'
+              });
+                console.log(error);
+            })    
       });
 
   }
@@ -142,6 +183,11 @@ export default class ProfileCompanyUser extends React.Component {
                             <Col style = {{position: "absolute", right: "100px"}} xs={11} sm={4} md={6} lg={8} xl={3}>
                                 <Avatar size={200} icon="user" />
                             </Col>
+                        </Row> 
+                        <Divider />
+                        <Title level={4}> Seus Relatos Resolvidos </Title>
+                        <Row>
+                          <Table rowKey="_id" columns={columns} dataSource={this.state.reports} />
                         </Row>
                     
                     </Content>
