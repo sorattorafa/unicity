@@ -5,7 +5,7 @@ const Report =  mongoose.model('Report');
 // every functions are async! 
 
 exports.get = async () => {  
-    const res = await Report.find({}, 'lat lng title description category street number').populate('category'); 
+    const res = await Report.find({}, 'lat lng title description category street number solver').populate('category'); 
     return res;    
 }  
 
@@ -23,6 +23,11 @@ exports.getBySimpleuser = async(id) => {
 exports.getByCategory = async(id) => { 
     const res = await Report.find({category:id}, 'lat lng title description category street number').populate('category');
     return res;    
+}  
+
+exports.getBySolver = async(id) => { 
+    const res = await Report.find({solver:id}, 'lat lng title description category street number').populate('category');
+    return res;    
 } 
 exports.create = async (data) => { 
     var report = new Report(data); 
@@ -34,7 +39,8 @@ exports.update = async(id,data) => {
     .findByIdAndUpdate(id, { 
         $set: {  
             // can update anything 
-            status: data.status
+            status: data.status, 
+            solver: data.solver,
         }
     });
 } 

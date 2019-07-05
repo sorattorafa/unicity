@@ -47,6 +47,18 @@ exports.getByCategory = async (req, res, next) =>{
             message: 'Falha ao processar sua requisição'
         });
     }    
+};   
+
+
+exports.getBySolver = async (req, res, next) =>{ 
+    try {
+        var data = await repository.getBySolver(req.params.id); 
+        res.status(200).send(data);
+    } catch (e) { 
+        res.status(500).send({ 
+            message: 'Falha ao processar sua requisição'
+        });
+    }    
 };  
 // create / set / update / delete  
 //post - create

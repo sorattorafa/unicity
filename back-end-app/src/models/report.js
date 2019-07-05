@@ -67,6 +67,10 @@ const schema = new Schema({
     comment: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Comment' 
+    },   
+    solver: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Companyuser' 
     },  
     city: {  
         type: mongoose.Schema.Types.ObjectId, 
