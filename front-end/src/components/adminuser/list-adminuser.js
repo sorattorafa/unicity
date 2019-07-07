@@ -111,7 +111,7 @@ export default class ListAdminUser extends React.Component {
           
           <Content className = "contentLayoutForm" style = {{ padding: "30px 20px 0px 20px" }} >
 
-              <Title className = "titleForm" level={1}> Cadastrar administradores </Title>
+              <Title className = "titleForm" level={1}> Lista de administradores </Title>
               <Divider className = "dividerForm" />
 
               <Table rowKey="_id" columns={columns} dataSource={this.state.list_admin} />
