@@ -250,8 +250,8 @@ class ReportMap extends Component {
               position={position2}
               icon={myIcon}>    
               <Popup>  
-              <p>latitude: {lat}  </p>
-              <p>  longitude: {lng} </p>  
+              {/* <p>latitude: {lat}  </p>
+              <p>  longitude: {lng} </p>   */}
               <div className="collpase nav-collapse"> 
               <ul className="navbar-nav mr-auto">
                 <li className="navbar-item">
