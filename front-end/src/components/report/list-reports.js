@@ -56,7 +56,7 @@ class ListReports extends Component {
                   onChange: page => {
                   console.log(page);
                   },
-                  pageSize: 3,
+                  pageSize: 10,
               }}
               dataSource={this.state.reports}
               renderItem={item => (

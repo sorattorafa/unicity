@@ -57,7 +57,7 @@ class ListCompanyUsers extends Component {
                   onChange: page => {
                   console.log(page);
                   },
-                  pageSize: 4,
+                  pageSize: 10,
               }}
               dataSource={this.state.companyusers}
               renderItem={item => (

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import { Descriptions, Divider, Typography, Layout, Badge, Icon, Tag, Row } from 'antd';
+import { Descriptions, Divider, Typography, Layout, Badge, Icon, Tag, Comment } from 'antd';
 import "antd/dist/antd.css";
 
 import NavBar from '../../components/navbar/navbar';
@@ -26,7 +26,11 @@ export default class ViewReport extends Component {
             number_of_denunciations: '',
             number_of_supports: '',
             status: '',
+
+            comments:[],
+
             category: '', 
+
             catname: '',
             color:''
           }
@@ -47,9 +51,10 @@ export default class ViewReport extends Component {
                 number_of_denunciations: response.data.number_of_denunciations, 
                 number_of_supports: response.data.number_of_supports,
                 status: response.data.status,
+                comments: response.data.comments,
                 category: response.data.category
             }) 
-            axios.get('/categories/')
+        axios.get('/categories/')
         .then(response => {
             this.setState({  
                 categories: response.data
@@ -67,9 +72,8 @@ export default class ViewReport extends Component {
             )
             console.log(this.state.color)
         })
-        })
+        }) 
 
-        
     }
 
     render() {
