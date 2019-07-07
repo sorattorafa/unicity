@@ -23,8 +23,8 @@ export default class ViewReportCompany extends Component {
             number: '', 
             description: '',
             createDate: '',
-            number_of_denunciations: 0,
-            number_of_supports: 0,
+            number_of_denunciations: '',
+            number_of_supports: '',
             status: '',
             category: '', 
             catname: '',
@@ -44,8 +44,8 @@ export default class ViewReportCompany extends Component {
                 number: response.data.number, 
                 description: response.data.description, 
                 createDate: response.data.createDate,  
-                number_of_denunciations: response.data.number_of_denunciations + 1, 
-                number_of_supports: response.data.number_of_supports + 1,
+                number_of_denunciations: response.data.number_of_denunciations, 
+                number_of_supports: response.data.number_of_supports,
                 status: response.data.status,
                 category: response.data.category
             }) 
@@ -73,8 +73,9 @@ export default class ViewReportCompany extends Component {
     } 
     
   like = () => { 
-      this.setState({ number_of_supports: this.state.number_of_supports + 1 });  
-      axios.put('/reports/updatelike/'+ this.props.match.params.id + '/' + this.state.number_of_supports) 
+      this.setState({ number_of_supports: this.state.number_of_supports + 1 }); 
+      const nexato = this.state.number_of_supports + 1;  
+      axios.put('/reports/updatelike/'+ this.props.match.params.id + '/' + nexato) 
       .then(res => {
           console.log(this.state.number_of_supports)
           // Atualiza página
@@ -85,8 +86,9 @@ export default class ViewReportCompany extends Component {
   
   deslike = () => {
     this.setState({ number_of_denunciations: this.state.number_of_denunciations + 1 }); 
+    const nexatodeslike = this.state.number_of_denunciations + 1 ;
     console.log(this.state.number_of_denunciations) 
-    axios.put('/reports/updatedeslike/' + this.props.match.params.id + '/' + this.state.number_of_denunciations)
+    axios.put('/reports/updatedeslike/' + this.props.match.params.id + '/' + nexatodeslike)
 }
 
     render() {
