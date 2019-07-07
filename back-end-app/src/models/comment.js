@@ -16,18 +16,21 @@ const schema = new Schema({
         required: true, 
         default: Date.now 
     },   
-    description: { 
+    content: { 
         type: String, 
         required: true, 
         trim: true 
     },     
- 
-    number_of_denunciations: { 
+    comment_denunciations: { 
         type: Number, 
-        required: true
+        required: true,
+        default: 0
     },     
-
-       
+    comment_supports: { 
+        type: Number, 
+        required: true,
+        default: 0
+    },   
 }); 
   
 // export the model of customer 

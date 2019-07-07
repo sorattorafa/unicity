@@ -5,7 +5,7 @@ const Report =  mongoose.model('Report');
 // every functions are async! 
 
 exports.get = async () => {  
-    const res = await Report.find({}, 'lat lng title description category street number solver').populate('category'); 
+    const res = await Report.find({}, 'lat lng title description category street number solver comments').populate('category').populate('comments'); 
     return res;    
 }  
 

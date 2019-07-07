@@ -16,12 +16,24 @@ exports.get = async (req, res, next) =>{
     }
 };
 
+// Get comment by id 
+exports.getById = async (req, res, next) =>{ 
+    try {
+        var data = await repository.getById(req.params.id); 
+        res.status(200).send(data);
+    } catch (e) { 
+        res.status(500).send({ 
+            message: 'Falha ao processar sua requisição'
+        });
+    }    
+}; 
+
 // create / set / update / delete
 
 //post - create
 exports.post = async(req, res, next) => {
     let contract = new ValidationContract();
-    contract.isRequired(req.body.description, 'O comentario deve ter conteudo')
+    contract.isRequired(req.body.content, 'O comentario deve ter conteudo')
 
     // if data is valid
     if (!contract.isValid()){
@@ -43,7 +55,7 @@ exports.post = async(req, res, next) => {
 // put - set
 exports.put = (req, any, next) => {
     let contract = new ValidationContract();
-    contract.isRequired(req.body.description, 'O comentario deve ter conteudo')
+    contract.isRequired(req.body.content, 'O comentario deve ter conteudo')
     
     const id = req.params.id;
 
@@ -70,8 +82,7 @@ exports.put = (req, any, next) => {
 //put- update request
 exports.put = (req, res, next) => {
     let contract = new ValidationContract();    // Usado para fazer a validação de dados
-    contract.isRequired(req.body.description, 'O comentario deve ter conteudo')
-    contract.isRequired(req.body.city, 'Preencha a cidade do relato.')
+    contract.isRequired(req.body.content, 'O comentario deve ter conteudo')
 
     // if data is valid
     if (!contract.isValid()){
@@ -80,7 +91,7 @@ exports.put = (req, res, next) => {
     }
 
     repository
-        .update(req.params.name, req.body)
+        .update(req.params.id, req.body)
         .then(x=>{
             res.status(201).send({
                 message: 'Comentario atualizado com sucesso!'

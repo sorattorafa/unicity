@@ -34,25 +34,21 @@ const schema = new Schema({
         type: String,  
         trim: true 
     },  
-        
     description: { 
         type: String, 
         required: true, 
         trim: true 
     },     
-
     status: { 
         type: Number, 
         required: true, 
         default: 0 
     },        
-
     createDate: { 
         type: Date, 
         required: true, 
         default: Date.now 
     },  
-
     number_of_denunciations: { 
         type: Number,
         required: true, 
@@ -63,11 +59,10 @@ const schema = new Schema({
         required: true, 
         default: 0  
     },     
-
-    comment: { 
+    comments: [{ 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Comment' 
-    },   
+    }],   
     solver: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Companyuser' 
@@ -76,14 +71,12 @@ const schema = new Schema({
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'City'
         // required: true
-    },     
-        
+    },        
     simpleuser: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Simpleuser', 
         required:true 
-    }, 
-     
+    },   
   //categories: [{  
     category: {  
         type: mongoose.Schema.Types.ObjectId,  
@@ -91,7 +84,6 @@ const schema = new Schema({
         required: true
     }, 
   //}],    
-
 }); 
   
 
