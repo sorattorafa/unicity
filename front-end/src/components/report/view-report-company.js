@@ -23,8 +23,8 @@ export default class ViewReportCompany extends Component {
             number: '', 
             description: '',
             createDate: '',
-            number_of_denunciations: '',
-            number_of_supports: '',
+            number_of_denunciations: 0,
+            number_of_supports: 0,
             status: '',
             category: '', 
             catname: '',
@@ -44,8 +44,8 @@ export default class ViewReportCompany extends Component {
                 number: response.data.number, 
                 description: response.data.description, 
                 createDate: response.data.createDate,  
-                number_of_denunciations: response.data.number_of_denunciations, 
-                number_of_supports: response.data.number_of_supports,
+                number_of_denunciations: response.data.number_of_denunciations + 1, 
+                number_of_supports: response.data.number_of_supports + 1,
                 status: response.data.status,
                 category: response.data.category
             }) 
@@ -70,7 +70,24 @@ export default class ViewReportCompany extends Component {
         })
 
         
-    }
+    } 
+    
+  like = () => { 
+      this.setState({ number_of_supports: this.state.number_of_supports + 1 });  
+      axios.put('/reports/updatelike/'+ this.props.match.params.id + '/' + this.state.number_of_supports) 
+      .then(res => {
+          console.log(this.state.number_of_supports)
+          // Atualiza página
+          //window.location.replace("http://localhost:3000/viewreport/"+id_report);
+       // }   
+      });
+  } 
+  
+  deslike = () => {
+    this.setState({ number_of_denunciations: this.state.number_of_denunciations + 1 }); 
+    console.log(this.state.number_of_denunciations) 
+    axios.put('/reports/updatedeslike/' + this.props.match.params.id + '/' + this.state.number_of_denunciations)
+}
 
     render() {
 
@@ -118,17 +135,19 @@ export default class ViewReportCompany extends Component {
                                         Número: {this.state.number}
                                         <br />
                                         Cep: {this.state.cep}
-                                    </Descriptions.Item>
+                                    </Descriptions.Item> 
+                                    {/**
                                     <Descriptions.Item label="Posição" span={2}>
                                         Latitude: {this.state.lat}
                                         <br />
                                         Longitude: {this.state.lng}
-                                    </Descriptions.Item>
+                                    </Descriptions.Item> 
+                                     */}
                                     <Descriptions.Item label="Apoiadores" span={3}>
-                                        {this.state.number_of_supports} <Icon type="like" />
+                                        {this.state.number_of_supports} <Icon type="like" onClick = { this.like}/>
                                     </Descriptions.Item>
                                     <Descriptions.Item label="Denúncias" span={3}>
-                                        {this.state.number_of_denunciations} <Icon type="dislike" />
+                                        {this.state.number_of_denunciations} <Icon type="dislike" onClick = { this.deslike} />
                                     </Descriptions.Item>   
                                      
                                     <Descriptions.Item label="Resolver Relato" span={3}>
