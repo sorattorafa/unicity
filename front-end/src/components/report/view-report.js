@@ -108,16 +108,6 @@ export default class ViewReport extends Component {
                                     <Descriptions.Item label="Descrição" span={3}>
                                         {this.state.description}
                                     </Descriptions.Item>
-                                    <Descriptions.Item label="Categoria" span={1}>
-                                        <Tag color={this.state.color}> {this.state.catname} </Tag>
-                                    </Descriptions.Item>
-                                    <Descriptions.Item label="Status" span ={2}>
-                                        <StatusCheck ReportStatus={this.state.status} />,
-                                        <br />  
-                                        </Descriptions.Item> 
-                                    <Descriptions.Item label="Data de criação" span ={2}>
-                                        {FormatDate}
-                                    </Descriptions.Item>
                                     <Descriptions.Item label="Endereço" span={1}>
                                         Rua: {this.state.street}
                                         <br />
@@ -125,6 +115,14 @@ export default class ViewReport extends Component {
                                         <br />
                                         Cep: {this.state.cep}
                                     </Descriptions.Item> 
+                                    <Descriptions.Item label="Categoria" span={1}>
+                                        <Tag color={this.state.color}> {this.state.catname} </Tag>
+                                    </Descriptions.Item>
+                                    <Descriptions.Item label="Status" span ={1}>
+                                        <StatusCheck ReportStatus={this.state.status} />,
+                                        <br />
+                                        Data de Criação: {FormatDate}
+                                    </Descriptions.Item>
                                     {/** 
                                     <Descriptions.Item label="Posição" span={2}>
                                         Latitude: {this.state.lat}
