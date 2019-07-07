@@ -54,16 +54,16 @@ const schema = new Schema({
     },  
 
     number_of_denunciations: { 
-        type: Number, 
-        required: true,  
-        default:0
-    },  
-
-    number_of_supports: { 
-        type: Number, 
+        type: Number,
         required: true, 
-        default:0 
-    },    
+        default: 0
+    },  
+    number_of_supports: { 
+        type: Number,
+        required: true, 
+        default: 0  
+    },     
+
     comment: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Comment' 

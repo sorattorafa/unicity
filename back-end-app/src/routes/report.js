@@ -15,7 +15,9 @@ router.get('/bysolver/:id', controller.getBySolver);
 
 // post, put and delete (create, update and delete)
 router.post('/add', controller.post); 
-router.put('/:id', controller.put); 
+router.put('/:id', controller.put);  
+router.put('/updatelike/:id/:num', controller.putlike); 
+router.put('/updatedeslike/:id/:num', controller.putdeslike);  
 router.delete('/', controller.delete); 
 
 module.exports = router;

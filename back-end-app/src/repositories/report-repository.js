@@ -43,7 +43,28 @@ exports.update = async(id,data) => {
             solver: data.solver,
         }
     });
+}  
+exports.updatelike = async(id,num) => { 
+    await Report   
+    .findByIdAndUpdate(id, { 
+        $set: {  
+            // can update anything 
+            number_of_supports: num,
+        }
+    });
 } 
+ 
+
+exports.updatedeslike = async(id,num) => { 
+    await Report    
+    .findByIdAndUpdate(id, { 
+        $set: {  
+            // can update anything 
+            number_of_denunciations: num,
+        }
+    });
+} 
+
 
 exports.delete = async(id) => { 
     await Report.findByIdAndDelete(id);

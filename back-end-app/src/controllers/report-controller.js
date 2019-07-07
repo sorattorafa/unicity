@@ -98,7 +98,40 @@ exports.put = (req, res, next) => {
             });
         });  
 }; 
+ 
 
+//put- update request
+exports.putlike = (req, res, next) => {   
+    repository  
+        .updatelike(req.params.id, req.params.num)
+        .then(x=>{ 
+            res.status(201).send({ 
+                message: 'Relato atualizado com sucesso!' 
+            });
+        }).catch(e=>{ 
+            res.status(400).send({ 
+                message: 'Relato não atualizado!',  
+                data: e 
+            });
+        });  
+};  
+
+
+//put- update request
+exports.putdeslike = (req, res, next) => {   
+    repository  
+        .updatedeslike(req.params.id, req.params.num)
+        .then(x=>{ 
+            res.status(201).send({ 
+                message: 'Relato atualizado com sucesso!' 
+            });
+        }).catch(e=>{ 
+            res.status(400).send({ 
+                message: 'Relato não atualizado!',  
+                data: e 
+            });
+        });  
+}; 
  
 exports.delete = (req, res, next) => {  
     repository.delete(req.body.id) 
