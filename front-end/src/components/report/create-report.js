@@ -116,7 +116,9 @@ class CreateReport extends React.Component {
     console.log(this.state.position2)
     this.props.form.validateFields((err, values) => {
       if (!err) {  
-        values.simpleuser = getUserId()
+        values.simpleuser = getUserId() 
+        values.lat = this.state.lat; 
+        values.lng = this.state.lng;
         console.log('Received values of form: ', values); 
         axios.post('/reports/add', values)
             .then(res => console.log(res.data));
@@ -336,7 +338,7 @@ class CreateReport extends React.Component {
               
 
               {/* Report's LogLat */}
-              <Row>
+              {/* <Row>
                 <Col span={16}>
                   <Form.Item
                     label={
@@ -377,7 +379,7 @@ class CreateReport extends React.Component {
                       />)}
                   </Form.Item>
                 </Col>  
-              </Row>
+              </Row> */}
 
               {/* Submit Button */}
               <Row className="buttonForm">

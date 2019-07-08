@@ -44,15 +44,22 @@ export default class LateralMenu extends Component {
             </Link>
           </Menu.Item>
 
+          <Menu.Item key = "createreport">
+              <Link to = "/map">
+                <Icon type = "tag" />
+                <span> Criar Relato </span>
+              </Link>
+            </Menu.Item>
+
           {/* Visível para simpleuser */}
-          { this.state.status === '0' ?
+          {/* { this.state.status === '0' ?
             <Menu.Item key = "createreport">
               <Link to = "/map">
                 <Icon type = "tag" />
                 <span> Criar Relato </span>
               </Link>
             </Menu.Item>
-          : null }
+          : null } */}
           {/* { this.state.status === '0' ?
             <Menu.Item key = "createSimpleuser">
               <Link to = "/createuser">

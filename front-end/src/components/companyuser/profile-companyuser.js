@@ -34,7 +34,7 @@ const columns = [
       render:  (text, record) =>  
        (  
         <span>  
-          <Icon type = "eye" theme = "twoTone" twoToneColor = "#f5222d" />   
+          <Icon type = "eye" theme = "twoTone" twoToneColor = "#ff8d00" />   
           <a href={"http://localhost:3000/viewreportcompany/"+record._id}> Visualizar Relato</a>
         </span> 
       ), 
