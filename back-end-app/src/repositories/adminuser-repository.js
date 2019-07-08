@@ -14,19 +14,22 @@ exports.create = async (data) => {
     await adminuser.save(); 
 }  
 
-exports.update = async(cpf,data) => { 
+exports.update = async(id,data) => { 
     await Adminuser 
-    .findOneAndUpdate(cpf, { 
+    .findOneAndUpdate(id, { 
         $set: {  
-            // can update anything  
+            // can update anything
+            cpf: data.cpf,
+            name: data.name,
             email: data.email,
             password: data.password
         }
     });
-} 
-exports.delete = async(cpf) => { 
+}
+
+exports.delete = async(id) => { 
     await Adminuser 
-        .findOneAndRemove(cpf);
+        .findOneAndRemove(id);
 } 
 
 exports.getByEmail = async(email) => { 
@@ -34,5 +37,19 @@ exports.getByEmail = async(email) => {
         .find({  
          email: email 
         }, 'email password')  
+    return res;    
+}
+
+exports.getByCpf = async(cpf) => { 
+    const res = await Adminuser 
+        .find({  
+         cpf: cpf 
+        }, 'name email password')  
+    return res;    
+}
+
+exports.getById = async(id) => { 
+    const res = await Adminuser 
+        .findById(id)
     return res;    
 } 

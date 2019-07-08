@@ -15,6 +15,7 @@ exports.get = async (req, res, next) =>{
         });
     }    
 }; 
+
 exports.getByEmail = async (req, res, next) =>{ 
     try {
         var data = await repository.getByEmail(req.params.email); 
@@ -25,6 +26,28 @@ exports.getByEmail = async (req, res, next) =>{
         });
     }    
 }; 
+
+exports.getByCpf = async (req, res, next) =>{ 
+    try {
+        var data = await repository.getByCpf(req.params.cpf); 
+        res.status(200).send(data);
+    } catch (e) { 
+        res.status(500).send({ 
+            message: 'Falha ao processar sua requisição'
+        });
+    }    
+};
+
+exports.getById = async (req, res, next) =>{ 
+    try {
+        var data = await repository.getById(req.params.id); 
+        res.status(200).send(data);
+    } catch (e) { 
+        res.status(500).send({ 
+            message: 'Falha ao processar sua requisição'
+        });
+    }    
+};
  
 // create / set / update / delete  
 
@@ -42,7 +65,7 @@ exports.post = async(req, res, next) => {
     }  
     try{ 
         await repository.create(req.body);
-        res.status(201).send({ 
+        res.status(200).send({ 
             message: 'Usuário administrador cadastrado com sucesso!' 
         });
     } catch (e){ 
@@ -65,9 +88,9 @@ exports.put = (req, res, next) => {
     }
 
     repository  
-        .update(req.params.cpf, req.body)
+        .update(req.params.id, req.body)
         .then(x=>{ 
-            res.status(201).send({ 
+            res.status(200).send({ 
                 message: 'Usuário administrador atualizado com sucesso!' 
             });
         }).catch(e=>{ 
@@ -79,8 +102,9 @@ exports.put = (req, res, next) => {
 }; 
 
  
-exports.delete = (req, res, next) => {  
-    repository.delete(req.body.id) 
+exports.delete = (req, res, next) => {
+    console.log(req.params.id)
+    repository.delete(req.params.id) 
         .then(x=>{ 
             res.status(200).send({ 
                 message: 'Usuário administrador removido com sucesso!' 

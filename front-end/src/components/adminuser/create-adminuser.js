@@ -7,6 +7,8 @@ import axios from 'axios';
 import NavBar from '../../components/navbar/navbar';
 // import Footer from '../../components/footer/footer';
 import LateralMenu from '../../components/lateralmenu/lateralmenu';
+import { getToken, getStatus } from '../services/auth';
+import { Redirect, Link } from "react-router-dom";
 
 const { Title } = Typography;
 const { Content } = Layout;
@@ -26,7 +28,8 @@ class CreateAdminUser extends React.Component {
     this.onChangePassword = this.onChangePassword.bind(this);
     this.onChangeConfirmpassword = this.onChangeConfirmpassword.bind(this);
 
-    this.state = { 
+    this.state = {
+      nav: '',
       cpf: '',
       name: '',
       email: '',  
@@ -112,6 +115,13 @@ class CreateAdminUser extends React.Component {
     const passwordError = isFieldTouched('password') && getFieldError('password');
     const confirmpasswordError = isFieldTouched('confirmpassword') && getFieldError('confirmpassword');
 
+    // Controla página exibida - Ao atualizar, muda de página
+    if(this.state.nav)
+      return <Redirect to = { this.state.nav } />
+    // Só exibe se estiver logado
+    else if(!getToken() || !(getStatus() === '2'))
+      return <Redirect to = { "/" } />
+    else if(getToken() && (getStatus() === '2'))
     return (
       <Layout style = {{ minHeight: '100vh', width: '100%' }}>
         <NavBar />

@@ -64,6 +64,12 @@ export default class NavBar extends Component {
             <Icon type = "setting" /> Perfil
           </Link>
         </Menu.Item>
+      : this.state.token && (this.state.status === '2') ?
+        <Menu.Item className = "linkNav" key = "Editar perfil">
+          <Link className = "linkNav" to = {"/editadminuser"} >
+            <Icon type = "setting" /> Perfil
+          </Link>
+        </Menu.Item>
       : null }
 
         <Menu.Item className = "linkNav" key = "logout" onClick = { this.signout }>

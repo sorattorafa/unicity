@@ -5,7 +5,8 @@ import "./create-adminuser.css";
 import axios from 'axios';
 import NavBar from '../../components/navbar/navbar';
 import LateralMenu from '../../components/lateralmenu/lateralmenu';
-import { getUserId } from '../services/auth';
+import { getUserId, getToken, getStatus } from '../services/auth';
+import { Redirect } from "react-router-dom";
 
 const { Title } = Typography;
 const { Content } = Layout;
@@ -64,7 +65,8 @@ export default class ListAdminUser extends React.Component {
   constructor(props) {
     super(props); 
 
-    this.state = { 
+    this.state = {
+      nav: '',
       list_admin: []
     }
   }
@@ -106,7 +108,13 @@ export default class ListAdminUser extends React.Component {
 
 
   render() {
-    
+    // Controla página exibida - Ao atualizar, muda de página
+    if(this.state.nav)
+      return <Redirect to = { this.state.nav } />
+    // Só exibe se estiver logado
+    else if(!getToken() || !(getStatus() === '2'))
+      return <Redirect to = { "/" } />
+    else if(getToken() && (getStatus() === '2'))
     return (
       <Layout style = {{ minHeight: '100vh', width: '100%' }}>
         <NavBar />

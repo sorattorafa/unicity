@@ -7,6 +7,8 @@ import axios from 'axios';
 
 import NavBar from '../../components/navbar/navbar';
 import LateralMenu from '../../components/lateralmenu/lateralmenu';
+import { getToken, getStatus } from '../services/auth';
+import { Redirect } from "react-router-dom";
 
 const TextArea = Input.TextArea;
 const { Title } = Typography;
@@ -34,7 +36,8 @@ class CreateCompanyUser extends React.Component {
         this.onChangeConfirmpassword = this.onChangeConfirmpassword.bind(this);
         this.onChangeCategories = this.onChangeCategories.bind(this);
     
-        this.state = { 
+        this.state = {
+            nav: '',
             cnpj: '',
             name: '',
             apresentation: '',
@@ -113,7 +116,8 @@ class CreateCompanyUser extends React.Component {
                 axios.post('/companyusers/add', values)
                     .then(res => console.log(res.data));
     
-                this.setState({ 
+                this.setState({
+                    nav: '',
                     cnpj: '',
                     name: '',
                     apresentation: '',
@@ -154,6 +158,12 @@ class CreateCompanyUser extends React.Component {
         const confirmpasswordError = isFieldTouched('confirmpassword') && getFieldError('confirmpassword');
         const categoriesError = isFieldTouched('categories') && getFieldError('categories');
 
+        if(this.state.nav)
+            return <Redirect to = { this.state.nav } />
+        // Só exibe se estiver logado
+        else if(!getToken() || !(getStatus() === '2'))
+            return <Redirect to = { "/" } />
+        else if(getToken() && (getStatus() === '2'))
         return (
             <Layout style = {{ minHeight: '100vh' }}>
                 <NavBar />

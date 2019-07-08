@@ -26,7 +26,7 @@ exports.getById = async (req, res, next) =>{
             message: 'Falha ao processar sua requisição'
         });
     }    
-}; 
+};
 
 exports.getByEmail = async (req, res, next) =>{ 
     try {
@@ -80,7 +80,7 @@ exports.post = async(req, res, next) => {
     }  
     try{ 
         await repository.create(req.body);              // Cria com os dados recebidos
-        res.status(201).send({                          // Envia mensagem de sucesso para tela
+        res.status(200).send({                          // Envia mensagem de sucesso para tela
             message: 'Requisição Cadastrada com sucesso!' 
         });
     } catch (e){ 

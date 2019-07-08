@@ -20,6 +20,7 @@ import EditReport from  "./components/report/edit-report";
 
 // Components of Admin Users
 import CreateAdminUser from "./components/adminuser/create-adminuser";
+import EditAdminUser from "./components/adminuser/edit-adminuser";
 import ListAdminUser from "./components/adminuser/list-adminuser";
 
 // Components of Company Users
@@ -44,12 +45,14 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
+          {/* Simple user */}
           <Route path="/createuser" component={ CreateUser } />
           <Route path="/profilesimpleuser/:id" component={ ProfileSimpleuser } />
           <Route path="/edit/:id" component={ EditSimpleuser } />
           <Route path="/listusers" component={ SimpleusersList } />  
           <Route path="/menusimpleuser/:id" component={ MenuSimpleUser } />  
           <Route path="/delete/:id" component={ DeleteSimpleuser } />
+          {/* Reports */}
           <Route path="/createreport" component={ CreateReport } />
           <Route path="/viewreport/:id" component={ ViewReport } />   
           <Route path="/viewreportcompany/:id" component={ ViewReportCompany } />  
@@ -57,17 +60,20 @@ class App extends Component {
           <Route path="/listreport" component={ ListReports } /> 
           <Route path="/listreportbyuser/:id" component={ ListReportsByuser } /> 
           <Route path="/listreportbycompanyuser/:id" component={ ListReportsByCompanyuser } />
+          {/* Admin user */}
           <Route path="/createadminuser" component={ CreateAdminUser } />
+          <Route path="/editadminuser" component={ EditAdminUser } />
           <Route path="/listadminusers" component={ ListAdminUser } />
+          {/* Company user */}
           <Route path="/createcompanyuser" component={ CreateCompanyUser } />
           <Route path="/profilecompanyuser/:id" component={ ProfileCompanyUser } />
           <Route path="/editcompanyuser/:id" component={ EditCompanyUser } />
           <Route path="/viewcompanyuser/:id" component={ ViewCompanyUser } /> 
-          <Route path="/listcompanyusers" component={ ListCompanyUsers } /> 
+          <Route path="/listcompanyusers" component={ ListCompanyUsers } />
+          {/* General */}
           {/* <Route path="/createcategory" component={ CreateCategory } /> */}
           <Route path = "/map/" exact component = { ReportMap } />
           <Route path = "/" exact component = { PublicHome } />
-
           {/* <Route path = "*" component = { NotFound } /> */}
         </Switch>
       </BrowserRouter>
