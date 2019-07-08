@@ -126,7 +126,7 @@ class EditReport extends React.Component {
                 <NavBar />
         
                 <Layout>
-          <LateralMenu pagina = "listcompanyusers" />
+          <LateralMenu pagina = "listreport" />
           
           <Content className = "contentLayoutForm" style = {{ padding: "30px 20px 0px 20px" }} >
             <Form {...formItemLayout} onSubmit={this.handleSubmit}>

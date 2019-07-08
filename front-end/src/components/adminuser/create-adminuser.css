@@ -20,6 +20,7 @@
   color: #6f3e00;
   background: #ff8d00 !important;
   border: none !important;
+  text-align: center !important;
 }
 
 .buttonForm button:active {
@@ -41,6 +42,13 @@
   .buttonForm button {
       width: 100%;
     }
+}
+
+.buttonStatus button {
+  height: 20px !important;
+  font-size: 12px !important;
+  padding: 2px 5px 5px 0px !important;
+  margin-left: 10px;
 }
 
   /* ======== Home ======== */

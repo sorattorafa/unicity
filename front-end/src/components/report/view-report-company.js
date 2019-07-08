@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import { Descriptions, Divider, Typography, Layout, Badge, Icon, Tag, Row } from 'antd';
+import { Descriptions, Divider, Typography, Layout, Badge, Icon, Tag, Button } from 'antd';
 import "antd/dist/antd.css";
 
 import NavBar from '../../components/navbar/navbar';
 import LateralMenu from '../../components/lateralmenu/lateralmenu';
+import { Link } from "react-router-dom";
 
 const { Title } = Typography;
 const { Content } = Layout;
@@ -111,7 +112,7 @@ export default class ViewReportCompany extends Component {
                 <NavBar />
 
                 <Layout>
-                    <LateralMenu pagina = "createadminuser" />
+                    <LateralMenu pagina = "listreport" />
                     <Content className = "contentLayoutForm" style = {{ padding: "30px 20px 0px 20px" }} >
                         <Title className = "titleForm" level={1}> {this.state.title} </Title>
                         <Divider className = "dividerForm" />
@@ -134,7 +135,12 @@ export default class ViewReportCompany extends Component {
                                         <Tag color={this.state.color}> {this.state.catname} </Tag>
                                     </Descriptions.Item>
                                     <Descriptions.Item label="Status" span ={1}>
-                                        <StatusCheck ReportStatus={this.state.status} />,
+                                        <StatusCheck ReportStatus={this.state.status} />
+                                        <Link className="buttonForm buttonStatus" to = { "/editreport/" + this.props.match.params.id} >
+                                            <Button className = "buttonNav" type = "primary">
+                                                <Icon />Alterar
+                                            </Button>
+                                        </Link>
                                         <br />
                                         Data de Criação: {FormatDate}
                                     </Descriptions.Item>
@@ -151,12 +157,12 @@ export default class ViewReportCompany extends Component {
                                     <Descriptions.Item label="Denúncias" span={3}>
                                         {this.state.number_of_denunciations} <Icon type="dislike" onClick = { this.deslike} />
                                     </Descriptions.Item>   
-                                     
-                                    <Descriptions.Item label="Resolver Relato" span={3}>
+                                    
+                                    {/* <Descriptions.Item label="Resolver Relato" span={3}>
                                     <nav>
                                      <a href={"http://localhost:3000/editreport/"+this.props.match.params.id}>Editar Estado Relato</a>
                                     </nav>  
-                                    </Descriptions.Item>  
+                                    </Descriptions.Item>   */}
                                     </Descriptions>
                             </div>
                     </Content>

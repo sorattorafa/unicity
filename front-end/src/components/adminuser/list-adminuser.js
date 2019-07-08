@@ -1,10 +1,11 @@
-import { Divider, Typography, Layout, Table, Popconfirm, Icon, notification } from 'antd';
-import React, {Component} from 'react';
-import ReactDOM from "react-dom";
+import { Divider, Typography, Layout, Table, Popconfirm, Icon, notification, Button } from 'antd';
+import React from 'react';
+import { Link } from "react-router-dom";
 import "./create-adminuser.css";
 import axios from 'axios';
 import NavBar from '../../components/navbar/navbar';
 import LateralMenu from '../../components/lateralmenu/lateralmenu';
+import { getUserId } from '../services/auth';
 
 const { Title } = Typography;
 const { Content } = Layout;
@@ -26,27 +27,31 @@ const columns = [
     title: 'Ações',
     dataIndex: '',
     key: 'x',
-    render: (text, record) => <Popconfirm title = "Tem certeza que deseja excluir?" 
-    onConfirm = { () => {try {
-                          let res = axios.delete('/adminusers/', record._id);
-                      
-                          if(res.status === 200) {
-                            notification['success']({
-                              message: 'Sucesso!',
-                              description: 'A exclusão do artigo ocorreu com sucesso. Dados Atualizados!'
-                            });
-                      
-                            this.componentWillMount();
-                          }
-                        } catch(ex) {
-                          notification['error']({
-                            message: 'Erro!',
-                            description: 'Administrador não excluído. '
-                          });
-                        }
-    }} okText = "Deletar" cancelText = "Cancelar">
-                                <Icon type = "delete" theme = "twoTone" twoToneColor = "#f5222d" />
-                              </Popconfirm>,
+    render: (text, record) => 
+        {record._id != getUserId() ?
+        <Popconfirm title = "Tem certeza que deseja excluir?" 
+          onConfirm = { () => {try {
+                                let adm_id = record._id;
+                                let res = axios.delete('/adminusers/', adm_id);
+                            
+                                if(res.status === 200) {
+                                  notification['success']({
+                                    message: 'Sucesso!',
+                                    description: 'A exclusão do artigo ocorreu com sucesso. Dados Atualizados!'
+                                  });
+                            
+                                  this.componentWillMount();
+                                }
+                              } catch(ex) {
+                                notification['error']({
+                                  message: 'Erro!',
+                                  description: 'Administrador não excluído. '
+                                });
+                              }
+          }} okText = "Deletar" cancelText = "Cancelar">
+                                      <Icon type = "delete" theme = "twoTone" twoToneColor = "#f5222d" />
+                                    </Popconfirm>
+        : null} ,
   },
 ];
 
@@ -112,6 +117,12 @@ export default class ListAdminUser extends React.Component {
           <Content className = "contentLayoutForm" style = {{ padding: "30px 20px 0px 20px" }} >
 
               <Title className = "titleForm" level={1}> Lista de administradores </Title>
+
+              <Link to = { "/createadminuser"} >
+                <Button className = "buttonNav" type = "primary">
+                    <Icon type = "add"/>Cadastrar
+                </Button>
+              </Link>
               <Divider className = "dividerForm" />
 
               <Table rowKey="_id" columns={columns} dataSource={this.state.list_admin} />

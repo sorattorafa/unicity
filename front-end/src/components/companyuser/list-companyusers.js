@@ -3,6 +3,7 @@ import { Divider, Typography, Layout, Icon, List, Tag, notification } from 'antd
 import axios from 'axios';
 import NavBar from '../../components/navbar/navbar';
 import LateralMenu from '../../components/lateralmenu/lateralmenu';
+import { Link } from "react-router-dom";
 
 const { Title } = Typography;
 const { Content } = Layout;
@@ -61,24 +62,26 @@ class ListCompanyUsers extends Component {
               }}
               dataSource={this.state.companyusers}
               renderItem={item => (
+                <Link to = { "/viewcompanyuser/" + item._id} >
                   <List.Item
-                  key={item.name}
-                  extra={
-                      <img
-                      width={100}
-                      alt="logo"
-                      src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
-                      />
-                  }
+                    key={item.name}
+                    extra={
+                        <img
+                        width={100}
+                        alt="logo"
+                        src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+                        />
+                    }
                   >
-                  <List.Item.Meta
-                      title={<a href={"/viewcompanyuser/"+item._id}>{item.name}</a>}
-                      description={item.apresentation}
-                  />
-                  Endereço: {item.street}, {item.number} - {item.city}
-                  <br/>
-                  <Tag color={item.categories.color}> {item.categories.name} </Tag>
-                </List.Item>
+                    <List.Item.Meta
+                        title={item.name}
+                        description={item.apresentation}
+                    />
+                    Endereço: {item.street}, {item.number} - {item.city}
+                    <br/>
+                    <Tag color={item.categories.color}> {item.categories.name} </Tag>
+                  </List.Item>
+                </Link>
               )}
             />
           </Content>

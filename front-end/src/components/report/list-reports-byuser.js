@@ -3,6 +3,7 @@ import { Divider, Typography, Layout, Row, Col, Icon, List, Tag, notification } 
 import axios from 'axios';
 import NavBar from '../../components/navbar/navbar';
 import LateralMenu from '../../components/lateralmenu/lateralmenu';
+import { Link } from "react-router-dom";
 
 const { Title } = Typography;
 const { Content } = Layout;
@@ -61,24 +62,26 @@ class ListReportsByuser extends Component {
               }}
               dataSource={this.state.reports}
               renderItem={item => (
+                <Link to = { "/viewreport/" + item._id} >
                   <List.Item
-                  key={item.title}
-                  extra={
-                      <img
-                      width={100}
-                      alt="logo"
-                      src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
-                      />
-                  }
+                    key={item.title}
+                    extra={
+                        <img
+                        width={100}
+                        alt="logo"
+                        src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+                        />
+                    }
                   >
-                  <List.Item.Meta
-                      title={<a href={"/viewreport/"+item._id}>{item.title}</a>}
-                      description={item.description}
-                  />
-                  {item.street}, {item.number}
-                  <br/>
-                  <Tag color={item.category.color}> {item.category.name} </Tag>
-                </List.Item>
+                    <List.Item.Meta
+                        title={item.title}
+                        description={item.description}
+                    />
+                    {item.street}, {item.number}
+                    <br/>
+                    <Tag color={item.category.color}> {item.category.name} </Tag>
+                  </List.Item>
+                </Link>
               )}
             />
           </Content>
