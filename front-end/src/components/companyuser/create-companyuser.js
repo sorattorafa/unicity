@@ -114,7 +114,18 @@ class CreateCompanyUser extends React.Component {
                 console.log('Received values of form: ', values);
     
                 axios.post('/companyusers/add', values)
-                    .then(res => console.log(res.data));
+                    .then(res => {
+                        console.log(res.data);
+                        if(res.status === 200) {
+                            notification['success']({
+                              message: 'Sucesso!',
+                              description: 'Empresa cadastrada!'
+                            });
+                            
+                            // Atualiza página
+                            this.setState({ nav: '/listcompanyusers'});
+                        }
+                    });
     
                 this.setState({
                     nav: '',
