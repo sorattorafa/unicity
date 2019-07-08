@@ -341,7 +341,7 @@ class CreateCompanyUser extends React.Component {
                                     {getFieldDecorator('street', {
                                         // initialValue: this.state.street,
                                         rules: [{ required: true, message: 'Insira a rua do endereço da empresa!', whitespace: true }],
-                                    })(<Input disabled={this.state.visibility} />)}
+                                    })(<Input />)}
                                 </Form.Item>
                             </Col>
 
@@ -361,7 +361,7 @@ class CreateCompanyUser extends React.Component {
                                     {getFieldDecorator('number', {
                                         // initialValue: this.state.number,
                                         rules: [{ required: true, message: 'Insira o número do endereço da empresa!', whitespace: true }],
-                                    })(<Input disabled={this.state.visibility} />)}
+                                    })(<Input />)}
                                 </Form.Item>
                             </Col>
                         </Row>

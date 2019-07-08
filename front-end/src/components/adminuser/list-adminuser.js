@@ -23,7 +23,8 @@ const columns = [
   {
     title: 'E-mail',
     dataIndex: 'email',
-  },
+  }, 
+  /** 
   {
     title: 'Ações',
     dataIndex: '',
@@ -53,7 +54,8 @@ const columns = [
                                       <Icon type = "delete" theme = "twoTone" twoToneColor = "#f5222d" />
                                     </Popconfirm>
         : null} ,
-  },
+  }, 
+  */
 ];
 
 

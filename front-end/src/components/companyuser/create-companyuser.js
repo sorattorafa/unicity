@@ -169,11 +169,11 @@ class CreateCompanyUser extends React.Component {
                 <NavBar />
         
                 <Layout>
-          <LateralMenu pagina = "createcompanyuser" />
+          <LateralMenu pagina = "createCompanyuser" />
           
           <Content className = "contentLayoutForm" style = {{ padding: "30px 20px 0px 20px" }} >
             <Form {...formItemLayout} onSubmit={this.handleSubmit}>
-              <Title className = "titleForm" level={1}> Cadastrar usuário empresarial </Title>
+              <Title className = "titleForm" level={1}> Cadastrar Empresa </Title>
               <Divider className = "dividerForm" />
 
                         {/* Company User's Cnpj */}
