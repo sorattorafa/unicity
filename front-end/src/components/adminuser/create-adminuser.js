@@ -1,4 +1,4 @@
-import { Divider, Typography, Layout, Form, Row, Col, Icon, Input, Button, Tooltip } from 'antd';
+import { Divider, Typography, Layout, Form, Row, Col, Icon, Input, Button, Tooltip, notification } from 'antd';
 import React, {Component} from 'react';
 import ReactDOM from "react-dom";
 // import "antd/dist/antd.css";
@@ -81,7 +81,19 @@ class CreateAdminUser extends React.Component {
         console.log('Received values of form: ', values);
 
         axios.post('/adminusers/add', values)
-            .then(res => console.log(res.data));
+            .then(res => {
+              console.log(res.data)
+              console.log("Status: " + res.status);
+              if(res.status === 200) {
+                notification['success']({
+                  message: 'Sucesso!',
+                  description: 'Usuário cadastrado!'
+                });
+                
+                // Atualiza página
+                this.setState({ nav: '/listadminusers'});
+              }
+            });
 
         this.setState({ 
           cpf: '',
