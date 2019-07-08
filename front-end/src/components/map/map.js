@@ -285,7 +285,7 @@ class ReportMap extends Component {
                     <p><strong> {report.title} </strong> </p>
                     <p><em> {report.description} </em></p> 
                     <nav>
-                    <a href={"http://localhost:3000/viewreport/"+report._id}>Visualizar Relato</a>
+                    <a href={"http://localhost:3000/viewreportcompany/"+report._id}>Visualizar Relato</a>
                      </nav> 
                   </Popup>
               </Marker>
