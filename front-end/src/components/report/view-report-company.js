@@ -29,7 +29,9 @@ export default class ViewReportCompany extends Component {
             status: '',
             category: '', 
             catname: '',
-            color:''
+            color:'', 
+            jadeulike: false, 
+            jadeudeslike:false,
           }
     }
 
@@ -73,23 +75,28 @@ export default class ViewReportCompany extends Component {
         
     } 
     
-  like = () => { 
-      this.setState({ number_of_supports: this.state.number_of_supports + 1 }); 
-      const nexato = this.state.number_of_supports + 1;  
-      axios.put('/reports/updatelike/'+ this.props.match.params.id + '/' + nexato) 
-      .then(res => {
-          console.log(this.state.number_of_supports)
-          // Atualiza página
-          //window.location.replace("http://localhost:3000/viewreport/"+id_report);
-       // }   
-      });
+  like = () => {  
+      if(this.state.jadeulike === false){ 
+        this.setState({ number_of_supports: this.state.number_of_supports + 1, jadeulike:true }); 
+        const nexato = this.state.number_of_supports + 1;  
+        axios.put('/reports/updatelike/'+ this.props.match.params.id + '/' + nexato) 
+        .then(res => {
+            console.log(this.state.number_of_supports)
+            // Atualiza página
+            //window.location.replace("http://localhost:3000/viewreport/"+id_report);
+        // }   
+        }); 
+    }
   } 
   
-  deslike = () => {
-    this.setState({ number_of_denunciations: this.state.number_of_denunciations + 1 }); 
+  deslike = () => { 
+    
+    if(this.state.jadeudeslike === false){  
+    this.setState({ number_of_denunciations: this.state.number_of_denunciations + 1, jadeudeslike: true }); 
     const nexatodeslike = this.state.number_of_denunciations + 1 ;
     console.log(this.state.number_of_denunciations) 
-    axios.put('/reports/updatedeslike/' + this.props.match.params.id + '/' + nexatodeslike)
+    axios.put('/reports/updatedeslike/' + this.props.match.params.id + '/' + nexatodeslike) 
+    }
 }
 
     render() {
