@@ -112,8 +112,6 @@ export default class ViewReport extends Component {
                                         Rua: {this.state.street}
                                         <br />
                                         Número: {this.state.number}
-                                        <br />
-                                        Cep: {this.state.cep}
                                     </Descriptions.Item> 
                                     <Descriptions.Item label="Categoria" span={1}>
                                         <Tag color={this.state.color}> {this.state.catname} </Tag>

@@ -54,7 +54,7 @@ export default class Login extends Component {
         login(token, 0, response.data._id);
         this.state.finduser = true 
         const menuuser = "http://localhost:3000/listreport"
-            window.location.replace("http://localhost:3000/listreport"); 
+            window.location.replace("http://localhost:3000/map"); 
 
       } else if (response.status === 401) {
         notification['error']({
