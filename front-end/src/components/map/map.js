@@ -109,7 +109,10 @@ class ReportMap extends Component {
     location2: { 
       lat: 0, 
       lng: 0,
-    },
+    },  
+    lat: 0, 
+    lng: 0,
+    localizacaoatual : [],
     haveUsersLocation: false, 
     haveUserClick:false,
     zoom: 29,
@@ -133,7 +136,13 @@ class ReportMap extends Component {
     })
     .catch(function (error) {
         console.log(error);
-    }) 
+    })  
+    navigator.geolocation.getCurrentPosition((position) => {  
+      console.log(position.coords.latitude)  
+      this.setState({lat: position.coords.latitude, lng: position.coords.longitude,})
+    } );  
+    console.log(this.state.lat)
+
   }
 
   showMessageForm = () => {
@@ -220,7 +229,7 @@ class ReportMap extends Component {
   }
   render() {  
     // primeira posição pode ser encontrada automaticamente
-    const position = [this.state.location.lat, this.state.location.lng]; 
+    const position = [this.state.lat, this.state.lng]; 
     // posição para o clique do mouse  
     const position2 = this.state.location2;   
     const iduser = this.props.match.params.id;
