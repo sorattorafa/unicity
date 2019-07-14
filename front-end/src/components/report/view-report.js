@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import { Descriptions, Divider, Typography, Layout, Badge, Icon, Tag, Comment } from 'antd';
-import "antd/dist/antd.css";
+import { Descriptions, Divider, Typography, Layout, Badge, Icon, Tag, Comment, Button } from 'antd';
+import "antd/dist/antd.css"; 
+import { Link } from "react-router-dom";
 
 import NavBar from '../../components/navbar/navbar';
 import LateralMenu from '../../components/lateralmenu/lateralmenu';
@@ -26,17 +27,15 @@ export default class ViewReport extends Component {
             number_of_denunciations: '',
             number_of_supports: '',
             status: '',
-
-            comments:[],
-
             category: '', 
-
             catname: '',
-            color:''
+            color:'', 
+            jadeulike: false, 
+            jadeudeslike:false,
           }
     }
 
-    componentWillMount() {
+    componentWillMount() { 
         axios.get('/reports/'+this.props.match.params.id)
         .then(response => {
             this.setState({  
@@ -51,10 +50,9 @@ export default class ViewReport extends Component {
                 number_of_denunciations: response.data.number_of_denunciations, 
                 number_of_supports: response.data.number_of_supports,
                 status: response.data.status,
-                comments: response.data.comments,
                 category: response.data.category
             }) 
-        axios.get('/categories/')
+            axios.get('/categories/')
         .then(response => {
             this.setState({  
                 categories: response.data
@@ -72,9 +70,11 @@ export default class ViewReport extends Component {
             )
             console.log(this.state.color)
         })
-        }) 
+        })
 
-    }
+        
+    } 
+    
 
     render() {
 
@@ -112,35 +112,42 @@ export default class ViewReport extends Component {
                                         Rua: {this.state.street}
                                         <br />
                                         Número: {this.state.number}
+                                        <br />
+                                        Cep: {this.state.cep}
                                     </Descriptions.Item> 
                                     <Descriptions.Item label="Categoria" span={1}>
                                         <Tag color={this.state.color}> {this.state.catname} </Tag>
                                     </Descriptions.Item>
                                     <Descriptions.Item label="Status" span ={1}>
-                                        <StatusCheck ReportStatus={this.state.status} />,
+                                        <StatusCheck ReportStatus={this.state.status} />
+                                        <Link className="buttonForm buttonStatus" to = { "/editreport/" + this.props.match.params.id} >
+                                            <Button className = "buttonNav" type = "primary">
+                                                <Icon />Alterar
+                                            </Button>
+                                        </Link>
                                         <br />
                                         Data de Criação: {FormatDate}
                                     </Descriptions.Item>
-                                    {/** 
+                                    {/**
                                     <Descriptions.Item label="Posição" span={2}>
                                         Latitude: {this.state.lat}
                                         <br />
                                         Longitude: {this.state.lng}
                                     </Descriptions.Item> 
-                                    */}
+                                     */}
                                     <Descriptions.Item label="Apoiadores" span={3}>
-                                        {this.state.number_of_supports} <Icon type="like" />
+                                        {this.state.number_of_supports} <Icon type="like"/>
                                     </Descriptions.Item>
                                     <Descriptions.Item label="Denúncias" span={3}>
                                         {this.state.number_of_denunciations} <Icon type="dislike" />
                                     </Descriptions.Item>   
-                                    {/** 
-                                    <Descriptions.Item label="Resolver Relato" span={3}>
+                                    
+                                    {/* <Descriptions.Item label="Resolver Relato" span={3}>
                                     <nav>
                                      <a href={"http://localhost:3000/editreport/"+this.props.match.params.id}>Editar Estado Relato</a>
                                     </nav>  
-                                    </Descriptions.Item>  
-                               */} </Descriptions>
+                                    </Descriptions.Item>   */}
+                                    </Descriptions>
                             </div>
                     </Content>
                 </Layout>

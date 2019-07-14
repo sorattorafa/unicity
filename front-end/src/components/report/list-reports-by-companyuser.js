@@ -72,7 +72,7 @@ class ListReportsByCompanyuser extends Component {
               }}
               dataSource={this.state.reports}
               renderItem={item => (
-                <Link to = { "/viewreportcompany/" + item._id} >
+                <Link to = { "/viewreport/" + item._id} >
                   <List.Item
                     key={item.title}
                     extra={
