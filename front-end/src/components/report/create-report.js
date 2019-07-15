@@ -24,7 +24,6 @@ class CreateReport extends React.Component {
     super(props); 
 
     this.onChangeTitle = this.onChangeTitle.bind(this);
-    this.onChangeCep = this.onChangeCep.bind(this);  
     this.onChangeStreet = this.onChangeStreet.bind(this); 
     this.onChangeNumber = this.onChangeNumber.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this); 
@@ -38,13 +37,12 @@ class CreateReport extends React.Component {
       lat: lat,  
       lng: lng,
       title: '',
-      cep: '',
       street: '',  
       number: '', 
       category: '',
       description: '',  
-      simpleuser:iduser,
-      comments:[],
+      simpleuser: iduser,
+      comments:'',
       active: true
     } 
   }
@@ -69,11 +67,6 @@ class CreateReport extends React.Component {
   onChangeTitle(e) {
     this.setState({
         title: e.target.value
-    });
-  }
-  onChangeCep(e) {
-    this.setState({
-        cep: e.target.value
     });
   }
   onChangeStreet(e) {
@@ -127,7 +120,6 @@ class CreateReport extends React.Component {
           lat: '', 
           lng: '',
           title: '',
-          cep: '',
           street: '',  
           number: '', 
           category:'',
@@ -156,7 +148,6 @@ class CreateReport extends React.Component {
     // Only show error after a field is touched.
     const titleError = isFieldTouched('title') && getFieldError('title'); 
     const simpleuserError = isFieldTouched('simpleuser') && getFieldError('simpleuser');
-    const cepError = isFieldTouched('cep') && getFieldError('cep');
     const streetError = isFieldTouched('street') && getFieldError('street');
     const numberError = isFieldTouched('number') && getFieldError('number'); 
     const categoryError = isFieldTouched('category') && getFieldError('category');
@@ -191,27 +182,6 @@ class CreateReport extends React.Component {
                   >
                     {getFieldDecorator('title', {
                       rules: [{ required: true, message: 'Insira um título para o problema!', whitespace: true }],
-                    })(<Input />)}
-                  </Form.Item>
-                </Col>
-              </Row>
-
-              {/* Report's CEP */}
-              <Row>
-                <Col span={16}>
-                  <Form.Item
-                    validateStatus={cepError ? 'error' : ''} help={cepError || ''}
-                    label={
-                      <span>
-                        CEP&nbsp;
-                        <Tooltip title="Qual o CEP da rua do problema?">
-                          <Icon type="question-circle-o" />
-                        </Tooltip>
-                      </span>
-                    }
-                  >
-                    {getFieldDecorator('cep', {
-                      rules: [{ message: 'Insira o CEP do local do relato!', whitespace: true }],
                     })(<Input />)}
                   </Form.Item>
                 </Col>
