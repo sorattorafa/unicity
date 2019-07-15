@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import { Descriptions, Divider, Typography, Layout, Badge, Icon, Tag, Button } from 'antd';
+import { Descriptions, Divider, Typography, Layout, Badge, Icon, Tag, Button, Row, List } from 'antd';
 import "antd/dist/antd.css";
 
 import NavBar from '../../components/navbar/navbar';
@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 
 const { Title } = Typography;
 const { Content } = Layout;
+const { Text } = Typography;
 
 export default class ViewReportCompany extends Component {
 
@@ -19,7 +20,6 @@ export default class ViewReportCompany extends Component {
             lat:'',  
             lng:'',
             title: '',
-            cep: '',
             street: '',  
             number: '', 
             description: '',
@@ -32,17 +32,33 @@ export default class ViewReportCompany extends Component {
             color:'', 
             jadeulike: false, 
             jadeudeslike:false,
+
+            comments:[]
           }
     }
 
-    componentWillMount() { 
+    componentWillMount() {
+        axios.get('/comments')
+        .then(response => {
+            this.setState({
+                comments: response.data
+            });
+            // this.state.comments.map(comment => 
+            //     {             
+            //         if(comment.comment_report === this.state.id){ 
+            //             this.setState({ 
+            //                 comment: comment
+            //             }) 
+            //         } 
+            //     }
+            // )
+        })
         axios.get('/reports/'+this.props.match.params.id)
         .then(response => {
             this.setState({  
                 lat: response.data.lat, 
                 lng: response.data.lng,
-                title: response.data.title, 
-                cep: response.data.cep, 
+                title: response.data.title,
                 street: response.data.street, 
                 number: response.data.number, 
                 description: response.data.description, 
@@ -53,23 +69,22 @@ export default class ViewReportCompany extends Component {
                 category: response.data.category
             }) 
             axios.get('/categories/')
-        .then(response => {
-            this.setState({  
-                categories: response.data
-            })  
-            this.state.categories.map(category => 
+            .then(response => {
+                this.setState({  
+                    categories: response.data
+                })  
+                this.state.categories.map(category => 
                 {             
                     if(category._id === this.state.category){ 
-                    this.setState({ 
-                        color: category.color, 
-                        catname: category.name
-                    }) 
+                        this.setState({ 
+                            color: category.color, 
+                            catname: category.name
+                        }) 
                     } 
-                }
-                  
-            )
-            console.log(this.state.color)
-        })
+                }  
+                )
+                console.log(this.state.color)
+            })
         })
 
         
@@ -114,6 +129,16 @@ export default class ViewReportCompany extends Component {
             }
         }
 
+        function CommentStatusCheck(CommentStatus){
+            if (CommentStatus === 0) {
+                return 'Aberto';
+            } else if (CommentStatus === 1) {
+                return 'Em Resolução';
+            } else {
+                return 'Resolvido';
+            }
+        }
+
         return(
             <Layout style = {{ minHeight: '100vh', width: '100%' }}>
                 <NavBar />
@@ -136,7 +161,6 @@ export default class ViewReportCompany extends Component {
                                         <br />
                                         Número: {this.state.number}
                                         <br />
-                                        Cep: {this.state.cep}
                                     </Descriptions.Item> 
                                     <Descriptions.Item label="Categoria" span={1}>
                                         <Tag color={this.state.color}> {this.state.catname} </Tag>
@@ -171,6 +195,35 @@ export default class ViewReportCompany extends Component {
                                     </nav>  
                                     </Descriptions.Item>   */}
                                     </Descriptions>
+
+                                    <Row>
+                                        <Divider className = "dividerForm" />
+                                        <Title level={3}> Histórico de Alterações </Title>
+                                        <List
+                                            itemLayout="vertical"
+                                            size="large"
+                                            pagination={{
+                                                onChange: page => {
+                                                console.log(page);
+                                                },
+                                                pageSize: 10,
+                                            }}
+                                            dataSource={this.state.comments}
+
+                                            renderItem={item => (
+                                                <List.Item
+                                                    key={item.author.name}
+                                                >  
+                                                    <List.Item.Meta
+                                                        title={item.comment_createDate}
+                                                        description={item.content}
+                                                    />
+                                                    {item.author.name} alterou status para <CommentStatusCheck CommentStatus={item.comment_status} />
+                                                    <br/>
+                                                </List.Item>
+                                            )}
+                                        />
+                                    </Row>
                             </div>
                     </Content>
                 </Layout>
