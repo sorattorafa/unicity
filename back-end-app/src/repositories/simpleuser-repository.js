@@ -47,6 +47,6 @@ exports.getByEmail = async(email) => {
 exports.getByOneEmail = async(email) => { 
     const res = await Simpleuser.findOne({  
         email: email 
-       }, 'email password _id')  
+       })  
     return res;    
 } 

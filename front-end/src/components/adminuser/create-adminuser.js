@@ -1,14 +1,13 @@
 import { Divider, Typography, Layout, Form, Row, Col, Icon, Input, Button, Tooltip, notification } from 'antd';
 import React, {Component} from 'react';
-import ReactDOM from "react-dom";
-// import "antd/dist/antd.css";
-import "./create-adminuser.css";
 import axios from 'axios';
+import { Redirect } from "react-router-dom";
 import NavBar from '../../components/navbar/navbar';
 // import Footer from '../../components/footer/footer';
 import LateralMenu from '../../components/lateralmenu/lateralmenu';
 import { getToken, getStatus } from '../services/auth';
-import { Redirect, Link } from "react-router-dom";
+import {TestaCPF} from '../../components/services/cfp_validation';
+import "./create-adminuser.css";
 
 const { Title } = Typography;
 const { Content } = Layout;
@@ -80,28 +79,42 @@ class CreateAdminUser extends React.Component {
       if (!err) {
         console.log('Received values of form: ', values);
 
-        axios.post('/adminusers/add', values)
-            .then(res => {
-              console.log(res.data)
-              console.log("Status: " + res.status);
-              if(res.status === 200) {
-                notification['success']({
-                  message: 'Sucesso!',
-                  description: 'Usuário cadastrado!'
-                });
-                
-                // Atualiza página
-                this.setState({ nav: '/listadminusers'});
-              }
+        // console.log("CPF:" + this.state.cpf)
+          let cpfIsValid = TestaCPF(this.state.cpf);
+          if (!cpfIsValid) {
+            notification['error']({
+              message: 'Erro!',
+              description: 'CPF inválido!'
             });
+          } else {
+            axios.post('/adminusers/add', values)
+                .then(res => {
+                  console.log(res.data)
+                  console.log("Status: " + res.status);
+                  if(res.status === 200) {
+                    notification['success']({
+                      message: 'Sucesso!',
+                      description: 'Usuário administrador cadastrado!'
+                    });
+                    
+                    // Atualiza página
+                    this.setState({ nav: '/listadminusers'});
+                  } else {
+                    notification['error']({
+                      message: 'Ops!',
+                      description: 'Usuário administrador já cadastrado!'
+                    });
+                  }
+                });
+          }
 
-        this.setState({ 
-          cpf: '',
-          name: '',
-          email: '',  
-          password: '',
-          active: true
-        })
+        // this.setState({ 
+        //   cpf: '',
+        //   name: '',
+        //   email: '',  
+        //   password: '',
+        //   active: true
+        // })
       }
     });
   };
@@ -160,7 +173,7 @@ class CreateAdminUser extends React.Component {
                 >
                   {getFieldDecorator('cpf', {
                     rules: [{ required: true, message: 'Insira o CPF do novo administrador!', whitespace: true }],
-                  })(<Input />)}
+                  })(<Input onChange={this.onChangeCpf} />)}
                 </Form.Item>
               </Row>
 

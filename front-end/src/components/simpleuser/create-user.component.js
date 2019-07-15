@@ -5,7 +5,10 @@ import axios from 'axios';
 
 import NavBar from '../../components/navbar/navbar';
 import {TestaCPF} from '../../components/services/cfp_validation';
+import { getToken, login } from '../services/auth';
+import { Redirect } from "react-router-dom";
 
+const jwt = require('jsonwebtoken');
 const { Title } = Typography;
 const { Content } = Layout;
 
@@ -24,7 +27,8 @@ function hasErrors(fieldsError) {
       this.onChangePassword = this.onChangePassword.bind(this);
       this.onChangeConfirmpassword = this.onChangeConfirmpassword.bind(this);
   
-      this.state = { 
+      this.state = {
+        nav: '',
         cpf: '',
         name: '',
         email: '',  
@@ -75,7 +79,7 @@ function hasErrors(fieldsError) {
       
       this.props.form.validateFields((err, values) => {
         if (!err) {
-          console.log("CPF:" + this.state.cpf)
+          // console.log("CPF:" + this.state.cpf)
           let cpfIsValid = TestaCPF(this.state.cpf);
           if (!cpfIsValid) {
             notification['error']({
@@ -83,25 +87,36 @@ function hasErrors(fieldsError) {
               description: 'CPF inválido!'
             });
           } else {
-            console.log('Received values of form: ', values);
+            // console.log('Received values of form: ', values);
     
             axios.post('/simpleusers/add', values)
-                .then(res => {
-                  if(res.status === 200) {
-                    notification['success']({
-                      message: 'Feito!',
-                      description: 'Seu perfil foi cadastrado!'
-                    });
-                    
-                    // Atualiza página
-                    this.setState({ nav: '/map'});
-                  } else {
-                    notification['error']({
-                      message: 'Ops!',
-                      description: 'Esse usuário já está cadastrado!'
-                    });
-                  }
-                });
+              .then(res => {
+                if(res.status === 200) {
+                  notification['success']({
+                    message: 'Feito!',
+                    description: 'Seu perfil foi cadastrado!'
+                  });
+
+                  axios.get('/simpleusers/oneemail/' + this.state.email)
+                    .then(res => {
+
+                      console.log("id: " + res.data._id)
+                      var token = jwt.sign({ id: res.data._id }, 'secret', { expiresIn: 14400 });
+                      login(token, 0, res.data._id);
+                      
+                      // Atualiza página
+                      this.setState({ nav: '/map'});
+                  });
+
+                  // Atualiza página
+                  // this.setState({ nav: '/'});
+                } else {
+                  notification['error']({
+                    message: 'Ops!',
+                    description: 'Esse usuário já está cadastrado! Já pode fazer seu login.'
+                  });
+                }
+              });
           }
     
             // this.setState({ 
@@ -136,6 +151,13 @@ function hasErrors(fieldsError) {
       const passwordError = isFieldTouched('password') && getFieldError('password');
       const confirmpasswordError = isFieldTouched('confirmpassword') && getFieldError('confirmpassword');
   
+      // Controla página exibida - Ao atualizar, muda de página
+      if(this.state.nav)
+        return <Redirect to = { this.state.nav } />
+      // Só exibe se estiver deslogado
+      else if(getToken())
+        return <Redirect to = { "/" } />
+      else
       return (
         <Layout style = {{ minHeight: '100vh' }}>
           <NavBar home = {true} />
@@ -163,7 +185,7 @@ function hasErrors(fieldsError) {
                     {getFieldDecorator('cpf', {
                       rules: [{ required: true, message: 'Insira o CPF!', whitespace: true }],
                     })(<Input
-                        placeholder="000.000.00X-00"
+                        placeholder="00000000X00"
                         onChange={this.onChangeCpf}
                     />)}
                   </Form.Item>
@@ -208,6 +230,7 @@ function hasErrors(fieldsError) {
                         { required: true, message: 'Insira seu email!', whitespace: true }],
                     })(<Input
                         placeholder="exemplo@exemplo.com"
+                        onChange={this.onChangeEmail}
                     />)}
                     </Form.Item>
                 </Row>

@@ -10,7 +10,8 @@ const SimpleUser = require('../routes/simpleuser');
 // get functions (by id and data)
 router.get('/', controller.get);
 router.get('/:id', controller.getById);  
-router.get('/:email', controller.getByEmail);  
+router.get('/email/:email', controller.getByEmail);
+router.get('/oneemail/:email', controller.getByOneEmail);
 // post, put and delete (create, update and delete)
 router.post('/add', controller.post); 
 router.put('/:id', controller.put); 
