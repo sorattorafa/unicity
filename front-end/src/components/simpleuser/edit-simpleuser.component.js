@@ -8,6 +8,7 @@ import axios from 'axios';
 import NavBar from '../../components/navbar/navbar';
 import LateralMenu from '../../components/lateralmenu/lateralmenu';
 import { getToken, getUserId } from '../services/auth';
+import {TestaCPF} from '../../components/services/cfp_validation';
 
 const { Title } = Typography;
 const { Content } = Layout;
@@ -88,25 +89,34 @@ class EditSimpleuser extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                // console.log('Received values of form: ', values);
-    
-                let res = axios.put('/simpleusers/' + this.state.id , values)
-                    .then(res => {
-                      // console.log(res.data);
-                      // console.log("Status: " + res.status);
-
-                      // Exibe notificação de sucesso
-                      if(res.status === 200) {
-                        notification['success']({
-                          message: 'Sucesso!',
-                          description: 'Perfil atualizado!'
-                        });
-                        
-                        // Atualiza página
-                        let id_simpleuser = this.state.id;
-                        this.setState({ nav: '/profilesimpleuser/' + id_simpleuser });
-                      }
+                // console.log("CPF:" + this.state.cpf)
+                let cpfIsValid = TestaCPF(this.state.cpf);
+                if (!cpfIsValid) {
+                    notification['error']({
+                    message: 'Erro!',
+                    description: 'CPF inválido!'
                     });
+                } else {
+                    // console.log('Received values of form: ', values);
+        
+                    let res = axios.put('/simpleusers/' + this.state.id , values)
+                        .then(res => {
+                        // console.log(res.data);
+                        // console.log("Status: " + res.status);
+
+                        // Exibe notificação de sucesso
+                        if(res.status === 200) {
+                            notification['success']({
+                            message: 'Sucesso!',
+                            description: 'Perfil atualizado!'
+                            });
+                            
+                            // Atualiza página
+                            let id_simpleuser = this.state.id;
+                            this.setState({ nav: '/profilesimpleuser/' + id_simpleuser });
+                        }
+                        });
+                }
             }
         });
     };
@@ -166,7 +176,7 @@ class EditSimpleuser extends React.Component {
                                 >
                                     {getFieldDecorator('cpf', {
                                         rules: [ {required: true}, {message: 'Insira seu CPF!' }],
-                                    })(<Input />)}
+                                    })(<Input onChange={this.onChangeCpf} />)}
                                 </Form.Item>
                             </Row>
 

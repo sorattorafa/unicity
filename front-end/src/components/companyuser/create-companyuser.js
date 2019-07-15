@@ -1,14 +1,14 @@
 import { Divider, Typography, Layout, Form, Row, Col, Icon, Input, Button, Tooltip, Select, notification } from 'antd';
 import React, {Component} from 'react';
-import ReactDOM from "react-dom";
 import "antd/dist/antd.css";
 // import "./index.css";
 import axios from 'axios';
+import { Redirect } from "react-router-dom";
 
 import NavBar from '../../components/navbar/navbar';
 import LateralMenu from '../../components/lateralmenu/lateralmenu';
 import { getToken, getStatus } from '../services/auth';
-import { Redirect } from "react-router-dom";
+import {validarCNPJ} from '../../components/services/cfp_validation';
 
 const TextArea = Input.TextArea;
 const { Title } = Typography;
@@ -111,36 +111,52 @@ class CreateCompanyUser extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
-    
-                axios.post('/companyusers/add', values)
-                    .then(res => {
-                        console.log(res.data);
-                        if(res.status === 200) {
-                            notification['success']({
-                              message: 'Sucesso!',
-                              description: 'Empresa cadastrada!'
-                            });
-                            
-                            // Atualiza página
-                            this.setState({ nav: '/listcompanyusers'});
-                        }
+                // console.log("CNPJ:" + this.state.cnpj)
+                let cnpjIsValid = validarCNPJ(this.state.cnpj);
+                if (!cnpjIsValid) {
+                    notification['error']({
+                      message: 'Erro!',
+                      description: 'CNPJ inválido!'
                     });
+                  } else {
+
+                    // console.log('Received values of form: ', values);
+        
+                    axios.post('/companyusers/add', values)
+                        .then(res => {
+                            // console.log(res.data);
+                            if(res.status === 200) {
+                                notification['success']({
+                                  message: 'Sucesso!',
+                                  description: 'Empresa cadastrada!'
+                                });
+                                
+                                // Atualiza página
+                                this.setState({ nav: '/listcompanyusers'});
+                            } else {
+                            //   console.log(res)
+                              notification['error']({
+                                message: 'Ops!',
+                                description: 'Empresa já cadastrada!'
+                              });
+                            }
+                        });
     
-                this.setState({
-                    nav: '',
-                    cnpj: '',
-                    name: '',
-                    apresentation: '',
-                    city: '',
-                    street: '',
-                    number: '',
-                    email: '',  
-                    password: '',
-                    categories:'',
-                    active: true
-                })
+                // this.setState({
+                //     nav: '',
+                //     cnpj: '',
+                //     name: '',
+                //     apresentation: '',
+                //     city: '',
+                //     street: '',
+                //     number: '',
+                //     email: '',  
+                //     password: '',
+                //     categories:'',
+                //     active: true
+                // });
             }
+          }
         });
     };
 
@@ -203,7 +219,7 @@ class CreateCompanyUser extends React.Component {
                                 >
                                     {getFieldDecorator('cnpj', {
                                         rules: [{ required: true, message: 'Insira o CNPJ da nova empresa!', whitespace: true }],
-                                    })(<Input />)}
+                                    })(<Input onChange={this.onChangeCnpj} />)}
                                 </Form.Item>
                             </Col>
                         </Row>
