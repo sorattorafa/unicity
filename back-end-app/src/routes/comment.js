@@ -11,7 +11,7 @@ router.get('/', controller.get);
 router.get('/:id', controller.getById);    
 
 // post, put and delete (create, update and delete)
-router.post('/', controller.post);
+router.post('/add', controller.post);
 router.put('/:id', controller.put);
 router.delete('/:id', controller.delete);
 

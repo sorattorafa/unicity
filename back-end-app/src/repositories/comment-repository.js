@@ -5,7 +5,7 @@ const Comment =  mongoose.model('Comment');
 // every functions are async!
 
 exports.get = async () => {
-    const res = await Comment.find({}, 'author createDate content comment_denunciations comment_supports').populate('author');
+    const res = await Comment.find({}, 'author comment_report comment_createDate content comment_status').populate('author').populate('comment_report');
     return res;
 }
 
@@ -24,7 +24,6 @@ exports.delete = async(id) => {
     await Comment
         .findOneAndRemove(id);
 }
-
 
 exports.update = async(id,data) => { 
     await Category

@@ -59,10 +59,10 @@ const schema = new Schema({
         required: true, 
         default: 0  
     },     
-    comments: [{ 
+    comment: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Comment' 
-    }],   
+    },   
     solver: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Companyuser' 

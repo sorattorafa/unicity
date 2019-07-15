@@ -10,8 +10,12 @@ const schema = new Schema({
     author: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Simpleuser' 
-    },  
-    createDate: { 
+    },
+    comment_report: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Report' 
+    },
+    comment_createDate: { 
         type: Date, 
         required: true, 
         default: Date.now 
@@ -20,17 +24,12 @@ const schema = new Schema({
         type: String, 
         required: true, 
         trim: true 
-    },     
-    comment_denunciations: { 
+    },
+    comment_status: { 
         type: Number, 
-        required: true,
-        default: 0
-    },     
-    comment_supports: { 
-        type: Number, 
-        required: true,
-        default: 0
-    },   
+        required: true, 
+        default: 0 
+    }, 
 }); 
   
 // export the model of customer 
