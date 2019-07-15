@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import { Descriptions, Divider, Typography, Layout, Badge, Icon, Tag, Comment, Button } from 'antd';
+import { Descriptions, Divider, Typography, Layout, Badge, Icon, Tag, Comment, Button, Row, List } from 'antd';
 import "antd/dist/antd.css"; 
 import { Link } from "react-router-dom";
 
@@ -31,7 +31,9 @@ export default class ViewReport extends Component {
             catname: '',
             color:'', 
             jadeulike: false, 
-            jadeudeslike:false,
+            jadeudeslike:false, 
+            comment_id:'', 
+            commets:[],
           }
     }
 
@@ -50,7 +52,8 @@ export default class ViewReport extends Component {
                 number_of_denunciations: response.data.number_of_denunciations, 
                 number_of_supports: response.data.number_of_supports,
                 status: response.data.status,
-                category: response.data.category
+                category: response.data.category, 
+                comment_id: response.data.id
             }) 
             axios.get('/categories/')
         .then(response => {
@@ -71,7 +74,12 @@ export default class ViewReport extends Component {
             console.log(this.state.color)
         })
         })
-
+        axios.get('/comments/')
+        .then(response => {
+            this.setState({  
+                commets: response.data
+            })  
+        })
         
     } 
     
@@ -79,8 +87,6 @@ export default class ViewReport extends Component {
     render() {
 
         const ReportStatus = this.state.status;
-        const FormatDate = this.state.createDate.split("T")[0];
-
         function StatusCheck(){
             if (ReportStatus === 0) {
                 return <Badge status="processing" text="Aberto" />;
@@ -88,6 +94,15 @@ export default class ViewReport extends Component {
                 return <Badge status="warning" text="Em Resolução" />;
             } else {
                 return <Badge status="success" text="Resolvido" />;
+            }
+        } 
+        function CommentStatusCheck(CommentStatus){
+            if (CommentStatus === 0) {
+                return 'Aberto';
+            } else if (CommentStatus === 1) {
+                return 'Em Resolução';
+            } else {
+                return 'Resolvido';
             }
         }
 
@@ -126,7 +141,7 @@ export default class ViewReport extends Component {
                                             </Button>
                                         </Link>
                                         <br />
-                                        Data de Criação: {FormatDate}
+                                        Data de Criação: {this.state.createDate}
                                     </Descriptions.Item>
                                     {/**
                                     <Descriptions.Item label="Posição" span={2}>
@@ -147,7 +162,34 @@ export default class ViewReport extends Component {
                                      <a href={"http://localhost:3000/editreport/"+this.props.match.params.id}>Editar Estado Relato</a>
                                     </nav>  
                                     </Descriptions.Item>   */}
-                                    </Descriptions>
+                                    </Descriptions> 
+                                    <Row>
+                                        <Divider className = "dividerForm" />
+                                        <Title level={3}> Histórico de Alterações </Title>
+                                        <List
+                                            itemLayout="vertical"
+                                            size="large"
+                                            pagination={{
+                                                onChange: page => {
+                                                console.log(page);
+                                                },
+                                                pageSize: 10,
+                                            }}
+                                            dataSource={this.state.comments}
+                                            renderItem={item => (
+                                                <List.Item
+                                                    key={item.author.name}
+                                                >  
+                                                    <List.Item.Meta
+                                                        title={item.comment_createDate}
+                                                        description={item.content}
+                                                    />
+                                                    {item.author.name} alterou status para <CommentStatusCheck CommentStatus={item.comment_status} />
+                                                    <br/>
+                                                </List.Item>
+                                            )}
+                                        />
+                                    </Row> 
                             </div>
                     </Content>
                 </Layout>

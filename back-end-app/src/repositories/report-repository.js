@@ -40,7 +40,8 @@ exports.update = async(id,data) => {
         $set: {  
             // can update anything 
             status: data.status, 
-            solver: data.solver,
+            solver: data.solver, 
+            comment: data.comment,
         }
     });
 }  
