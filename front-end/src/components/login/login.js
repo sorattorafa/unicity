@@ -1,5 +1,4 @@
 // login.js
-
 import React, {Component} from 'react';
 import { Divider, Typography, Modal, Icon, Form, Input, Button, notification } from 'antd';
 import { Redirect } from "react-router-dom";
@@ -53,7 +52,7 @@ export default class Login extends Component {
         var token = jwt.sign({ id: response.data._id }, 'secret', { expiresIn: 14400 });
         login(token, 0, response.data._id);
         this.state.finduser = true 
-        const menuuser = "http://localhost:3000/listreport"
+       // const menuuser = "http://localhost:3000/listreport"
             window.location.replace("http://localhost:3000/map"); 
 
       } else if (response.status === 401) {

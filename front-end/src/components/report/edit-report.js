@@ -92,7 +92,7 @@ class EditReport extends React.Component {
                 // console.log('Received values of form: ', values);
                 values.solver = getUserId()
                 values.author = getUserId()
-                values.comment_report = this.state.id        
+                values.comment = this.state.id        
                 axios.post('/comments/add', values)
                 axios.put('/reports/' + this.state.id , values)
                     .then(res => {
@@ -108,7 +108,7 @@ class EditReport extends React.Component {
                         console.log('Relato atualizado com sucesso');
                         // Atualiza página
                         let id_report = this.state.id;
-                        this.setState({ nav: '/viewreportcompany/' + id_report }); 
+                        this.setState({ nav: '/viewreport/' + id_report }); 
                         //window.location.replace("http://localhost:3000/viewreport/"+id_report);
                      // }   
 

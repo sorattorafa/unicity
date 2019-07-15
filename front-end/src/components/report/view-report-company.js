@@ -196,6 +196,7 @@ export default class ViewReportCompany extends Component {
                                     </Descriptions.Item>   */}
                                     </Descriptions>
 
+{/* 
                                     <Row>
                                         <Divider className = "dividerForm" />
                                         <Title level={3}> Histórico de Alterações </Title>
@@ -209,7 +210,6 @@ export default class ViewReportCompany extends Component {
                                                 pageSize: 10,
                                             }}
                                             dataSource={this.state.comments}
-
                                             renderItem={item => (
                                                 <List.Item
                                                     key={item.author.name}
@@ -223,7 +223,8 @@ export default class ViewReportCompany extends Component {
                                                 </List.Item>
                                             )}
                                         />
-                                    </Row>
+                                    </Row> 
+                                */}
                             </div>
                     </Content>
                 </Layout>
