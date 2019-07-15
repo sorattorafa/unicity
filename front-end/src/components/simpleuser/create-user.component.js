@@ -1,12 +1,10 @@
-import { Divider, Typography, Layout, Form, Row, Col, Icon, Input, Button, Tooltip } from 'antd';
+import { Divider, Typography, Layout, Form, Row, Col, Icon, Input, Button, Tooltip, notification } from 'antd';
 import React, {Component} from 'react';
-import ReactDOM from "react-dom";
 import "antd/dist/antd.css";
-// import "./index.css";
 import axios from 'axios';
 
 import NavBar from '../../components/navbar/navbar';
-import LateralMenu from '../../components/lateralmenu/lateralmenu';
+import {TestaCPF} from '../../components/services/cfp_validation';
 
 const { Title } = Typography;
 const { Content } = Layout;
@@ -73,23 +71,49 @@ function hasErrors(fieldsError) {
   
     handleSubmit = e => {
       e.preventDefault();
+      
+      
       this.props.form.validateFields((err, values) => {
         if (!err) {
-          console.log('Received values of form: ', values);
-  
-          axios.post('/simpleusers/add', values)
-              .then(res => console.log(res.data));
-  
-          this.setState({ 
-            cpf: '',
-            name: '',
-            email: '',  
-            password: '',
-            active: true
-          })
-        }
+          console.log("CPF:" + this.state.cpf)
+          let cpfIsValid = TestaCPF(this.state.cpf);
+          if (!cpfIsValid) {
+            notification['error']({
+              message: 'Erro!',
+              description: 'CPF inválido!'
+            });
+          } else {
+            console.log('Received values of form: ', values);
+    
+            axios.post('/simpleusers/add', values)
+                .then(res => {
+                  if(res.status === 200) {
+                    notification['success']({
+                      message: 'Feito!',
+                      description: 'Seu perfil foi cadastrado!'
+                    });
+                    
+                    // Atualiza página
+                    this.setState({ nav: '/map'});
+                  } else {
+                    notification['error']({
+                      message: 'Ops!',
+                      description: 'Esse usuário já está cadastrado!'
+                    });
+                  }
+                });
+          }
+    
+            // this.setState({ 
+            //   cpf: '',
+            //   name: '',
+            //   email: '',  
+            //   password: '',
+            //   active: true
+            // })
+          }
       });
-    };
+    }
   
     render() {
       const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
@@ -140,6 +164,7 @@ function hasErrors(fieldsError) {
                       rules: [{ required: true, message: 'Insira o CPF!', whitespace: true }],
                     })(<Input
                         placeholder="000.000.00X-00"
+                        onChange={this.onChangeCpf}
                     />)}
                   </Form.Item>
                 </Row>
