@@ -33,7 +33,8 @@ export default class ViewReport extends Component {
             jadeulike: false, 
             jadeudeslike:false, 
             comment_id:'', 
-            commets:[],
+            commets:[], 
+            solver:'',
           }
     }
 
@@ -53,7 +54,8 @@ export default class ViewReport extends Component {
                 number_of_supports: response.data.number_of_supports,
                 status: response.data.status,
                 category: response.data.category, 
-                comment_id: response.data.id
+                comment_id: response.data.id, 
+                solver: response.data.solver,
             }) 
             axios.get('/categories/')
         .then(response => {
@@ -77,7 +79,7 @@ export default class ViewReport extends Component {
         axios.get('/comments/')
         .then(response => {
             this.setState({  
-                commets: response.data
+                comments: response.data
             })  
         })
         
@@ -86,7 +88,9 @@ export default class ViewReport extends Component {
 
     render() {
 
-        const ReportStatus = this.state.status;
+        const ReportStatus = this.state.status; 
+        const FormatDate = this.state.createDate.split("T")[0];
+
         function StatusCheck(){
             if (ReportStatus === 0) {
                 return <Badge status="processing" text="Aberto" />;
@@ -141,7 +145,7 @@ export default class ViewReport extends Component {
                                             </Button>
                                         </Link>
                                         <br />
-                                        Data de Criação: {this.state.createDate}
+                                        Data de Criação:{FormatDate}
                                     </Descriptions.Item>
                                     {/**
                                     <Descriptions.Item label="Posição" span={2}>
@@ -178,13 +182,13 @@ export default class ViewReport extends Component {
                                             dataSource={this.state.comments}
                                             renderItem={item => (
                                                 <List.Item
-                                                    key={item.author.name}
-                                                >  
+                                                    key={this.state.solver}
+                                                > 
                                                     <List.Item.Meta
                                                         title={item.comment_createDate}
                                                         description={item.content}
                                                     />
-                                                    {item.author.name} alterou status para <CommentStatusCheck CommentStatus={item.comment_status} />
+                                                   {this.state.solver.name} alterou status para <CommentStatusCheck CommentStatus={item.comment_status} />
                                                     <br/>
                                                 </List.Item>
                                             )}
